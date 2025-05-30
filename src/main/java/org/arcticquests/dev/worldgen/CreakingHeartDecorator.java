@@ -10,6 +10,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
+import org.arcticquests.dev.world.level.block.CreakingHeartBlock;
+import org.arcticquests.dev.world.level.block.ModBlocks;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -49,6 +49,7 @@ import net.minecraft.world.phys.Vec3;
 import org.arcticquests.dev.sounds.ModSounds;
 import org.arcticquests.dev.world.level.block.CreakingHeartBlock;
 import org.arcticquests.dev.world.level.block.CreakingHeartBlockEntity;
+import org.arcticquests.dev.world.level.block.ModBlocks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -312,7 +313,7 @@ public class Creaking extends Monster {
             double e = aABB2.getYsize() * 0.3;
             double f = aABB2.getZsize() * 0.3;
             serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, ModBlocks.PALE_OAK_WOOD.defaultBlockState()), vec3.x, vec3.y, vec3.z, 100, d, e, f, (double)0.0F);
-            serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, (BlockState)ModBlocks.CREAKING_HEART.defaultBlockState().setValue(CreakingHeartBlock.ENABLED, true)), vec3.x, vec3.y, vec3.z, 10, d, e, f, (double)0.0F);
+            serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, (BlockState) ModBlocks.CREAKING_HEART.defaultBlockState().setValue(CreakingHeartBlock.ENABLED, true)), vec3.x, vec3.y, vec3.z, 10, d, e, f, (double)0.0F);
         }
 
         this.makeSound(this.getDeathSound());
