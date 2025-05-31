@@ -15,7 +15,11 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.arcticquests.dev.entity.ModEntities;
 import org.arcticquests.dev.entity.monster.CreakingRenderer;
+import org.arcticquests.dev.particle.ModParticles;
 import org.arcticquests.dev.sounds.ModSounds;
+import org.arcticquests.dev.world.level.block.ModBlocks;
+import org.arcticquests.dev.worldgen.ModTreeDecoratorType;
+import org.arcticquests.dev.worldgen.ModVegetationFeatures;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -33,11 +37,16 @@ public class PerfectParityPG {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
+        ModBlocks.register(modEventBus);
 
         ModEntities.register(modEventBus);
+        ModParticles.register(modEventBus);
 
         ModSounds.register(modEventBus);
 
+        ModTreeDecoratorType.register(modEventBus);
+
+        ModVegetationFeatures.registerVegetationFeatures();
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.

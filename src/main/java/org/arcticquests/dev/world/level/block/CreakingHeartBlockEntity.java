@@ -2,6 +2,7 @@ package org.arcticquests.dev.world.level.block;
 
 
 import com.mojang.datafixers.util.Either;
+import org.arcticquests.dev.datagen.ModBlockTagProvider;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -33,6 +34,7 @@ import org.apache.commons.lang3.mutable.Mutable;
 import org.apache.commons.lang3.mutable.MutableObject;
 import org.arcticquests.dev.entity.ModEntities;
 import org.arcticquests.dev.entity.creakng.Creaking;
+import org.arcticquests.dev.particle.TrailParticleOption;
 import org.arcticquests.dev.sounds.ModSounds;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -70,7 +72,7 @@ public class CreakingHeartBlockEntity extends BlockEntity {
 
 
     public CreakingHeartBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.CREAKING_HEART, blockPos, blockState);
+        super(ModBlockEntities.CREAKING_HEART.get(), blockPos, blockState);
     }
 
     public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, CreakingHeartBlockEntity creakingHeartBlockEntity) {
@@ -82,7 +84,7 @@ public class CreakingHeartBlockEntity extends BlockEntity {
             int i = creakingHeartBlockEntity.computeAnalogOutputSignal();
             if (creakingHeartBlockEntity.outputSignal != i) {
                 creakingHeartBlockEntity.outputSignal = i;
-                level.updateNeighbourForOutputSignal(blockPos, ModBlocks.CREAKING_HEART);
+                level.updateNeighbourForOutputSignal(blockPos, ModBlocks.CREAKING_HEART.get());
             }
 
             if (creakingHeartBlockEntity.emitter > 0) {
@@ -213,7 +215,7 @@ public class CreakingHeartBlockEntity extends BlockEntity {
         if (optional.isEmpty()) {
             return null;
         } else {
-            Creaking creaking = (Creaking)optional.get();
+            Creaking creaking = optional.get();
             serverLevel.gameEvent(creaking, GameEvent.ENTITY_PLACE, creaking.position());
             serverLevel.broadcastEntityEvent(creaking, (byte)60);
             creaking.setTransient(blockPos);
@@ -232,7 +234,7 @@ public class CreakingHeartBlockEntity extends BlockEntity {
     }
 
     public void creakingHurt() {
-        Object serverLevel = this.getCreakingProtector().orElse((Creaking) null);
+        Object serverLevel = this.getCreakingProtector().orElse(null);
         if (serverLevel instanceof Creaking creaking) {
             Level i = this.level;
             if (i instanceof ServerLevel serverLevel2) {
@@ -242,7 +244,7 @@ public class CreakingHeartBlockEntity extends BlockEntity {
 
                     for(int j = 0; j < rand; ++j) {
                         this.spreadResin().ifPresent((blockPos) -> {
-                            this.level.playSound((Player)null, blockPos, ModSounds.RESIN_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                            this.level.playSound(null, blockPos, ModSounds.RESIN_PLACE.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
                             this.level.gameEvent(GameEvent.BLOCK_PLACE, blockPos, GameEvent.Context.of(this.level.getBlockState(blockPos)));
                         });
                     }
@@ -271,12 +273,12 @@ public class CreakingHeartBlockEntity extends BlockEntity {
                     BlockState blockState = this.level.getBlockState(blockPos2);
                     Direction direction2 = direction.getOpposite();
                     if (blockState.isAir()) {
-                        blockState = ModBlocks.RESIN_CLUMP.defaultBlockState();
+                        blockState = ModBlocks.RESIN_CLUMP.get().defaultBlockState();
                     } else if (blockState.is(Blocks.WATER) && blockState.getFluidState().isSource()) {
-                        blockState = ModBlocks.RESIN_CLUMP.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, true);
+                        blockState = ModBlocks.RESIN_CLUMP.get().defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, true);
                     }
 
-                    if (blockState.is(ModBlocks.RESIN_CLUMP) && !MultifaceBlock.hasFace(blockState, direction2)) {
+                    if (blockState.is(ModBlocks.RESIN_CLUMP.get()) && !MultifaceBlock.hasFace(blockState, direction2)) {
                         this.level.setBlock(blockPos2, (BlockState) blockState.setValue(MultifaceBlock.getFaceProperty(direction2), true), 3);
                         mutable.setValue(blockPos2);
                         return false;

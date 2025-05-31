@@ -27,7 +27,7 @@ public class CreakingHeartDecorator extends TreeDecorator {
     }
 
     protected TreeDecoratorType<?> type() {
-        return ModTreeDecoratorType.CREAKING_HEART;
+        return ModTreeDecoratorType.CREAKING_HEART.get();
     }
 
     public void place(TreeDecorator.Context context) {
@@ -35,7 +35,7 @@ public class CreakingHeartDecorator extends TreeDecorator {
         List<BlockPos> list = context.logs();
         if (!list.isEmpty()) {
             if (!(randomSource.nextFloat() >= this.probability)) {
-                List<BlockPos> list2 = new ArrayList(list);
+                List<BlockPos> list2 = new ArrayList<>(list);
                 Util.shuffle(list2, randomSource);
                 Optional<BlockPos> optional = list2.stream().filter((blockPos) -> {
                     for(Direction direction : Direction.values()) {
@@ -47,7 +47,7 @@ public class CreakingHeartDecorator extends TreeDecorator {
                     return true;
                 }).findFirst();
                 if (!optional.isEmpty()) {
-                    context.setBlock((BlockPos)optional.get(), (BlockState)((BlockState) ModBlocks.CREAKING_HEART.defaultBlockState().setValue(CreakingHeartBlock.ACTIVE, true)).setValue(CreakingHeartBlock.NATURAL, true));
+                    context.setBlock(optional.get(), ModBlocks.CREAKING_HEART.get().defaultBlockState().setValue(CreakingHeartBlock.ACTIVE, true).setValue(CreakingHeartBlock.NATURAL, true));
                 }
             }
         }

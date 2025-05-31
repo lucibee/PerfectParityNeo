@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
+import org.arcticquests.dev.datagen.ModBlockTagProvider;
 import org.arcticquests.dev.sounds.ModSounds;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -65,7 +66,7 @@ public class CreakingHeartBlock extends BaseEntityBlock {
             return null;
         } else {
             // blockState.setValue(ACTIVE, blockState.getValue(ENABLED));
-            return (Boolean)blockState.getValue(ENABLED) ? createTickerHelper(blockEntityType, ModBlockEntities.CREAKING_HEART, CreakingHeartBlockEntity::serverTick) : null;
+            return blockState.getValue(ENABLED) ? createTickerHelper(blockEntityType, ModBlockEntities.CREAKING_HEART.get(), CreakingHeartBlockEntity::serverTick) : null;
         }
     }
 
@@ -77,9 +78,9 @@ public class CreakingHeartBlock extends BaseEntityBlock {
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
         if (isNaturalNight(level)) {
-            if ((Boolean)blockState.getValue(ENABLED)) {
+            if (blockState.getValue(ENABLED)) {
                 if (randomSource.nextInt(16) == 0 && isSurroundedByLogs(level, blockPos)) {
-                    level.playLocalSound((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), ModSounds.CREAKING_HEART_IDLE.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
+                    level.playLocalSound(blockPos.getX(), blockPos.getY(), blockPos.getZ(), ModSounds.CREAKING_HEART_IDLE.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
                 }
 
             }
