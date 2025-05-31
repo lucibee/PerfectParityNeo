@@ -1,5 +1,6 @@
 package org.arcticquests.dev.worldgen;
 
+
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.Util;
@@ -10,8 +11,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
-import org.arcticquests.dev.world.level.block.CreakingHeartBlock;
-import org.arcticquests.dev.world.level.block.ModBlocks;
+import org.arcticquests.dev.block.ModBlocks;
+import org.arcticquests.dev.block.custom.CreakingHeartBlock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,17 +26,17 @@ public class CreakingHeartDecorator extends TreeDecorator {
     public CreakingHeartDecorator(float f) {
         this.probability = f;
     }
-
+    @Override
     protected TreeDecoratorType<?> type() {
-        return ModTreeDecoratorType.CREAKING_HEART.get();
+        return ModTreeDecoratorType.CREAKING_HEART;
     }
-
+    @Override
     public void place(TreeDecorator.Context context) {
         RandomSource randomSource = context.random();
         List<BlockPos> list = context.logs();
         if (!list.isEmpty()) {
             if (!(randomSource.nextFloat() >= this.probability)) {
-                List<BlockPos> list2 = new ArrayList<>(list);
+                List<BlockPos> list2 = new ArrayList(list);
                 Util.shuffle(list2, randomSource);
                 Optional<BlockPos> optional = list2.stream().filter((blockPos) -> {
                     for(Direction direction : Direction.values()) {
@@ -47,7 +48,7 @@ public class CreakingHeartDecorator extends TreeDecorator {
                     return true;
                 }).findFirst();
                 if (!optional.isEmpty()) {
-                    context.setBlock(optional.get(), ModBlocks.CREAKING_HEART.get().defaultBlockState().setValue(CreakingHeartBlock.ACTIVE, true).setValue(CreakingHeartBlock.NATURAL, true));
+                    context.setBlock((BlockPos)optional.get(), ModBlocks.CREAKING_HEART.get().defaultBlockState().setValue(CreakingHeartBlock.ACTIVE, true).setValue(CreakingHeartBlock.NATURAL, true));
                 }
             }
         }

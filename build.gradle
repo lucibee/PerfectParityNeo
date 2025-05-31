@@ -13,10 +13,6 @@ group = mod_group_id
 
 repositories {
     mavenLocal()
-    maven {
-        name = 'TerraformersMC'
-        url = 'https://maven.terraformersmc.com/'
-    }
     maven {url "https://cursemaven.com"}
     maven {url "https://maven.su5ed.dev/releases"}
     maven { url = 'https://maven.minecraftforge.net/' }
@@ -91,13 +87,8 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 
 dependencies {
-
-    implementation "curse.maven:continuity-531351:5981335"
-
-    implementation "org.sinytra.forgified-fabric-api:forgified-fabric-api:0.115.6+2.1.0+1.21.1"
-
     implementation "com.github.glitchfiend:TerraBlender-neoforge:1.21.1-4.1.0.8"
-
+    implementation "curse.maven:selene-499980:6462396"
 
     // Specify the version of Minecraft to use.
     // Depending on the plugin applied there are several options. We will assume you applied the userdev plugin as shown above.
@@ -107,7 +98,6 @@ dependencies {
     // For all intends and purposes: You can treat this dependency as if it is a normal library you would use.
 
     implementation "net.neoforged:neoforge:${neo_version}"
-    implementation "org.sinytra.forgified-fabric-api:forgified-fabric-api:0.115.6+2.1.0+1.21.1"
 
     // Example mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

@@ -9,13 +9,16 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.SoundType;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.common.util.DeferredSoundType;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.arcticquests.dev.PerfectParityPG;
 
 import java.util.function.Supplier;
 
 public class ModSounds {
+    public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
+            DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, PerfectParityPG.MODID);
+
+
     public static final Supplier<SoundEvent> RESIN_BREAK = registerSoundEvent("block.resin.break");
     public static final Supplier<SoundEvent> RESIN_FALL = registerSoundEvent("block.resin.fall");
     public static final Supplier<SoundEvent> RESIN_PLACE = registerSoundEvent("block.resin.place");
@@ -51,15 +54,20 @@ public class ModSounds {
     public static final Supplier<SoundEvent> EYEBLOSSOM_CLOSE_LONG = registerSoundEvent("block.eyeblossom.close_long");
     public static final Supplier<SoundEvent> EYEBLOSSOM_CLOSE = registerSoundEvent("block.eyeblossom.close");
     public static final Supplier<SoundEvent> EYEBLOSSOM_IDLE = registerSoundEvent("block.eyeblossom.idle");
-    public static final  Supplier<SoundEvent> PALE_HANGING_MOSS_IDLE = registerSoundEvent("block.pale_hanging_moss.idle");
 
     public static final Holder.Reference<SoundEvent> NONE = registerForHolder("music.none");
-
     public static final Music NO_MUSIC = new Music(ModSounds.NONE, 0, 0, true);
-    public static final DeferredSoundType RESIN = new DeferredSoundType(1.0F, 1.0F, RESIN_BREAK, RESIN_STEP, RESIN_PLACE, (Supplier<SoundEvent>) SoundEvents.EMPTY, RESIN_FALL);
-    public static final DeferredSoundType RESIN_BRICKS = new DeferredSoundType(1.0F, 1.0F, ModSounds.RESIN_BRICKS_BREAK, ModSounds.RESIN_BRICKS_STEP, ModSounds.RESIN_BRICKS_PLACE, ModSounds.RESIN_BRICKS_HIT, ModSounds.RESIN_BRICKS_FALL);
-    public static final DeferredSoundType CREAKING_HEART = new DeferredSoundType(1.0F, 1.0F, ModSounds.CREAKING_HEART_BREAK, ModSounds.CREAKING_HEART_STEP, ModSounds.CREAKING_HEART_PLACE, ModSounds.CREAKING_HEART_HIT, ModSounds.CREAKING_HEART_FALL);
 
+    public static final Supplier<SoundEvent> PALE_HANGING_MOSS_IDLE = registerSoundEvent("block.pale_hanging_moss.idle");
+
+    public static final SoundType RESIN = new SoundType(1.0F, 1.0F, RESIN_BREAK, RESIN_STEP, RESIN_PLACE, SoundEvents.EMPTY, RESIN_FALL);
+    public static final SoundType RESIN_BRICKS = new SoundType(1.0F, 1.0F, ModSounds.RESIN_BRICKS_BREAK, ModSounds.RESIN_BRICKS_STEP, ModSounds.RESIN_BRICKS_PLACE, ModSounds.RESIN_BRICKS_HIT, ModSounds.RESIN_BRICKS_FALL);
+    public static final SoundType CREAKING_HEART = new SoundType(1.0F, 1.0F, ModSounds.CREAKING_HEART_BREAK, ModSounds.CREAKING_HEART_STEP, ModSounds.CREAKING_HEART_PLACE, ModSounds.CREAKING_HEART_HIT, ModSounds.CREAKING_HEART_FALL);
+
+    private static Supplier<SoundEvent> registerSoundEvent(String name) {
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID, name);
+        return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(id));
+    }
 
     private static Holder.Reference<SoundEvent> registerForHolder(String string) {
         return registerForHolder(ResourceLocation.withDefaultNamespace(string));
@@ -72,15 +80,6 @@ public class ModSounds {
     private static Holder.Reference<SoundEvent> registerForHolder(ResourceLocation resourceLocation, ResourceLocation resourceLocation2) {
         return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, resourceLocation, SoundEvent.createVariableRangeEvent(resourceLocation2));
     }
-
-    public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, PerfectParityPG.MODID);
-
-
-    private static Supplier<SoundEvent> registerSoundEvent(String name) {
-        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID, name);
-        return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(id));
-    }
-
     public static void register(IEventBus eventBus) {
         SOUND_EVENTS.register(eventBus);
     }

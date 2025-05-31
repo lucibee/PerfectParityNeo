@@ -15,8 +15,8 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import org.apache.commons.lang3.mutable.Mutable;
 import org.apache.commons.lang3.mutable.MutableObject;
-import org.arcticquests.dev.world.level.block.HangingMossBlock;
-import org.arcticquests.dev.world.level.block.ModBlocks;
+import org.arcticquests.dev.block.ModBlocks;
+import org.arcticquests.dev.block.custom.HangingMossBlock;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class PaleMossDecorator extends TreeDecorator {
     private final float groundProbability;
 
     protected TreeDecoratorType<?> type() {
-        return ModTreeDecoratorType.PALE_MOSS.get();
+        return ModTreeDecoratorType.PALE_MOSS;
     }
 
     public PaleMossDecorator(float f, float g, float h) {
