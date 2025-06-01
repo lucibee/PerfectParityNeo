@@ -17,10 +17,9 @@ import java.util.concurrent.CompletableFuture;
 
 public class ModBlockTagProvider extends BlockTagsProvider {
 
-    public static final TagKey<Block> PALE_OAK_LOGS = create("pale_oak_logs");
-
-    private static TagKey<Block> create(String string) {
-        return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,string));
+    public static final TagKey<Block> PALE_OAK_LOGS = createTag("pale_oak_logs");
+    private static TagKey<Block> createTag(String name) {
+        return BlockTags.create(ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID, name));
     }
 
     public ModBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {

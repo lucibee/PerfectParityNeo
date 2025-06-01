@@ -16,9 +16,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class ModBiomeTagProvider extends BiomeTagsProvider {
-
     public static final TagKey<Biome> SPAWNS_WARM_VARIANT_FARM_ANIMALS = create("spawns_warm_variant_farm_animals");
     public static final TagKey<Biome> SPAWNS_COLD_VARIANT_FARM_ANIMALS = create("spawns_cold_variant_farm_animals");
+
     private static TagKey<Biome> create(String string) {
         return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,string));
     }

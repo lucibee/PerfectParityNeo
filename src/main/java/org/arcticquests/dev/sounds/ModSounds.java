@@ -55,6 +55,7 @@ public class ModSounds {
     public static final Supplier<SoundEvent> EYEBLOSSOM_CLOSE_LONG = registerSoundEvent("block.eyeblossom.close_long");
     public static final Supplier<SoundEvent> EYEBLOSSOM_CLOSE = registerSoundEvent("block.eyeblossom.close");
     public static final Supplier<SoundEvent> EYEBLOSSOM_IDLE = registerSoundEvent("block.eyeblossom.idle");
+    public static final Supplier<SoundEvent> NONE = registerSoundEvent("music.none");
 
 
     public static final Supplier<SoundEvent> PALE_HANGING_MOSS_IDLE = registerSoundEvent("block.pale_hanging_moss.idle");

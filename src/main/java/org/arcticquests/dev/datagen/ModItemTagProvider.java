@@ -1,7 +1,6 @@
 package org.arcticquests.dev.datagen;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -19,7 +18,10 @@ import java.util.concurrent.CompletableFuture;
 
 public class ModItemTagProvider extends ItemTagsProvider {
 
-    public static final TagKey<Item> PALE_OAK_LOGS = TagKey.create(Registries.ITEM, ResourceLocation.withDefaultNamespace("pale_oak_logs"));
+    public static final TagKey<Item> PALE_OAK_LOGS = createTag("pale_oak_logs");
+    private static TagKey<Item> createTag(String name) {
+        return ItemTags.create(ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID, name));
+    }
 
     public ModItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTags, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, blockTags, PerfectParityPG.MODID, existingFileHelper);
@@ -29,22 +31,16 @@ public class ModItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        addVanillaTags();
-
-        tag(PALE_OAK_LOGS).add(
-                ModBlocks.PALE_OAK_LOG.get().asItem(),
-                ModBlocks.STRIPPED_PALE_OAK_LOG.get().asItem(),
-                ModBlocks.PALE_OAK_WOOD.get().asItem(),
-                ModBlocks.STRIPPED_PALE_OAK_WOOD.get().asItem()
-        );
-
-        this.tag(ItemTags.SLABS).add(ModBlocks.RESIN_BRICK_SLAB.get().asItem());
-        this.tag(ItemTags.WALLS).add(ModBlocks.RESIN_BRICK_WALL.get().asItem());
-        this.tag(ItemTags.STAIRS).add(ModBlocks.RESIN_BRICK_STAIRS.get().asItem());
-        this.tag(ItemTags.TRIM_MATERIALS).add(ModItems.RESIN_BRICK.get());
-        this.tag(ItemTags.LEAVES).add(ModBlocks.PALE_OAK_LEAVES.get().asItem());
-        this.tag(ItemTags.PLANKS).add(ModBlocks.PALE_OAK_PLANKS.get().asItem());
-        this.tag(ItemTags.LOGS_THAT_BURN).addTag(PALE_OAK_LOGS);
+        LOGGER.info("Starting Item Tag generation...");
+        this.tag(PALE_OAK_LOGS).add(ModBlocks.PALE_OAK_LOG.get().asItem(), ModBlocks.STRIPPED_PALE_OAK_LOG.get().asItem(), ModBlocks.PALE_OAK_WOOD.get().asItem(), ModBlocks.STRIPPED_PALE_OAK_WOOD.get().asItem());
+        LOGGER.info("Tagging resin brick structures...");
+        tag(ItemTags.SLABS).add(ModBlocks.RESIN_BRICK_SLAB.get().asItem());
+        tag(ItemTags.WALLS).add(ModBlocks.RESIN_BRICK_WALL.get().asItem());
+        tag(ItemTags.STAIRS).add(ModBlocks.RESIN_BRICK_STAIRS.get().asItem());
+        tag(ItemTags.TRIM_MATERIALS).add(ModItems.RESIN_BRICK.get());
+        tag(ItemTags.LEAVES).add(ModBlocks.PALE_OAK_LEAVES.get().asItem());
+        tag(ItemTags.PLANKS).add(ModBlocks.PALE_OAK_PLANKS.get().asItem());
+        tag(ItemTags.LOGS_THAT_BURN).addTag(PALE_OAK_LOGS);
 
 /*        tag(ItemTags.WOODEN_BUTTONS).add(ModBlocks.PALE_OAK_BUTTON.asItem());
         tag(ItemTags.WOODEN_DOORS).add(ModBlocks.PALE_OAK_DOOR.asItem());
@@ -59,6 +55,5 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.CHEST_BOATS).add(ModItems.PALE_OAK_CHEST_BOAT);*/
 
     }
-    protected void addVanillaTags() {
-    }
+
 }

@@ -19,7 +19,6 @@ import org.arcticquests.dev.entity.ModEntities;
 public class ModItems {
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(PerfectParityPG.MODID);
-
     public static final DeferredItem<Item> RESIN_CLUMP = ITEMS.register("resin_clump",()-> new Item(new Item.Properties()));
     public static final DeferredItem<Item> RESIN_BRICK = ITEMS.register("resin_brick",()-> new Item(new Item.Properties()));
     public static final DeferredItem<Item> CREAKING_SPAWN_EGG = ITEMS.register("creaking_spawn_egg",()-> new DeferredSpawnEggItem(ModEntities.CREAKING, 0x5F5F5F, 0xFC7812,new Item.Properties()));
@@ -37,14 +36,6 @@ public class ModItems {
             ModBoats.PALE_OAK_CHEST_BOAT_ID, ModBoats.PALE_OAK_BOAT_KEY, true);
 */
 
-    static {
-        RESIN_BLOCK = ModBlocks.RESIN_BLOCK.asItem();
-        RESIN_BRICKS = ModBlocks.RESIN_BRICKS.asItem();
-        RESIN_BRICK_STAIRS = ModBlocks.RESIN_BRICK_STAIRS.asItem();
-        RESIN_BRICK_SLAB = ModBlocks.RESIN_BRICK_SLAB.asItem();
-        RESIN_BRICK_WALL = ModBlocks.RESIN_BRICK_WALL.asItem();
-        CHISELED_RESIN_BRICKS = ModBlocks.CHISELED_RESIN_BRICKS.asItem();
-    }
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
