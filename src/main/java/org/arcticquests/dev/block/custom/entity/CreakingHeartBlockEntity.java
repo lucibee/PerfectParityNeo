@@ -102,7 +102,7 @@ public class CreakingHeartBlockEntity extends BlockEntity {
                     Vec3 vec32 = vec3.subtract(creakingHeartBlockEntity.emitterTarget).scale((double)f).add(creakingHeartBlockEntity.emitterTarget);
                     BlockPos blockPos2 = BlockPos.containing(vec32);
                     float g = (float)creakingHeartBlockEntity.emitter / 2.0F / 100.0F + 0.5F;
-                    serverLevel.playSound((Player)null, blockPos2, ModSounds.CREAKING_HEART_HURT, SoundSource.BLOCKS, g, 1.0F);
+                    serverLevel.playSound((Player)null, blockPos2, ModSounds.CREAKING_HEART_HURT.get(), SoundSource.BLOCKS, g, 1.0F);
                 }
 
                 --creakingHeartBlockEntity.emitter;
@@ -126,8 +126,8 @@ public class CreakingHeartBlockEntity extends BlockEntity {
                                         Creaking creaking = spawnProtector(serverLevel, creakingHeartBlockEntity);
                                         if (creaking != null) {
                                             creakingHeartBlockEntity.setCreakingInfo(creaking);
-                                            creaking.makeSound(ModSounds.CREAKING_SPAWN);
-                                            level.playSound((Player)null, creakingHeartBlockEntity.getBlockPos(), ModSounds.CREAKING_HEART_SPAWN, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                            creaking.makeSound(ModSounds.CREAKING_SPAWN.get());
+                                            level.playSound((Player)null, creakingHeartBlockEntity.getBlockPos(), ModSounds.CREAKING_HEART_SPAWN.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
                                         }
                                     }
 
@@ -246,7 +246,7 @@ public class CreakingHeartBlockEntity extends BlockEntity {
 
                     for(int j = 0; j < rand; ++j) {
                         this.spreadResin().ifPresent((blockPos) -> {
-                            this.level.playSound((Player)null, blockPos, ModSounds.RESIN_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                            this.level.playSound((Player)null, blockPos, ModSounds.RESIN_PLACE.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
                             this.level.gameEvent(GameEvent.BLOCK_PLACE, blockPos, GameEvent.Context.of(this.level.getBlockState(blockPos)));
                         });
                     }

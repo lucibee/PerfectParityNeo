@@ -51,7 +51,7 @@ public class HangingMossBlock extends Block implements BonemealableBlock {
         if (randomSource.nextInt(500) == 0) {
             BlockState blockState2 = level.getBlockState(blockPos.above());
             if (blockState2.is(ModBlockTagProvider.PALE_OAK_LOGS) || blockState2.is(ModBlocks.PALE_OAK_LEAVES)) {
-                level.playLocalSound((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), ModSounds.PALE_HANGING_MOSS_IDLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+                level.playLocalSound((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), ModSounds.PALE_HANGING_MOSS_IDLE.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
             }
         }
 

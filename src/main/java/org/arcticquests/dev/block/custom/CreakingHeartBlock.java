@@ -82,7 +82,7 @@ public class CreakingHeartBlock extends BaseEntityBlock {
         if (isNaturalNight(level)) {
             if (blockState.getValue(ENABLED)) {
                 if (randomSource.nextInt(16) == 0 && isSurroundedByLogs(level, blockPos)) {
-                    level.playLocalSound((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), ModSounds.CREAKING_HEART_IDLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+                    level.playLocalSound((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), ModSounds.CREAKING_HEART_IDLE.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
                 }
 
             }

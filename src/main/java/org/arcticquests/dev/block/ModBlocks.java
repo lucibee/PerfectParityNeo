@@ -118,11 +118,13 @@ public class ModBlocks {
                     .isRedstoneConductor((state, getter, pos) -> false)));
 
 
-    //Wood Varients
     public static final DeferredBlock<Block> PALE_OAK_SIGN= null;
     public static final DeferredBlock<Block> PALE_OAK_WALL_SIGN= null;
     public static final DeferredBlock<Block> PALE_OAK_HANGING_SIGN= null;
     public static final DeferredBlock<Block> PALE_OAK_WALL_HANGING_SIGN= null;
+
+
+    //Non Block Blocks
     public static final DeferredBlock<Block> PALE_OAK_PRESSURE_PLATE= null;
     public static final DeferredBlock<Block> PALE_OAK_TRAPDOOR= null;
     public static final DeferredBlock<Block> POTTED_PALE_OAK_SAPLING= null;
@@ -133,16 +135,21 @@ public class ModBlocks {
     public static final DeferredBlock<Block> PALE_OAK_FENCE= null;
     public static final DeferredBlock<Block> PALE_OAK_DOOR= null;
 
+    public static final DeferredBlock<Block> CREAKING_HEART = registerBlock("creaking_heart",()-> new CreakingHeartBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASEDRUM).strength(10.0F).sound(ModSounds.CREAKING_HEART)));
+
     public static final DeferredBlock<Block> PALE_MOSS_BLOCK = registerBlock("pale_moss_block", ()->new ModPaleMossBlock(BlockBehaviour.Properties.of().ignitedByLava().mapColor(MapColor.COLOR_LIGHT_GRAY).strength(0.1F).sound(SoundType.MOSS).pushReaction(PushReaction.DESTROY)));
     public static final DeferredBlock<Block> PALE_MOSS_CARPET = registerBlock("pale_moss_carpet",()-> new ModPaleModCarpet(BlockBehaviour.Properties.of().ignitedByLava().mapColor(PALE_MOSS_BLOCK.get().defaultMapColor()).strength(0.1F).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.DESTROY).noOcclusion()));
     public static final DeferredBlock<Block> PALE_HANGING_MOSS = registerBlock("pale_hanging_moss", ()-> new HangingMossBlock(BlockBehaviour.Properties.of().ignitedByLava().mapColor(MapColor.COLOR_LIGHT_GREEN).noCollission().sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.DESTROY)));
 
-    public static final DeferredBlock<Block> OPEN_EYEBLOSSOM= null;
-    public static final DeferredBlock<Block> CLOSED_EYEBLOSSOM= null;
-    public static final DeferredBlock<Block> POTTED_OPEN_EYEBLOSSOM= null;
-    public static final DeferredBlock<Block> POTTED_CLOSED_EYEBLOSSOM= null;
+    public static final DeferredBlock<Block> OPEN_EYEBLOSSOM = registerBlock("open_eyeblossom", ()->new EyeblossomBlock(EyeblossomBlock.Type.OPEN, BlockBehaviour.Properties.of().mapColor(CREAKING_HEART.get().defaultMapColor()).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY).randomTicks()));
 
-    public static final DeferredBlock<Block> CREAKING_HEART = registerBlock("creaking_heart",()-> new CreakingHeartBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASEDRUM).strength(10.0F).sound(ModSounds.CREAKING_HEART)));
+    public static final DeferredBlock<Block> CLOSED_EYEBLOSSOM = registerBlock("closed_eyeblossom", ()-> new EyeblossomBlock(EyeblossomBlock.Type.CLOSED, BlockBehaviour.Properties.of().mapColor(PALE_OAK_LEAVES.get().defaultMapColor()).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY).randomTicks()));
+
+    public static final DeferredBlock<Block> POTTED_OPEN_EYEBLOSSOM = registerBlockOnly("potted_open_eyeblossom",()-> new FlowerPotBlock(OPEN_EYEBLOSSOM.get(), BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY).randomTicks()));
+
+    public static final DeferredBlock<Block> POTTED_CLOSED_EYEBLOSSOM = registerBlockOnly("potted_closed_eyeblossom",()-> new FlowerPotBlock(CLOSED_EYEBLOSSOM.get(), BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY).randomTicks()));
+
+
     private static <T extends Block> DeferredBlock<T> registerBlockOnly(String name, Supplier<T> block) {
         return BLOCKS.register(name, block);
     }

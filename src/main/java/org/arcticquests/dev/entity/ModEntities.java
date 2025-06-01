@@ -17,7 +17,7 @@ public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
             DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, PerfectParityPG.MODID);
 
-    private static final ResourceLocation CREAKING_ID = ResourceLocation.withDefaultNamespace("creaking");
+    private static final ResourceLocation CREAKING_ID = ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"creaking");
     private static final ResourceKey<EntityType<?>> CREAKING_KEY = ResourceKey.create(Registries.ENTITY_TYPE, CREAKING_ID);
 
     public static final Supplier<EntityType<Creaking>> CREAKING =

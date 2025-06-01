@@ -229,10 +229,10 @@ public class Creaking extends Monster {
             if (bl2 != bl) {
                 this.gameEvent(GameEvent.ENTITY_ACTION);
                 if (bl2) {
-                    this.makeSound(ModSounds.CREAKING_UNFREEZE);
+                    this.makeSound(ModSounds.CREAKING_UNFREEZE.get());
                 } else {
                     this.stopInPlace();
-                    this.makeSound(ModSounds.CREAKING_FREEZE);
+                    this.makeSound(ModSounds.CREAKING_FREEZE.get());
 
                 }
             }
@@ -324,7 +324,7 @@ public class Creaking extends Monster {
     public void creakingDeathEffects(DamageSource damageSource) {
         this.blameSourceForDamage(damageSource);
         // this.die(damageSource);
-        this.makeSound(ModSounds.CREAKING_TWITCH);
+        this.makeSound(ModSounds.CREAKING_TWITCH.get());
     }
 
     @Override
@@ -445,23 +445,23 @@ public class Creaking extends Monster {
     }
     @Override
     public void playAttackSound() {
-        this.makeSound(ModSounds.CREAKING_ATTACK);
+        this.makeSound(ModSounds.CREAKING_ATTACK.get());
     }
     @Override
     protected SoundEvent getAmbientSound() {
-        return this.isActive() ? null : ModSounds.CREAKING_AMBIENT;
+        return this.isActive() ? null : ModSounds.CREAKING_AMBIENT.get();
     }
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
-        return this.isHeartBound() ? ModSounds.CREAKING_SWAY : super.getHurtSound(damageSource);
+        return this.isHeartBound() ? ModSounds.CREAKING_SWAY.get() : super.getHurtSound(damageSource);
     }
     @Override
     protected SoundEvent getDeathSound() {
-        return ModSounds.CREAKING_DEATH;
+        return ModSounds.CREAKING_DEATH.get();
     }
     @Override
     protected void playStepSound(BlockPos blockPos, BlockState blockState) {
-        this.playSound(ModSounds.CREAKING_STEP, 0.15F, 1.0F);
+        this.playSound(ModSounds.CREAKING_STEP.get(), 0.15F, 1.0F);
     }
 
     @Nullable
@@ -520,14 +520,14 @@ public class Creaking extends Monster {
     public void activate(Player player) {
         this.getBrain().setMemory(MemoryModuleType.ATTACK_TARGET, player);
         this.gameEvent(GameEvent.ENTITY_ACTION);
-        this.makeSound(ModSounds.CREAKING_ACTIVATE);
+        this.makeSound(ModSounds.CREAKING_ACTIVATE.get());
         this.setIsActive(true);
     }
 
     public void deactivate() {
         this.getBrain().eraseMemory(MemoryModuleType.ATTACK_TARGET);
         this.gameEvent(GameEvent.ENTITY_ACTION);
-        this.makeSound(ModSounds.CREAKING_DEACTIVATE);
+        this.makeSound(ModSounds.CREAKING_DEACTIVATE.get());
         this.setIsActive(false);
     }
 

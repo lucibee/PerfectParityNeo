@@ -20,17 +20,11 @@ import org.arcticquests.dev.entity.client.CreakingRenderer;
 public class ModEventBusEvents {
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(ModModelLayers.CREAKING, CreakingModel::createBodyLayer);
+        event.registerLayerDefinition(CreakingModel.LAYER_LOCATION, CreakingModel::createBodyLayer);
     }
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(ModEntities.CREAKING.get(), Creaking.createAttributes().build());
-    }
-
-
-
-    @SubscribeEvent
-    public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent event) {
     }
 }

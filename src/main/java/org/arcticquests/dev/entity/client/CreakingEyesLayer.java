@@ -8,11 +8,12 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import org.arcticquests.dev.PerfectParityPG;
 import org.arcticquests.dev.entity.Creaking;
 
 public class CreakingEyesLayer<T extends Creaking> extends RenderLayer<T, CreakingModel<T>>{
 
-    private static final RenderType CREAKING_EYES = RenderType.eyes(ResourceLocation.withDefaultNamespace("textures/entity/creaking/creaking_eyes.png"));
+    private static final RenderType CREAKING_EYES = RenderType.eyes(ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"textures/entity/creaking/creaking_eyes.png"));
 
     public CreakingEyesLayer(RenderLayerParent<T, CreakingModel<T>> renderLayerParent) {
         super(renderLayerParent);

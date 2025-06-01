@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "org.arcticquests.dev.mixin",
   "compatibilityLevel": "JAVA_21",
-  "refmap": "PerfectParityPG.refmap.json",
+  "refmap": "perfectparitypg.refmap.json",
   "mixins": [
     "BushBlockMixin",
     "TreeDecoratorTypeInvoker"

@@ -31,7 +31,7 @@ import org.slf4j.Logger;
 public class PerfectParityPG {
     // Define mod id in a common place for everything to reference
 
-    public static final String MODID = "minecraft";
+    public static final String MODID = "perfectparitypg";
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
 
@@ -42,17 +42,14 @@ public class PerfectParityPG {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
-        ModSounds.register(modEventBus);
-
-        ModItems.register(modEventBus);
 
         ModBlocks.register(modEventBus);
-
+        ModBlockEntities.register(modEventBus);
+        ModItems.register(modEventBus);
+        ModSounds.register(modEventBus);
         ModParticles.register(modEventBus);
-
         ModEntities.register(modEventBus);
 
-        ModBlockEntities.register(modEventBus);
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
@@ -95,13 +92,15 @@ public class PerfectParityPG {
         if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
             event.accept(ModBlocks.PALE_OAK_SAPLING);
             event.accept(ModBlocks.PALE_OAK_LEAVES);
-            /*event.accept(ModBlocks.POTTED_PALE_OAK_SAPLING);
+/*
+            event.accept(ModBlocks.POTTED_PALE_OAK_SAPLING);
+*/
             event.accept(ModBlocks.PALE_MOSS_CARPET);
             event.accept(ModBlocks.PALE_HANGING_MOSS);
             event.accept(ModBlocks.OPEN_EYEBLOSSOM);
             event.accept(ModBlocks.CLOSED_EYEBLOSSOM);
             event.accept(ModBlocks.POTTED_OPEN_EYEBLOSSOM);
-            event.accept(ModBlocks.POTTED_CLOSED_EYEBLOSSOM);*/
+            event.accept(ModBlocks.POTTED_CLOSED_EYEBLOSSOM);
         }
 
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
