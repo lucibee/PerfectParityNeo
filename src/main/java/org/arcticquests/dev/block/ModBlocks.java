@@ -15,7 +15,7 @@ import org.arcticquests.dev.PerfectParityPG;
 import org.arcticquests.dev.block.custom.*;
 import org.arcticquests.dev.item.ModItems;
 import org.arcticquests.dev.sounds.ModSounds;
-import org.arcticquests.dev.worldgen.PaleOakTreeGrower;
+import org.arcticquests.dev.worldgen.ModTreeGrowers;
 
 import java.util.function.Supplier;
 
@@ -81,7 +81,7 @@ public class ModBlocks {
 
 
     public static final DeferredBlock<Block> PALE_OAK_SAPLING = registerBlock("pale_oak_sapling",()->
-            new SaplingBlock(PaleOakTreeGrower.PALE_OAK,
+            new SaplingBlock(ModTreeGrowers.PALE_OAK,
                     BlockBehaviour.Properties.of().mapColor(MapColor.QUARTZ)
                             .noCollission().randomTicks().instabreak()
                             .sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));

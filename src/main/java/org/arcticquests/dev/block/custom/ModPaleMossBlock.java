@@ -7,7 +7,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.MossBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import org.arcticquests.dev.worldgen.ModVegetationFeatures;
+import org.arcticquests.dev.worldgen.ModConfiguredFeatures;
+import org.arcticquests.dev.worldgen.ModPlacedFeatures;
 
 public class ModPaleMossBlock extends MossBlock {
     public ModPaleMossBlock(Properties properties) {
@@ -16,6 +17,6 @@ public class ModPaleMossBlock extends MossBlock {
 
     @Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
-        serverLevel.registryAccess().registry(Registries.CONFIGURED_FEATURE).flatMap((registry) -> registry.getHolder(ModVegetationFeatures.PALE_MOSS_PATCH_BONEMEAL)).ifPresent((reference) -> ((ConfiguredFeature)reference.value()).place(serverLevel, serverLevel.getChunkSource().getGenerator(), randomSource, blockPos.above()));
+        serverLevel.registryAccess().registry(Registries.CONFIGURED_FEATURE).flatMap((registry) -> registry.getHolder(ModConfiguredFeatures.PALE_MOSS_PATCH_BONEMEAL)).ifPresent((reference) -> ((ConfiguredFeature)reference.value()).place(serverLevel, serverLevel.getChunkSource().getGenerator(), randomSource, blockPos.above()));
     }
 }

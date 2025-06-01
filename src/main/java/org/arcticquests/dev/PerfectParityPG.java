@@ -2,6 +2,7 @@ package org.arcticquests.dev;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -24,7 +25,12 @@ import org.arcticquests.dev.particles.ModParticles;
 import org.arcticquests.dev.particles.PaleOakParticle;
 import org.arcticquests.dev.particles.TrailParticle;
 import org.arcticquests.dev.sounds.ModSounds;
+import org.arcticquests.dev.worldgen.ModConfiguredFeatures;
+import org.arcticquests.dev.worldgen.ModPlacedFeatures;
+import org.arcticquests.dev.worldgen.biome.ModOverworldRegion;
+import org.arcticquests.dev.worldgen.ModTreeDecoratorTypes;
 import org.slf4j.Logger;
+import terrablender.api.Regions;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(PerfectParityPG.MODID)
@@ -42,16 +48,25 @@ public class PerfectParityPG {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
+        ModConfiguredFeatures.registerModConfiguredFeatures();
+        ModPlacedFeatures.registerModPlacedFeatures();
+        ModTreeDecoratorTypes.registerTreeDecorators();
 
         ModBlocks.register(modEventBus);
+
         ModBlockEntities.register(modEventBus);
+
         ModItems.register(modEventBus);
+
         ModSounds.register(modEventBus);
+
         ModParticles.register(modEventBus);
+
         ModEntities.register(modEventBus);
 
-        // Register ourselves for server and other game events we are interested in.
-        // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.
+        //ModTreeDecoratorTypes.register(modEventBus);
+
+
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
         // Register the item to a creative tab
@@ -60,6 +75,8 @@ public class PerfectParityPG {
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
+        event.enqueueWork(() ->
+        {Regions.register(new ModOverworldRegion(ResourceLocation.fromNamespaceAndPath(MODID, "overworld"), 2));});
     }
 
     // Add the example block item to the building blocks tab

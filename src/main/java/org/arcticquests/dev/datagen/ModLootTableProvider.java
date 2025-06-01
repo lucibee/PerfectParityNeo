@@ -2,9 +2,7 @@ package org.arcticquests.dev.datagen;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.world.item.Item;
 import org.arcticquests.dev.block.ModBlocks;
 
 import java.util.Set;
@@ -31,7 +29,7 @@ public class ModLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.STRIPPED_PALE_OAK_LOG.get());
         dropSelf(ModBlocks.PALE_OAK_WOOD.get());
         dropSelf(ModBlocks.STRIPPED_PALE_OAK_WOOD.get());
-        createLeavesDrops(ModBlocks.PALE_OAK_LEAVES, ModBlocks.PALE_OAK_SAPLING, NORMAL_LEAVES_SAPLING_CHANCES.get());
+        createLeavesDrops(ModBlocks.PALE_OAK_LEAVES.get(), ModBlocks.PALE_OAK_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES);
         dropSelf(ModBlocks.PALE_OAK_SAPLING.get());
         dropSelf(ModBlocks.PALE_OAK_PLANKS.get());
    /*     dropSelf(ModBlocks.PALE_OAK_SLAB.get());
@@ -42,11 +40,13 @@ public class ModLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.PALE_OAK_TRAPDOOR.get());
         dropSelf(ModBlocks.PALE_OAK_BUTTON.get());
         dropSelf(ModBlocks.PALE_OAK_PRESSURE_PLATE.get());
-        createPotFlowerItemTable(ModBlocks.POTTED_PALE_OAK_SAPLING.get());
         dropOther(ModBlocks.PALE_OAK_SIGN, ModItems.PALE_OAK_SIGN.get());
         dropOther(ModBlocks.PALE_OAK_WALL_SIGN, ModItems.PALE_OAK_SIGN.get());
         dropOther(ModBlocks.PALE_OAK_HANGING_SIGN, ModItems.PALE_OAK_HANGING_SIGN.get());
         dropOther(ModBlocks.PALE_OAK_WALL_HANGING_SIGN, ModItems.PALE_OAK_HANGING_SIGN.get());*/
+/*
+        createPotFlowerItemTable(ModBlocks.POTTED_PALE_OAK_SAPLING.get());
+*/
         createDoublePlantShearsDrop(ModBlocks.PALE_HANGING_MOSS.get());
         createPotFlowerItemTable(ModBlocks.OPEN_EYEBLOSSOM.get());
         createPotFlowerItemTable(ModBlocks.CLOSED_EYEBLOSSOM.get());

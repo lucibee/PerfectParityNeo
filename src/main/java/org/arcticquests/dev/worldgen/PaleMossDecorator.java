@@ -27,7 +27,7 @@ public class PaleMossDecorator extends TreeDecorator {
     private final float groundProbability;
 
     protected TreeDecoratorType<?> type() {
-        return ModTreeDecoratorType.PALE_MOSS;
+        return ModTreeDecoratorTypes.PALE_MOSS;
     }
 
     public PaleMossDecorator(float f, float g, float h) {
@@ -50,7 +50,7 @@ public class PaleMossDecorator extends TreeDecorator {
             });
             BlockPos blockPos = (BlockPos)mutable.getValue();
             if (randomSource.nextFloat() < this.groundProbability) {
-                worldGenLevel.registryAccess().lookup(Registries.CONFIGURED_FEATURE).flatMap((registry) -> registry.get(ModVegetationFeatures.PALE_MOSS_PATCH)).ifPresent((reference) -> ((ConfiguredFeature)reference.value()).place(worldGenLevel, worldGenLevel.getLevel().getChunkSource().getGenerator(), randomSource, blockPos.above()));
+                worldGenLevel.registryAccess().lookup(Registries.CONFIGURED_FEATURE).flatMap((registry) -> registry.get(ModConfiguredFeatures.PALE_MOSS_PATCH)).ifPresent((reference) -> ((ConfiguredFeature)reference.value()).place(worldGenLevel, worldGenLevel.getLevel().getChunkSource().getGenerator(), randomSource, blockPos.above()));
             }
 
             context.logs().forEach((blockPosx) -> {
