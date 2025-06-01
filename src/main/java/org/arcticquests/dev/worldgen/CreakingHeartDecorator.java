@@ -28,7 +28,7 @@ public class CreakingHeartDecorator extends TreeDecorator {
     }
     @Override
     protected TreeDecoratorType<?> type() {
-        return ModTreeDecoratorTypes.CREAKING_HEART;
+        return ModTreeDecoratorTypes.CREAKING_HEART.get();
     }
     @Override
     public void place(TreeDecorator.Context context) {

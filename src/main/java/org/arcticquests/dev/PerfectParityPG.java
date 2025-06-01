@@ -50,7 +50,6 @@ public class PerfectParityPG {
 
         ModConfiguredFeatures.registerModConfiguredFeatures();
         ModPlacedFeatures.registerModPlacedFeatures();
-        ModTreeDecoratorTypes.registerTreeDecorators();
 
         ModBlocks.register(modEventBus);
 
@@ -64,7 +63,7 @@ public class PerfectParityPG {
 
         ModEntities.register(modEventBus);
 
-        //ModTreeDecoratorTypes.register(modEventBus);
+        ModTreeDecoratorTypes.register(modEventBus);
 
 
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
@@ -120,8 +119,8 @@ public class PerfectParityPG {
             event.accept(ModBlocks.POTTED_CLOSED_EYEBLOSSOM);
         }
 
-        if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
-      /*      event.accept(ModBlocks.PALE_OAK_SIGN);
+        /*if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+            event.accept(ModBlocks.PALE_OAK_SIGN);
             event.accept(ModBlocks.PALE_OAK_WALL_SIGN);
             event.accept(ModBlocks.PALE_OAK_HANGING_SIGN);
             event.accept(ModBlocks.PALE_OAK_WALL_HANGING_SIGN);*/
@@ -137,8 +136,7 @@ public class PerfectParityPG {
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents
-    {
+    public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {

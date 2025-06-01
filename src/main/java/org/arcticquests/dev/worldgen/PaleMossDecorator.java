@@ -27,7 +27,7 @@ public class PaleMossDecorator extends TreeDecorator {
     private final float groundProbability;
 
     protected TreeDecoratorType<?> type() {
-        return ModTreeDecoratorTypes.PALE_MOSS;
+        return ModTreeDecoratorTypes.PALE_MOSS.get();
     }
 
     public PaleMossDecorator(float f, float g, float h) {
