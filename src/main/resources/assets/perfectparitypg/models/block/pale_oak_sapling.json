@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "perfectparitypg:block/pale_oak_sapling"
+  }
+}

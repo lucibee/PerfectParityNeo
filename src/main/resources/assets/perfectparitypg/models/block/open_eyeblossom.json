@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "perfectparitypg:block/open_eyeblossom"
+  }
+}

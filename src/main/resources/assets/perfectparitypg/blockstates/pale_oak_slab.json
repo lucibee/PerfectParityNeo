@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "perfectparitypg:block/pale_oak_slab"
+    },
+    "type=double": {
+      "model": "perfectparitypg:block/pale_oak_planks"
+    },
+    "type=top": {
+      "model": "perfectparitypg:block/pale_oak_slab_top"
+    }
+  }
+}

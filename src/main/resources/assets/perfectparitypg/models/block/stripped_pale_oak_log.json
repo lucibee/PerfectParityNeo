@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "perfectparitypg:block/stripped_pale_oak_log_top",
+    "side": "perfectparitypg:block/stripped_pale_oak_log"
+  }
+}

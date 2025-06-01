@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "perfectparitypg:block/resin_bricks",
+    "side": "perfectparitypg:block/resin_bricks",
+    "top": "perfectparitypg:block/resin_bricks"
+  }
+}

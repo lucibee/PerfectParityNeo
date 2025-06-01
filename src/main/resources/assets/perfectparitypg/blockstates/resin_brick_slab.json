@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "perfectparitypg:block/resin_brick_slab"
+    },
+    "type=double": {
+      "model": "perfectparitypg:block/resin_bricks"
+    },
+    "type=top": {
+      "model": "perfectparitypg:block/resin_brick_slab_top"
+    }
+  }
+}
