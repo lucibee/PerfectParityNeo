@@ -123,8 +123,8 @@ public class PerfectParityPG {
             event.accept(ModBlocks.PALE_OAK_SIGN);
             event.accept(ModBlocks.PALE_OAK_WALL_SIGN);
             event.accept(ModBlocks.PALE_OAK_HANGING_SIGN);
-            event.accept(ModBlocks.PALE_OAK_WALL_HANGING_SIGN);*/
-        }
+            event.accept(ModBlocks.PALE_OAK_WALL_HANGING_SIGN);}*/
+        
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
