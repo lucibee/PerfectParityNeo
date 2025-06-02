@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "perfectparitypg:resin_bricks"
+  },
+  "result": {
+    "count": 1,
+    "id": "perfectparitypg:resin_brick_stairs"
+  }
+}

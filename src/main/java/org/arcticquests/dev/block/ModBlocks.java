@@ -29,7 +29,6 @@ public class ModBlocks {
                     .sound(ModSounds.RESIN)
                     .ignitedByLava()
                     .pushReaction(PushReaction.DESTROY)));
-    ;
     public static final DeferredBlock<Block> RESIN_BLOCK = registerBlock("resin_block",
             ()-> new Block(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.TERRACOTTA_ORANGE)
@@ -118,6 +117,7 @@ public class ModBlocks {
                     .isRedstoneConductor((state, getter, pos) -> false)));
 
 
+/*
     public static final DeferredBlock<Block> PALE_OAK_SIGN= null;
     public static final DeferredBlock<Block> PALE_OAK_WALL_SIGN= null;
     public static final DeferredBlock<Block> PALE_OAK_HANGING_SIGN= null;
@@ -134,6 +134,7 @@ public class ModBlocks {
     public static final DeferredBlock<Block> PALE_OAK_FENCE_GATE= null;
     public static final DeferredBlock<Block> PALE_OAK_FENCE= null;
     public static final DeferredBlock<Block> PALE_OAK_DOOR= null;
+*/
 
     public static final DeferredBlock<Block> CREAKING_HEART = registerBlock("creaking_heart",()-> new CreakingHeartBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASEDRUM).strength(10.0F).sound(ModSounds.CREAKING_HEART)));
 
@@ -145,9 +146,21 @@ public class ModBlocks {
 
     public static final DeferredBlock<Block> CLOSED_EYEBLOSSOM = registerBlock("closed_eyeblossom", ()-> new EyeblossomBlock(EyeblossomBlock.Type.CLOSED, BlockBehaviour.Properties.of().mapColor(PALE_OAK_LEAVES.get().defaultMapColor()).noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY).randomTicks()));
 
-    public static final DeferredBlock<Block> POTTED_OPEN_EYEBLOSSOM = registerBlockOnly("potted_open_eyeblossom",()-> new FlowerPotBlock(OPEN_EYEBLOSSOM.get(), BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY).randomTicks()));
+    public static final DeferredBlock<Block> POTTED_OPEN_EYEBLOSSOM =
+            registerBlockOnly("potted_open_eyeblossom", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    OPEN_EYEBLOSSOM, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
 
-    public static final DeferredBlock<Block> POTTED_CLOSED_EYEBLOSSOM = registerBlockOnly("potted_closed_eyeblossom",()-> new FlowerPotBlock(CLOSED_EYEBLOSSOM.get(), BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY).randomTicks()));
+    public static final DeferredBlock<Block> POTTED_CLOSED_EYEBLOSSOM =
+            registerBlockOnly("potted_closed_eyeblossom", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    CLOSED_EYEBLOSSOM, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
+
+
+    public static void registerFlowerPotPlants() {
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(
+                OPEN_EYEBLOSSOM.getId(), POTTED_OPEN_EYEBLOSSOM);
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(
+                CLOSED_EYEBLOSSOM.getId(), POTTED_CLOSED_EYEBLOSSOM);
+    }
 
 
     private static <T extends Block> DeferredBlock<T> registerBlockOnly(String name, Supplier<T> block) {

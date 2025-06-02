@@ -48,8 +48,7 @@ public class PerfectParityPG {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
-        ModConfiguredFeatures.registerModConfiguredFeatures();
-        ModPlacedFeatures.registerModPlacedFeatures();
+
 
         ModBlocks.register(modEventBus);
 
@@ -65,6 +64,8 @@ public class PerfectParityPG {
 
         ModTreeDecoratorTypes.register(modEventBus);
 
+        ModConfiguredFeatures.registerModConfiguredFeatures();
+        ModPlacedFeatures.registerModPlacedFeatures();
 
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
@@ -75,7 +76,9 @@ public class PerfectParityPG {
     private void commonSetup(final FMLCommonSetupEvent event)
     {
         event.enqueueWork(() ->
-        {Regions.register(new ModOverworldRegion(ResourceLocation.fromNamespaceAndPath(MODID, "overworld"), 2));});
+        {Regions.register(new ModOverworldRegion(ResourceLocation.fromNamespaceAndPath(MODID, "palegarden"), 2));});
+        event.enqueueWork(ModBlocks::registerFlowerPotPlants);
+
     }
 
     // Add the example block item to the building blocks tab
@@ -93,6 +96,8 @@ public class PerfectParityPG {
             event.accept(ModBlocks.PALE_OAK_LOG);
             event.accept(ModBlocks.STRIPPED_PALE_OAK_LOG);
             event.accept(ModBlocks.STRIPPED_PALE_OAK_WOOD);
+            event.accept(ModBlocks.CREAKING_HEART);
+
       /*      event.accept(ModBlocks.PALE_OAK_STAIRS);
             event.accept(ModBlocks.PALE_OAK_SLAB);
             event.accept(ModBlocks.PALE_OAK_FENCE);
@@ -102,29 +107,25 @@ public class PerfectParityPG {
             event.accept(ModBlocks.PALE_OAK_TRAPDOOR);
             event.accept(ModBlocks.PALE_OAK_BUTTON);
             event.accept(ModBlocks.PALE_MOSS_BLOCK);*/
-            event.accept(ModBlocks.CREAKING_HEART);
         }
 
         if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
             event.accept(ModBlocks.PALE_OAK_SAPLING);
             event.accept(ModBlocks.PALE_OAK_LEAVES);
-/*
-            event.accept(ModBlocks.POTTED_PALE_OAK_SAPLING);
-*/
             event.accept(ModBlocks.PALE_MOSS_CARPET);
             event.accept(ModBlocks.PALE_HANGING_MOSS);
             event.accept(ModBlocks.OPEN_EYEBLOSSOM);
             event.accept(ModBlocks.CLOSED_EYEBLOSSOM);
             event.accept(ModBlocks.POTTED_OPEN_EYEBLOSSOM);
             event.accept(ModBlocks.POTTED_CLOSED_EYEBLOSSOM);
+            /*event.accept(ModBlocks.POTTED_PALE_OAK_SAPLING);*/
         }
 
         /*if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
             event.accept(ModBlocks.PALE_OAK_SIGN);
             event.accept(ModBlocks.PALE_OAK_WALL_SIGN);
             event.accept(ModBlocks.PALE_OAK_HANGING_SIGN);
-            event.accept(ModBlocks.PALE_OAK_WALL_HANGING_SIGN);*/
-        }
+            event.accept(ModBlocks.PALE_OAK_WALL_HANGING_SIGN);}*/
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

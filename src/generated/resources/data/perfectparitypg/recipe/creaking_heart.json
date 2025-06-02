@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "perfectparitypg:pale_oak_log"
+    },
+    "O": {
+      "item": "perfectparitypg:resin_block"
+    }
+  },
+  "pattern": [
+    "#",
+    "O",
+    "#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "perfectparitypg:creaking_heart"
+  }
+}

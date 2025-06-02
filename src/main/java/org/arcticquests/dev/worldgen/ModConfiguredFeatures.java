@@ -1,5 +1,6 @@
 package org.arcticquests.dev.worldgen;
 
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -17,10 +18,21 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> PALE_FOREST_FLOWERS = registerKey("pale_forest_flowers");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PALE_GARDEN_VEGETATION = registerKey("pale_garden_vegetation");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PALE_MOSS_VEGETATION = registerKey("pale_moss_vegetation");
-
+    public static final ResourceKey<ConfiguredFeature<?,?>> PALE_GARDEN_FLOWERS = registerKey("pale_garden_flowers") ;
 
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+        HolderGetter<ConfiguredFeature<?, ?>> lookup = context.lookup(Registries.CONFIGURED_FEATURE);
+
+        // Touch each key to register it
+        lookup.getOrThrow(PALE_OAK);
+        lookup.getOrThrow(PALE_MOSS_PATCH_BONEMEAL);
+        lookup.getOrThrow(PALE_MOSS_PATCH);
+        lookup.getOrThrow(FLOWER_PALE_GARDEN);
+        lookup.getOrThrow(PALE_FOREST_FLOWERS);
+        lookup.getOrThrow(PALE_GARDEN_VEGETATION);
+        lookup.getOrThrow(PALE_MOSS_VEGETATION);
+        lookup.getOrThrow(PALE_GARDEN_FLOWERS);
     }
 
 

@@ -16,14 +16,20 @@ import java.util.List;
 import static org.arcticquests.dev.PerfectParityPG.LOGGER;
 
 public class ModPlacedFeatures {
-    public static final ResourceKey<PlacedFeature> FLOWER_PALE_GARDEN = PlacementUtils.createKey("flower_pale_garden");
-    public static final ResourceKey<PlacedFeature> PALE_GARDEN_VEGETATION = PlacementUtils.createKey("pale_garden_vegetation");
-    public static final ResourceKey<PlacedFeature> PALE_GARDEN_FLOWERS = PlacementUtils.createKey("pale_garden_flowers");
-    public static final ResourceKey<PlacedFeature> PALE_MOSS_PATCH = PlacementUtils.createKey("pale_moss_patch");
-    public static void bootstrap(BootstrapContext<PlacedFeature> context)
-    {
-        HolderGetter<ConfiguredFeature<?, ?>> holderGetter = context.lookup(Registries.CONFIGURED_FEATURE);
-        Holder<ConfiguredFeature<?, ?>> holder26 = holderGetter.getOrThrow(ModConfiguredFeatures.FLOWER_PALE_GARDEN);
+    public static final ResourceKey<PlacedFeature> FLOWER_PALE_GARDEN = registerKey("flower_pale_garden");
+    public static final ResourceKey<PlacedFeature> PALE_GARDEN_VEGETATION = registerKey("pale_garden_vegetation");
+    public static final ResourceKey<PlacedFeature> PALE_GARDEN_FLOWERS = registerKey("pale_garden_flowers");
+    public static final ResourceKey<PlacedFeature> PALE_MOSS_PATCH = registerKey("pale_moss_patch");
+
+    public static void bootstrap(BootstrapContext<PlacedFeature> context) {
+        HolderGetter<PlacedFeature> lookup = context.lookup(Registries.PLACED_FEATURE);
+
+        lookup.getOrThrow(FLOWER_PALE_GARDEN);
+        lookup.getOrThrow(PALE_GARDEN_VEGETATION);
+        lookup.getOrThrow(PALE_GARDEN_FLOWERS);
+        lookup.getOrThrow(PALE_MOSS_PATCH);
+
+        LOGGER.info("Registered all placed features for mod.");
     }
 
     private static ResourceKey<PlacedFeature> registerKey(String name) {
@@ -32,7 +38,10 @@ public class ModPlacedFeatures {
 
     public static void registerModPlacedFeatures() {
         LOGGER.info("Registering Placed features...");
-
-        LOGGER.debug("Placed feature keys: {}", FLOWER_PALE_GARDEN.location());
+        LOGGER.debug("Placed feature keys: {}, {}, {}, {}",
+                FLOWER_PALE_GARDEN.location(),
+                PALE_GARDEN_VEGETATION.location(),
+                PALE_GARDEN_FLOWERS.location(),
+                PALE_MOSS_PATCH.location());
     }
 }
