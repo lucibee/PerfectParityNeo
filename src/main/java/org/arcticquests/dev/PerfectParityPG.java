@@ -78,7 +78,6 @@ public class PerfectParityPG {
         event.enqueueWork(() ->
         {Regions.register(new ModOverworldRegion(ResourceLocation.fromNamespaceAndPath(MODID, "palegarden"), 2));});
         event.enqueueWork(ModBlocks::registerFlowerPotPlants);
-
     }
 
     // Add the example block item to the building blocks tab

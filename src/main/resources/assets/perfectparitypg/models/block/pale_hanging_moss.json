@@ -2,5 +2,5 @@
   "parent": "minecraft:block/cross",
   "textures": {
     "cross": "perfectparitypg:block/pale_hanging_moss"
-  }
+  },"render_type": "cutout"
 }

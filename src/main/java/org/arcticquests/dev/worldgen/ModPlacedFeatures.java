@@ -20,6 +20,10 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> PALE_GARDEN_VEGETATION = registerKey("pale_garden_vegetation");
     public static final ResourceKey<PlacedFeature> PALE_GARDEN_FLOWERS = registerKey("pale_garden_flowers");
     public static final ResourceKey<PlacedFeature> PALE_MOSS_PATCH = registerKey("pale_moss_patch");
+    public static final ResourceKey<PlacedFeature> PALE_OAK_CHECKED = registerKey("pale_oak_checked");
+    public static final ResourceKey<PlacedFeature> PALE_OAK_CREAKING_CHECKED = registerKey("pale_oak_creaking_checked");
+
+
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         HolderGetter<PlacedFeature> lookup = context.lookup(Registries.PLACED_FEATURE);
@@ -28,6 +32,8 @@ public class ModPlacedFeatures {
         lookup.getOrThrow(PALE_GARDEN_VEGETATION);
         lookup.getOrThrow(PALE_GARDEN_FLOWERS);
         lookup.getOrThrow(PALE_MOSS_PATCH);
+        lookup.getOrThrow(PALE_OAK_CHECKED);
+        lookup.getOrThrow(PALE_OAK_CREAKING_CHECKED);
 
         LOGGER.info("Registered all placed features for mod.");
     }

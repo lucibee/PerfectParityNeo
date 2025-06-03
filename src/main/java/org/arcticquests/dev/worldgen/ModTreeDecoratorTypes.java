@@ -14,8 +14,6 @@ import static org.arcticquests.dev.PerfectParityPG.LOGGER;
 
 public class ModTreeDecoratorTypes {
 
-
-
     public static final DeferredRegister<TreeDecoratorType<?>> TREE_DECORATOR_TYPES =
             DeferredRegister.create(Registries.TREE_DECORATOR_TYPE, PerfectParityPG.MODID);
 
@@ -26,7 +24,6 @@ public class ModTreeDecoratorTypes {
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<CreakingHeartDecorator>> CREAKING_HEART =
             TREE_DECORATOR_TYPES.register("creaking_heart",
                     () -> new TreeDecoratorType<>(CreakingHeartDecorator.CODEC));
-
 
     public static void register(IEventBus eventBus) {
         TREE_DECORATOR_TYPES.register(eventBus);
