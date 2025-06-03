@@ -67,7 +67,7 @@ public class CreakingHeartBlock extends BaseEntityBlock {
         if (level.isClientSide) {
             return null;
         } else {
-            // blockState.setValue(ACTIVE, blockState.getValue(ENABLED));
+            //blockState.setValue(ACTIVE, blockState.getValue(ENABLED));
             return blockState.getValue(ENABLED) ? createTickerHelper(blockEntityType, ModBlockEntities.CREAKING_HEART.get(), CreakingHeartBlockEntity::serverTick) : null;
         }
     }

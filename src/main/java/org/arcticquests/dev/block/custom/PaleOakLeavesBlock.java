@@ -9,6 +9,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import org.arcticquests.dev.particles.ModParticles;
 import org.jetbrains.annotations.NotNull;
 
 public class PaleOakLeavesBlock extends LeavesBlock {
@@ -32,7 +33,7 @@ public class PaleOakLeavesBlock extends LeavesBlock {
             BlockPos blockPos2 = blockPos.below();
             BlockState blockState2 = level.getBlockState(blockPos2);
             if (!isFaceFull(blockState2.getCollisionShape(level, blockPos2), Direction.UP)) {
-                ParticleUtils.spawnParticleBelow(level, blockPos, randomSource, ParticleTypes.CAMPFIRE_SIGNAL_SMOKE); // REplce particles with ModParticles.PALE_OAK_LEAVES
+                ParticleUtils.spawnParticleBelow(level, blockPos, randomSource, ModParticles.PALE_OAK_LEAVES.get()); // REplce particles with ModParticles.PALE_OAK_LEAVES
             }
         }
     }

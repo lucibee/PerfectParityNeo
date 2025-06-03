@@ -56,11 +56,8 @@ public class ModSounds {
     public static final Supplier<SoundEvent> EYEBLOSSOM_CLOSE = registerSoundEvent("block.eyeblossom.close");
     public static final Supplier<SoundEvent> EYEBLOSSOM_IDLE = registerSoundEvent("block.eyeblossom.idle");
     public static final Supplier<SoundEvent> NONE = registerSoundEvent("music.none");
-
     public static final ResourceLocation NONE_ID = ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID, "music.none");
-
     public static final Supplier<Music> NO_MUSIC = () -> new Music(BuiltInRegistries.SOUND_EVENT.getHolder(NONE_ID).orElseThrow(() -> new IllegalStateException("SoundEvent not registered yet for 'music.none'")), 999999, 999999, false);
-
     public static final Supplier<SoundEvent> PALE_HANGING_MOSS_IDLE = registerSoundEvent("block.pale_hanging_moss.idle");
 
     public static final DeferredSoundType RESIN = new DeferredSoundType(1.0F, 1.0F, RESIN_BREAK, RESIN_STEP, RESIN_PLACE, RESIN_PLACE, RESIN_FALL); // The Second Reson Place is suppose to be resin hit but who cares when you fall and die.

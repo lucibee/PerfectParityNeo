@@ -363,7 +363,7 @@ public class CreakingHeartBlockEntity extends BlockEntity {
     protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
         super.saveAdditional(compoundTag, provider);
         if (this.creakingInfo != null) {
-            compoundTag.putUUID("creaking", (UUID)this.creakingInfo.map(Entity::getUUID, (uUID) -> uUID));
+            compoundTag.putUUID("creaking", this.creakingInfo.map(Entity::getUUID, (uUID) -> uUID));
         }
     }
 

@@ -12,12 +12,9 @@ group = mod_group_id
 
 repositories {
     mavenLocal()
-
     maven {url "https://cursemaven.com"}
-
     maven { url = 'https://maven.minecraftforge.net/' }
     maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
-
     buildscript {
         repositories {
             maven { url = 'https://maven.minecraftforge.net/' }

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "perfectparitypg:block/pale_moss_block"
+  }
+}

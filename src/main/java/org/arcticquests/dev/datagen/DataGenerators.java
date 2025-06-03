@@ -18,27 +18,27 @@ import java.util.concurrent.CompletableFuture;
 
 @EventBusSubscriber(modid = PerfectParityPG.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
+
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
-        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+        ExistingFileHelper fileHelper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        //BlockTagsProvider blockTagsProvider = new ModBlockTagProvider(packOutput, lookupProvider, existingFileHelper);
-        //generator.addProvider(event.includeServer(), new ModItemTagProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter(), existingFileHelper));
+        // Block tags (used by item tags)
+        ModBlockTagProvider blockTagProvider = new ModBlockTagProvider(packOutput, lookupProvider, fileHelper);
+        // Server data
+        if (event.includeServer()) {
+            generator.addProvider(true, blockTagProvider);
+            generator.addProvider(true, new ModItemTagProvider(packOutput, lookupProvider, blockTagProvider.contentsGetter(), fileHelper));
+            generator.addProvider(true, new ModRecipeProvider(packOutput, lookupProvider));
+            generator.addProvider(true, new ModBiomeTagProvider(packOutput, lookupProvider, PerfectParityPG.MODID, fileHelper));
+            generator.addProvider(true, new ModDatapackProvider(packOutput, lookupProvider));
+           // generator.addProvider(true, new LootTableProvider(packOutput, Collections.emptySet(), List.of(new LootTableProvider.SubProviderEntry(ModBlockLootTableProvider::new, LootContextParamSets.BLOCK)), lookupProvider));
+        }
 
-       /* generator.addProvider(event.includeServer(), new LootTableProvider(packOutput, Collections.emptySet(),
-                List.of(new LootTableProvider.SubProviderEntry(ModLootTableProvider::new, LootContextParamSets.BLOCK)), lookupProvider));*/
-
-        generator.addProvider(event.includeClient(), new ModItemModelProvider(packOutput, existingFileHelper));
-
-        generator.addProvider(event.includeServer(), new ModRecipeProvider(packOutput, lookupProvider));
-
-        generator.addProvider(event.includeServer(), new ModBlockTagProvider(packOutput, lookupProvider, existingFileHelper));
-
-        generator.addProvider(event.includeServer(), new ModBiomeTagProvider(packOutput, lookupProvider, PerfectParityPG.MODID, existingFileHelper));
-
-        generator.addProvider(event.includeServer(), new ModDatapackProvider(packOutput, lookupProvider));
-
+        if (event.includeClient()) {
+            generator.addProvider(true, new ModItemModelProvider(packOutput, fileHelper));
+        }
     }
 }

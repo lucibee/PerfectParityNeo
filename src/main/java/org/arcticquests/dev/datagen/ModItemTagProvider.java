@@ -4,6 +4,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -34,26 +35,47 @@ public class ModItemTagProvider extends ItemTagsProvider {
         LOGGER.info("Starting Item Tag generation...");
         this.tag(PALE_OAK_LOGS).add(ModBlocks.PALE_OAK_LOG.get().asItem(), ModBlocks.STRIPPED_PALE_OAK_LOG.get().asItem(), ModBlocks.PALE_OAK_WOOD.get().asItem(), ModBlocks.STRIPPED_PALE_OAK_WOOD.get().asItem());
         LOGGER.info("Tagging resin brick structures...");
-        tag(ItemTags.SLABS).add(ModBlocks.RESIN_BRICK_SLAB.get().asItem());
-        tag(ItemTags.WALLS).add(ModBlocks.RESIN_BRICK_WALL.get().asItem());
-        tag(ItemTags.STAIRS).add(ModBlocks.RESIN_BRICK_STAIRS.get().asItem());
-        tag(ItemTags.TRIM_MATERIALS).add(ModItems.RESIN_BRICK.get());
-        tag(ItemTags.LEAVES).add(ModBlocks.PALE_OAK_LEAVES.get().asItem());
-        tag(ItemTags.PLANKS).add(ModBlocks.PALE_OAK_PLANKS.get().asItem());
-        tag(ItemTags.LOGS_THAT_BURN).addTag(PALE_OAK_LOGS);
-
-/*        tag(ItemTags.WOODEN_BUTTONS).add(ModBlocks.PALE_OAK_BUTTON.asItem());
-        tag(ItemTags.WOODEN_DOORS).add(ModBlocks.PALE_OAK_DOOR.asItem());
-        tag(ItemTags.WOODEN_FENCES).add(ModBlocks.PALE_OAK_FENCE.asItem());
-        tag(ItemTags.WOODEN_SLABS).add(ModBlocks.PALE_OAK_SLAB.asItem());
-        tag(ItemTags.WOODEN_STAIRS).add(ModBlocks.PALE_OAK_STAIRS.asItem());
-        tag(ItemTags.WOODEN_PRESSURE_PLATES).add(ModBlocks.PALE_OAK_PRESSURE_PLATE.asItem());
-        tag(ItemTags.FENCE_GATES).add(ModBlocks.PALE_OAK_FENCE_GATE.asItem());
-        tag(ItemTags.SIGNS).add(ModItems.PALE_OAK_SIGN);
-        tag(ItemTags.HANGING_SIGNS).add(ModItems.PALE_OAK_HANGING_SIGN);
-        tag(ItemTags.BOATS).add(ModItems.PALE_OAK_BOAT);
-        tag(ItemTags.CHEST_BOATS).add(ModItems.PALE_OAK_CHEST_BOAT);*/
+        this.tag(ItemTags.SLABS).add(ModBlocks.RESIN_BRICK_SLAB.get().asItem());
+        this.tag(ItemTags.WALLS).add(ModBlocks.RESIN_BRICK_WALL.get().asItem());
+        this.tag(ItemTags.STAIRS).add(ModBlocks.RESIN_BRICK_STAIRS.get().asItem());
+        this.tag(ItemTags.TRIM_MATERIALS).add(ModItems.RESIN_BRICK.get());
+        this.tag(ItemTags.LEAVES).add(ModBlocks.PALE_OAK_LEAVES.get().asItem());
+        this.tag(ItemTags.PLANKS).add(ModBlocks.PALE_OAK_PLANKS.get().asItem());
 
     }
 
 }
+/*
+// Pale Oak Logs
+tag(PALE_OAK_LOGS).add(
+        ModBlocks.PALE_OAK_LOG.get().asItem(),
+                ModBlocks.STRIPPED_PALE_OAK_LOG.get().asItem(),
+                ModBlocks.PALE_OAK_WOOD.get().asItem(),
+                ModBlocks.STRIPPED_PALE_OAK_WOOD.get().asItem()
+        );
+
+*/
+/*        // Basic tag syncing (faster with copy)
+        copy(BlockTags.SLABS, ItemTags.SLABS);
+        copy(BlockTags.WALLS, ItemTags.WALLS);
+        copy(BlockTags.STAIRS, ItemTags.STAIRS);
+        copy(BlockTags.PLANKS, ItemTags.PLANKS);
+        copy(BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN);
+        copy(BlockTags.LEAVES, ItemTags.LEAVES);
+        copy(BlockTags.FENCE_GATES, ItemTags.FENCE_GATES);
+        copy(BlockTags.WOODEN_DOORS, ItemTags.WOODEN_DOORS);
+        copy(BlockTags.WOODEN_TRAPDOORS, ItemTags.WOODEN_TRAPDOORS);
+        copy(BlockTags.WOODEN_BUTTONS, ItemTags.WOODEN_BUTTONS);
+        copy(BlockTags.WOODEN_PRESSURE_PLATES, ItemTags.WOODEN_PRESSURE_PLATES);
+        copy(BlockTags.FENCES, ItemTags.WOODEN_FENCES);*//*
+
+
+tag(ItemTags.TRIM_MATERIALS).add(ModItems.RESIN_BRICK.get());
+
+//        tag(ItemTags.SIGNS).add(ModItems.PALE_OAK_SIGN.get());
+//        tag(ItemTags.HANGING_SIGNS).add(ModItems.PALE_OAK_HANGING_SIGN.get());
+//        tag(ItemTags.BOATS).add(ModItems.PALE_OAK_BOAT.get());
+//        tag(ItemTags.CHEST_BOATS).add(ModItems.PALE_OAK_CHEST_BOAT.get());
+
+// Redundant fallback: add Pale Oak to logs that burn if copy fails
+tag(ItemTags.LOGS_THAT_BURN).addTag(PALE_OAK_LOGS);*/

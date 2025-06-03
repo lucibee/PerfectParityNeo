@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "tip=false": {
+      "model": "perfectparitypg:block/pale_hanging_moss"
+    },
+    "tip=true": {
+      "model": "perfectparitypg:block/pale_hanging_moss_tip"
+    }
+  }
+}

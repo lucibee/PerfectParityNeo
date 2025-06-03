@@ -10,7 +10,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
 import static net.minecraft.util.FastColor.ABGR32.*;
-@OnlyIn(Dist.CLIENT)
+
 public class TrailParticle extends TextureSheetParticle {
     private final Vec3 target;
 
@@ -54,7 +54,6 @@ public class TrailParticle extends TextureSheetParticle {
         return color(alpha(i), Math.clamp((long)((int)((float)red(i) * f)), 0, 255), Math.clamp((long)((int)((float)green(i) * g)), 0, 255), Math.clamp((long)((int)((float)blue(i) * h)), 0, 255));
     }
 
-@OnlyIn(Dist.CLIENT)
 public static class Provider implements ParticleProvider<TrailParticleOption> {
         private final SpriteSet sprite;
 

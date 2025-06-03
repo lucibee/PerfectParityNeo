@@ -116,11 +116,10 @@ public class PerfectParityPG {
             event.accept(ModBlocks.PALE_HANGING_MOSS);
             event.accept(ModBlocks.OPEN_EYEBLOSSOM);
             event.accept(ModBlocks.CLOSED_EYEBLOSSOM);
-            event.accept(ModBlocks.POTTED_OPEN_EYEBLOSSOM);
-            event.accept(ModBlocks.POTTED_CLOSED_EYEBLOSSOM);
+/*            event.accept(ModBlocks.POTTED_OPEN_EYEBLOSSOM);
+            event.accept(ModBlocks.POTTED_CLOSED_EYEBLOSSOM);*/
             /*event.accept(ModBlocks.POTTED_PALE_OAK_SAPLING);*/
         }
-
         /*if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
             event.accept(ModBlocks.PALE_OAK_SIGN);
             event.accept(ModBlocks.PALE_OAK_WALL_SIGN);

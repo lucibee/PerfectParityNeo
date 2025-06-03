@@ -51,7 +51,7 @@ public class EyeblossomBlock extends FlowerBlock {
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
         if (this.type.emitSounds() && randomSource.nextInt(700) == 0) {
             BlockState blockState2 = level.getBlockState(blockPos.below());
-            if (blockState2.is(ModBlocks.PALE_MOSS_BLOCK)) {
+            if (blockState2.is(ModBlocks.PALE_MOSS_BLOCK.get())) {
                 level.playLocalSound((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), ModSounds.EYEBLOSSOM_IDLE.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
             }
         }

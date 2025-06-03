@@ -163,7 +163,7 @@ public class Creaking extends Monster {
                 } else {
                     this.invulnerabilityAnimationRemainingTicks = 8;
                     this.level().broadcastEntityEvent(this, (byte)66);
-                    PerfectParityPG.LOGGER.info(String.valueOf(invulnerabilityAnimationRemainingTicks));
+                    //PerfectParityPG.LOGGER.info(String.valueOf(invulnerabilityAnimationRemainingTicks));
                     BlockEntity var8 = this.level().getBlockEntity(blockPos);
                     if (var8 instanceof CreakingHeartBlockEntity) {
                         CreakingHeartBlockEntity creakingHeartBlockEntity = (CreakingHeartBlockEntity)var8;
@@ -285,7 +285,7 @@ public class Creaking extends Monster {
             checkEyeBlink();
             if (!this.level().isClientSide() && this.deathTime > 45 && !this.isRemoved()) {
                 this.tearDown();
-                System.out.println("death");
+                //System.out.println("death");
             }
         } else {
             super.tickDeath();
@@ -323,7 +323,7 @@ public class Creaking extends Monster {
 
     public void creakingDeathEffects(DamageSource damageSource) {
         this.blameSourceForDamage(damageSource);
-        // this.die(damageSource);
+        this.die(damageSource);
         this.makeSound(ModSounds.CREAKING_TWITCH.get());
     }
 
@@ -436,7 +436,7 @@ public class Creaking extends Monster {
     }
 
     public void checkEyeBlink() {
-        System.out.println(String.valueOf(this.deathTime > this.nextFlickerTime));
+        // System.out.println(String.valueOf(this.deathTime > this.nextFlickerTime));
         if (this.deathTime > this.nextFlickerTime) {
             this.nextFlickerTime = this.deathTime + this.getRandom().nextIntBetweenInclusive(this.eyesGlowing ? 2 : this.deathTime / 4, this.eyesGlowing ? 8 : this.deathTime / 2);
             this.setIsActive(!this.isActive());
@@ -598,7 +598,6 @@ public class Creaking extends Monster {
         }
     }
 
-
     public Player blameSourceForDamage(DamageSource damageSource) {
         this.resolveMobResponsibleForDamage(damageSource);
         return this.resolvePlayerResponsibleForDamage(damageSource);
@@ -733,6 +732,6 @@ public class Creaking extends Monster {
         protected PathFinder createPathFinder(int i) {
             this.nodeEvaluator = Creaking.this.new HomeNodeEvaluator();
             this.nodeEvaluator.setCanPassDoors(true);
-            return new PathFinder(this.nodeEvaluator, i);        }
+            return new PathFinder(this.nodeEvaluator, i);  }
     }
 }

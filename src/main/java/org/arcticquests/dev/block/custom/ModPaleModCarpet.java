@@ -197,7 +197,8 @@ public class ModPaleModCarpet extends Block implements BonemealableBlock {
         return getUpdatedState(this.defaultBlockState(), blockPlaceContext.getLevel(), blockPlaceContext.getClickedPos(), true);
     }
 
-    public static void placeAt(LevelAccessor levelAccessor, BlockPos blockPos, RandomSource randomSource, int i) {
+
+        public static void placeAt(LevelAccessor levelAccessor, BlockPos blockPos, RandomSource randomSource, int i) {
         BlockState blockState = ModBlocks.PALE_MOSS_CARPET.get().defaultBlockState();
         BlockState blockState2 = getUpdatedState(blockState, levelAccessor, blockPos, true);
         levelAccessor.setBlock(blockPos, blockState2, 3);
@@ -221,7 +222,6 @@ public class ModPaleModCarpet extends Block implements BonemealableBlock {
 
         }
     }
-
 
     private static BlockState createTopperWithSideChance(BlockGetter blockGetter, BlockPos blockPos, BooleanSupplier booleanSupplier) {
         BlockPos blockPos2 = blockPos.above();

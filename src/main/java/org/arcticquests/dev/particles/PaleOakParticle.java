@@ -69,10 +69,8 @@ public class PaleOakParticle extends TextureSheetParticle {
     }
 
 
-    @OnlyIn(Dist.CLIENT)
     public static class Provider implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet sprites;
-
         public Provider(SpriteSet sprites) {
             this.sprites = sprites;
         }

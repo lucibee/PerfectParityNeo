@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/flower_pot_cross_emissive",
+  "textures": {
+    "cross_emissive": "perfectparitypg:block/open_eyeblossom_emissive",
+    "plant": "perfectparitypg:block/open_eyeblossom"
+  }
+}
