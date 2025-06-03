@@ -121,86 +121,86 @@
       "y": 90
     },
     "facing=south,half=top,shape=inner_left": {
-      "model": "minecraft:block/resin_brick_stairs_inner",
+      "model": "perfectparitypg:block/resin_brick_stairs_inner",
       "uvlock": true,
       "x": 180,
       "y": 90
     },
     "facing=south,half=top,shape=inner_right": {
-      "model": "minecraft:block/resin_brick_stairs_inner",
+      "model": "perfectparitypg:block/resin_brick_stairs_inner",
       "uvlock": true,
       "x": 180,
       "y": 180
     },
     "facing=south,half=top,shape=outer_left": {
-      "model": "minecraft:block/resin_brick_stairs_outer",
+      "model": "perfectparitypg:block/resin_brick_stairs_outer",
       "uvlock": true,
       "x": 180,
       "y": 90
     },
     "facing=south,half=top,shape=outer_right": {
-      "model": "minecraft:block/resin_brick_stairs_outer",
+      "model": "perfectparitypg:block/resin_brick_stairs_outer",
       "uvlock": true,
       "x": 180,
       "y": 180
     },
     "facing=south,half=top,shape=straight": {
-      "model": "minecraft:block/resin_brick_stairs",
+      "model": "perfectparitypg:block/resin_brick_stairs",
       "uvlock": true,
       "x": 180,
       "y": 90
     },
     "facing=west,half=bottom,shape=inner_left": {
-      "model": "minecraft:block/resin_brick_stairs_inner",
+      "model": "perfectparitypg:block/resin_brick_stairs_inner",
       "uvlock": true,
       "y": 90
     },
     "facing=west,half=bottom,shape=inner_right": {
-      "model": "minecraft:block/resin_brick_stairs_inner",
+      "model": "perfectparitypg:block/resin_brick_stairs_inner",
       "uvlock": true,
       "y": 180
     },
     "facing=west,half=bottom,shape=outer_left": {
-      "model": "minecraft:block/resin_brick_stairs_outer",
+      "model": "perfectparitypg:block/resin_brick_stairs_outer",
       "uvlock": true,
       "y": 90
     },
     "facing=west,half=bottom,shape=outer_right": {
-      "model": "minecraft:block/resin_brick_stairs_outer",
+      "model": "perfectparitypg:block/resin_brick_stairs_outer",
       "uvlock": true,
       "y": 180
     },
     "facing=west,half=bottom,shape=straight": {
-      "model": "minecraft:block/resin_brick_stairs",
+      "model": "perfectparitypg:block/resin_brick_stairs",
       "uvlock": true,
       "y": 180
     },
     "facing=west,half=top,shape=inner_left": {
-      "model": "minecraft:block/resin_brick_stairs_inner",
+      "model": "perfectparitypg:block/resin_brick_stairs_inner",
       "uvlock": true,
       "x": 180,
       "y": 180
     },
     "facing=west,half=top,shape=inner_right": {
-      "model": "minecraft:block/resin_brick_stairs_inner",
+      "model": "perfectparitypg:block/resin_brick_stairs_inner",
       "uvlock": true,
       "x": 180,
       "y": 270
     },
     "facing=west,half=top,shape=outer_left": {
-      "model": "minecraft:block/resin_brick_stairs_outer",
+      "model": "perfectparitypg:block/resin_brick_stairs_outer",
       "uvlock": true,
       "x": 180,
       "y": 180
     },
     "facing=west,half=top,shape=outer_right": {
-      "model": "minecraft:block/resin_brick_stairs_outer",
+      "model": "perfectparitypg:block/resin_brick_stairs_outer",
       "uvlock": true,
       "x": 180,
       "y": 270
     },
     "facing=west,half=top,shape=straight": {
-      "model": "minecraft:block/resin_brick_stairs",
+      "model": "perfectparitypg:block/resin_brick_stairs",
       "uvlock": true,
       "x": 180,
       "y": 180
