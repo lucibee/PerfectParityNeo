@@ -1,9 +1,18 @@
 package org.arcticquests.dev;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
+import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -18,6 +27,8 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.arcticquests.dev.block.ModBlocks;
 import org.arcticquests.dev.block.custom.entity.ModBlockEntities;
+import org.arcticquests.dev.block.wood.ModBlockFamilies;
+import org.arcticquests.dev.block.wood.ModWoodTypes;
 import org.arcticquests.dev.entity.ModEntities;
 import org.arcticquests.dev.entity.client.CreakingRenderer;
 import org.arcticquests.dev.item.ModItems;
@@ -48,8 +59,6 @@ public class PerfectParityPG {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
-
-
         ModBlocks.register(modEventBus);
 
         ModBlockEntities.register(modEventBus);
@@ -75,14 +84,23 @@ public class PerfectParityPG {
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-        event.enqueueWork(() ->
-        {Regions.register(new ModOverworldRegion(ResourceLocation.fromNamespaceAndPath(MODID, "palegarden"), 2));});
-        event.enqueueWork(ModBlocks::registerFlowerPotPlants);
+        event.enqueueWork(() -> {
+            Regions.register(new ModOverworldRegion(ResourceLocation.fromNamespaceAndPath(MODID, "palegarden"), 2));
+            ModBlockFamilies.createBlockFamilies();
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.OPEN_EYEBLOSSOM.getId(), ModBlocks.POTTED_OPEN_EYEBLOSSOM);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.PALE_OAK_SAPLING.getId(), ModBlocks.POTTED_PALE_OAK_SAPLING);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.CLOSED_EYEBLOSSOM.getId(), ModBlocks.POTTED_CLOSED_EYEBLOSSOM);
+        });
     }
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event)
-    {
+    {   if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
+        event.accept(ModItems.CREAKING_SPAWN_EGG);
+    }
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+         event.accept(ModItems.RESIN_BRICK);
+    }
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(ModBlocks.RESIN_CLUMP);
             event.accept(ModBlocks.RESIN_BLOCK);
@@ -93,11 +111,11 @@ public class PerfectParityPG {
             event.accept(ModBlocks.CHISELED_RESIN_BRICKS);
             event.accept(ModBlocks.PALE_OAK_PLANKS);
             event.accept(ModBlocks.PALE_OAK_LOG);
+            event.accept(ModBlocks.PALE_OAK_WOOD);
             event.accept(ModBlocks.STRIPPED_PALE_OAK_LOG);
             event.accept(ModBlocks.STRIPPED_PALE_OAK_WOOD);
             event.accept(ModBlocks.CREAKING_HEART);
-
-      /*      event.accept(ModBlocks.PALE_OAK_STAIRS);
+            event.accept(ModBlocks.PALE_OAK_STAIRS);
             event.accept(ModBlocks.PALE_OAK_SLAB);
             event.accept(ModBlocks.PALE_OAK_FENCE);
             event.accept(ModBlocks.PALE_OAK_FENCE_GATE);
@@ -105,7 +123,7 @@ public class PerfectParityPG {
             event.accept(ModBlocks.PALE_OAK_PRESSURE_PLATE);
             event.accept(ModBlocks.PALE_OAK_TRAPDOOR);
             event.accept(ModBlocks.PALE_OAK_BUTTON);
-            event.accept(ModBlocks.PALE_MOSS_BLOCK);*/
+            event.accept(ModBlocks.PALE_MOSS_BLOCK);
         }
 
         if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
@@ -115,11 +133,8 @@ public class PerfectParityPG {
             event.accept(ModBlocks.PALE_HANGING_MOSS);
             event.accept(ModBlocks.OPEN_EYEBLOSSOM);
             event.accept(ModBlocks.CLOSED_EYEBLOSSOM);
-/*            event.accept(ModBlocks.POTTED_OPEN_EYEBLOSSOM);
-            event.accept(ModBlocks.POTTED_CLOSED_EYEBLOSSOM);*/
-            /*event.accept(ModBlocks.POTTED_PALE_OAK_SAPLING);*/
         }
-        /*if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+/*        if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
             event.accept(ModBlocks.PALE_OAK_SIGN);
             event.accept(ModBlocks.PALE_OAK_WALL_SIGN);
             event.accept(ModBlocks.PALE_OAK_HANGING_SIGN);
@@ -140,6 +155,15 @@ public class PerfectParityPG {
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             EntityRenderers.register(ModEntities.CREAKING.get(), CreakingRenderer::new);
+
+            event.enqueueWork(() -> {
+                Sheets.addWoodType(ModWoodTypes.PALE_OAK);
+
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.PALE_OAK_SIGN.get(), RenderType.cutout());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.PALE_OAK_WALL_SIGN.get(), RenderType.cutout());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.PALE_OAK_HANGING_SIGN.get(), RenderType.cutout());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.PALE_OAK_WALL_HANGING_SIGN.get(), RenderType.cutout());
+            });
         }
         @SubscribeEvent
         public static void registerParticleFactories(RegisterParticleProvidersEvent event) {

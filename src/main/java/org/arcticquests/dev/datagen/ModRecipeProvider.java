@@ -6,10 +6,13 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 import org.arcticquests.dev.PerfectParityPG;
 import org.arcticquests.dev.block.ModBlocks;
+import org.arcticquests.dev.block.wood.ModBlockFamilies;
 import org.arcticquests.dev.item.ModItems;
 
 import java.util.concurrent.CompletableFuture;
@@ -25,7 +28,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     @Override
     protected void buildRecipes(RecipeOutput exporter) {
-       // woodRecipes(exporter);
+        woodRecipes(exporter);
 
         shapeless(RecipeCategory.MISC, Items.GRAY_DYE)
                 .requires(ModBlocks.CLOSED_EYEBLOSSOM.get())
@@ -107,116 +110,114 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     }
 
 
-    private void woodRecipes(RecipeOutput exporter) {/*
-        shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PALE_OAK_PLANKS, 4)
+    private void woodRecipes(RecipeOutput exporter) {
+        shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PALE_OAK_PLANKS.get(), 4)
                 .requires(ModItemTagProvider.PALE_OAK_LOGS)
-                .unlockedBy(ModItemTagProvider.PALE_OAK_LOGS.getTranslationKey(), has(ModItemTagProvider.PALE_OAK_LOGS))
-                .save(exporter, ResourceLocation.withDefaultNamespace("pale_oak_planks"));
+                .unlockedBy("has_pale_oak_logs", has(ModItemTagProvider.PALE_OAK_LOGS))
+                .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_planks"));
 
-
-        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PALE_OAK_STAIRS, 4)
-                .define('#', ModBlocks.PALE_OAK_PLANKS)
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PALE_OAK_STAIRS.get(), 4)
+                .define('#', ModBlocks.PALE_OAK_PLANKS.get())
                 .pattern("#  ")
                 .pattern("## ")
                 .pattern("###")
-                .unlockedBy("has_planks", has(ModBlocks.PALE_OAK_PLANKS))
-                .save(exporter, ResourceLocation.withDefaultNamespace("pale_oak_stairs"));
+                .unlockedBy("has_planks", has(ModBlocks.PALE_OAK_PLANKS.get()))
+                .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_stairs"));
 
         shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PALE_OAK_SLAB, 6)
-                .define('#', ModBlocks.PALE_OAK_PLANKS)
+                .define('#', ModBlocks.PALE_OAK_PLANKS.get())
                 .pattern("###")
-                .unlockedBy("has_planks", has(ModBlocks.PALE_OAK_PLANKS))
-                .save(exporter, ResourceLocation.withDefaultNamespace("pale_oak_slab"));
+                .unlockedBy("has_planks", has(ModBlocks.PALE_OAK_PLANKS.get()))
+                .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_slab"));
 
         shaped(RecipeCategory.MISC, ModBlocks.PALE_OAK_FENCE, 3)
-                .define('#', ModBlocks.PALE_OAK_PLANKS)
-                .define('S', ConventionalItemTags.WOODEN_RODS)
+                .define('#', ModBlocks.PALE_OAK_PLANKS.get())
+                .define('S', Items.STICK)
                 .pattern("#S#")
                 .pattern("#S#")
                 .unlockedBy("has_planks", has(ModBlocks.PALE_OAK_PLANKS))
-                .save(exporter, ResourceLocation.withDefaultNamespace("pale_oak_fence"));
+                .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_fence"));
 
-        shaped(RecipeCategory.REDSTONE, ModBlocks.PALE_OAK_FENCE_GATE)
-                .define('#', ModBlocks.PALE_OAK_PLANKS)
-                .define('S', ConventionalItemTags.WOODEN_RODS)
+        shaped(RecipeCategory.REDSTONE, ModBlocks.PALE_OAK_FENCE_GATE.get())
+                .define('#', ModBlocks.PALE_OAK_PLANKS.get())
+                .define('S',  Items.STICK)
                 .pattern("S#S")
                 .pattern("S#S")
-                .unlockedBy("has_planks", has(ModBlocks.PALE_OAK_PLANKS))
-                .save(exporter, ResourceLocation.withDefaultNamespace("pale_oak_fence_gate"));
+                .unlockedBy("has_planks", has(ModBlocks.PALE_OAK_PLANKS.get()))
+                .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_fence_gate"));
 
-        shaped(RecipeCategory.REDSTONE, ModItems.PALE_OAK_SIGN, 3)
-                .define('#', ModBlocks.PALE_OAK_PLANKS)
-                .define('S', ConventionalItemTags.WOODEN_RODS)
+       /* shaped(RecipeCategory.REDSTONE, ModItems.PALE_OAK_SIGN.get(), 3)
+                .define('#', ModBlocks.PALE_OAK_PLANKS.get())
+                .define('S',  Items.STICK)
                 .pattern("###")
                 .pattern("###")
                 .pattern(" S ")
-                .unlockedBy("has_planks", has(ModBlocks.PALE_OAK_PLANKS))
-                .save(exporter, ResourceLocation.withDefaultNamespace("pale_oak_sign"));
+                .unlockedBy("has_planks", has(ModBlocks.PALE_OAK_PLANKS.get()))
+                .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_sign"));
+*/
+        shaped(RecipeCategory.REDSTONE, ModBlocks.PALE_OAK_DOOR.get(), 3)
+                .define('#', ModBlocks.PALE_OAK_PLANKS.get())
+                .pattern("##")
+                .pattern("##")
+                .pattern("##")
+                .unlockedBy("has_planks", has(ModBlocks.PALE_OAK_PLANKS.get()))
+                .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_door"));
 
-        shaped(RecipeCategory.REDSTONE, ModBlocks.PALE_OAK_DOOR, 3)
-                .define('#', ModBlocks.PALE_OAK_PLANKS)
-                .pattern("##")
-                .pattern("##")
-                .pattern("##")
-                .unlockedBy("has_planks", has(ModBlocks.PALE_OAK_PLANKS))
-                .save(exporter, ResourceLocation.withDefaultNamespace("pale_oak_door"));
-
-        shaped(RecipeCategory.REDSTONE, ModBlocks.PALE_OAK_TRAPDOOR, 2)
-                .define('#', ModBlocks.PALE_OAK_PLANKS)
+        shaped(RecipeCategory.REDSTONE, ModBlocks.PALE_OAK_TRAPDOOR.get(), 2)
+                .define('#', ModBlocks.PALE_OAK_PLANKS.get())
                 .pattern("###")
                 .pattern("###")
-                .unlockedBy("has_planks", has(ModBlocks.PALE_OAK_PLANKS))
-                .save(exporter, ResourceLocation.withDefaultNamespace("pale_oak_trapdoor"));
+                .unlockedBy("has_planks", has(ModBlocks.PALE_OAK_PLANKS.get()))
+                .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_trapdoor"));
 
-        shaped(RecipeCategory.DECORATIONS, ModItems.PALE_OAK_HANGING_SIGN, 6)
-                .define('#', ModBlocks.STRIPPED_PALE_OAK_LOG)
-                .define('C', ConventionalItemTags.CHAINS)
+      /*  shaped(RecipeCategory.DECORATIONS, ModItems.PALE_OAK_HANGING_SIGN.get(), 6)
+                .define('#', ModBlocks.STRIPPED_PALE_OAK_LOG.get())
+                .define('C', Items.CHAIN)
                 .pattern("C C")
                 .pattern("###")
                 .pattern("###")
-                .unlockedBy("has_log", has(ModBlocks.STRIPPED_PALE_OAK_LOG))
-                .save(exporter, ResourceLocation.withDefaultNamespace("pale_oak_hanging_sign"));
-
-        shaped(RecipeCategory.TRANSPORTATION, ModItems.PALE_OAK_BOAT)
-                .define('#', ModBlocks.PALE_OAK_PLANKS)
+                .unlockedBy("has_log", has(ModBlocks.STRIPPED_PALE_OAK_LOG.get()))
+                .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_hanging_sign"));
+*/
+/*        shaped(RecipeCategory.TRANSPORTATION, ModItems.PALE_OAK_BOAT.get())
+                .define('#', ModBlocks.PALE_OAK_PLANKS.get())
                 .pattern("# #")
                 .pattern("###")
                 .unlockedBy("in_water", insideOf(Blocks.WATER))
-                .save(exporter, ResourceLocation.withDefaultNamespace("pale_oak_boat"));
+                .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_boat"));*/
 
-
-        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.STRIPPED_PALE_OAK_WOOD, 3)
-                .define('#', ModBlocks.STRIPPED_PALE_OAK_LOG)
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.STRIPPED_PALE_OAK_WOOD.get(), 3)
+                .define('#', ModBlocks.STRIPPED_PALE_OAK_LOG.get())
                 .pattern("##")
                 .pattern("##")
-                .unlockedBy("has_log", has(ModBlocks.STRIPPED_PALE_OAK_LOG))
-                .save(exporter, ResourceLocation.withDefaultNamespace("stripped_pale_oak_wood"));
+                .unlockedBy("has_log", has(ModBlocks.STRIPPED_PALE_OAK_LOG.get()))
+                .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"stripped_pale_oak_wood"));
 
-        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PALE_OAK_WOOD, 3)
-                .define('#', ModBlocks.PALE_OAK_LOG)
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PALE_OAK_WOOD.get(), 3)
+                .define('#', ModBlocks.PALE_OAK_LOG.get())
                 .pattern("##")
                 .pattern("##")
                 .unlockedBy("has_log", has(ModBlocks.PALE_OAK_PLANKS))
-                .save(exporter, ResourceLocation.withDefaultNamespace("pale_oak_wood"));
+                .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_wood"));
 
-        shapeless(RecipeCategory.DECORATIONS, ModItems.PALE_OAK_CHEST_BOAT)
-                .requires(ModItems.PALE_OAK_BOAT)
-                .requires(ConventionalItemTags.WOODEN_CHESTS)
-                .unlockedBy("has_boat", has(ModItems.PALE_OAK_BOAT))
-                .save(exporter, ResourceLocation.withDefaultNamespace("pale_oak_chest_boat"));
+/*        shapeless(RecipeCategory.DECORATIONS, ModItems.PALE_OAK_CHEST_BOAT.get())
+                .requires(ModItems.PALE_OAK_BOAT.get())
+                .requires(Items.CHEST)
+                .unlockedBy("has_boat", has(ModItems.PALE_OAK_BOAT.get()))
+                .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_chest_boat"));*/
 
-        shapeless(RecipeCategory.REDSTONE, ModBlocks.PALE_OAK_BUTTON)
-                .requires(ModBlocks.PALE_OAK_PLANKS)
-                .unlockedBy("has_planks", has(ModBlocks.PALE_OAK_PLANKS))
-                .save(exporter, ResourceLocation.withDefaultNamespace("pale_oak_button"));
+        shapeless(RecipeCategory.REDSTONE, ModBlocks.PALE_OAK_BUTTON.get())
+                .requires(ModBlocks.PALE_OAK_PLANKS.get())
+                .unlockedBy("has_planks", has(ModBlocks.PALE_OAK_PLANKS.get()))
+                .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_button"));
 
-        shaped(RecipeCategory.REDSTONE, ModBlocks.PALE_OAK_PRESSURE_PLATE)
-                .define('#', ModBlocks.PALE_OAK_PLANKS)
+        shaped(RecipeCategory.REDSTONE, ModBlocks.PALE_OAK_PRESSURE_PLATE.get())
+                .define('#', ModBlocks.PALE_OAK_PLANKS.get())
                 .pattern("##")
-                .unlockedBy("has_planks", has(ModBlocks.PALE_OAK_PLANKS))
-                .save(exporter, ResourceLocation.withDefaultNamespace("pale_oak_pressure_plate"));
+                .unlockedBy("has_planks", has(ModBlocks.PALE_OAK_PLANKS.get()))
+                .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_pressure_plate"));
 
-        generateRecipes(exporter, ModBlockFamilies.PALE_OAK, FeatureFlagSet.of());*/
+        generateRecipes(exporter, ModBlockFamilies.PALE_OAK, FeatureFlagSet.of());
     }
 
 

@@ -38,18 +38,7 @@ public class ModBiomeTagProvider extends BiomeTagsProvider {
                         Biomes.WARM_OCEAN,
                         Biomes.MANGROVE_SWAMP,
                         Biomes.DEEP_LUKEWARM_OCEAN,
-                        Biomes.LUKEWARM_OCEAN
-                )
-                .addTag(
-                        BiomeTags.IS_NETHER
-                ).addTag(
-                        BiomeTags.IS_SAVANNA
-                ).addTag(
-                        BiomeTags.IS_JUNGLE
-                ).addTag(
-                        BiomeTags.IS_BADLANDS
-                );
-
+                        Biomes.LUKEWARM_OCEAN).addTag(BiomeTags.IS_NETHER).addTag(BiomeTags.IS_SAVANNA).addTag(BiomeTags.IS_JUNGLE).addTag(BiomeTags.IS_BADLANDS);
         tag(SPAWNS_COLD_VARIANT_FARM_ANIMALS).add(
                         Biomes.SNOWY_PLAINS,
                         Biomes.ICE_SPIKES,
@@ -72,11 +61,6 @@ public class ModBiomeTagProvider extends BiomeTagsProvider {
                         Biomes.WINDSWEPT_GRAVELLY_HILLS,
                         Biomes.WINDSWEPT_GRAVELLY_HILLS,
                         Biomes.STONY_PEAKS
-                )
-                .addTag(
-                        BiomeTags.IS_END
-                );
-
-
+                ).addTag(BiomeTags.IS_END);
     }
 }

@@ -1,11 +1,15 @@
 package org.arcticquests.dev.block;
 
 
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
@@ -13,6 +17,8 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.arcticquests.dev.PerfectParityPG;
 import org.arcticquests.dev.block.custom.*;
+import org.arcticquests.dev.block.wood.ModBlockSetTypes;
+import org.arcticquests.dev.block.wood.ModWoodTypes;
 import org.arcticquests.dev.item.ModItems;
 import org.arcticquests.dev.sounds.ModSounds;
 import org.arcticquests.dev.worldgen.ModTreeGrowers;
@@ -117,24 +123,56 @@ public class ModBlocks {
                     .isRedstoneConductor((state, getter, pos) -> false)));
 
 
-/*
-    public static final DeferredBlock<Block> PALE_OAK_SIGN= null;
-    public static final DeferredBlock<Block> PALE_OAK_WALL_SIGN= null;
-    public static final DeferredBlock<Block> PALE_OAK_HANGING_SIGN= null;
-    public static final DeferredBlock<Block> PALE_OAK_WALL_HANGING_SIGN= null;
+    public static final DeferredBlock<StandingSignBlock> PALE_OAK_SIGN = registerBlock("pale_oak_sign",
+            () -> new StandingSignBlock(ModWoodTypes.PALE_OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SIGN)));
+
+    public static final DeferredBlock<WallSignBlock> PALE_OAK_WALL_SIGN = registerBlockOnly("pale_oak_wall_sign",
+            () -> new WallSignBlock(ModWoodTypes.PALE_OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_SIGN)));
+
+    public static final DeferredBlock<CeilingHangingSignBlock> PALE_OAK_HANGING_SIGN = registerBlock("pale_oak_hanging_sign",
+            () -> new CeilingHangingSignBlock(ModWoodTypes.PALE_OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN)));
+
+    public static final DeferredBlock<WallHangingSignBlock> PALE_OAK_WALL_HANGING_SIGN = registerBlockOnly("pale_oak_wall_hanging_sign",
+            () -> new WallHangingSignBlock(ModWoodTypes.PALE_OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN)));
 
 
     //Non Block Blocks
-    public static final DeferredBlock<Block> PALE_OAK_PRESSURE_PLATE= null;
-    public static final DeferredBlock<Block> PALE_OAK_TRAPDOOR= null;
-    public static final DeferredBlock<Block> POTTED_PALE_OAK_SAPLING= null;
-    public static final DeferredBlock<Block> PALE_OAK_BUTTON= null;
-    public static final DeferredBlock<Block> PALE_OAK_STAIRS= null;
-    public static final DeferredBlock<Block> PALE_OAK_SLAB= null;
-    public static final DeferredBlock<Block> PALE_OAK_FENCE_GATE= null;
-    public static final DeferredBlock<Block> PALE_OAK_FENCE= null;
-    public static final DeferredBlock<Block> PALE_OAK_DOOR= null;
-*/
+    public static final DeferredBlock<PressurePlateBlock> PALE_OAK_PRESSURE_PLATE =
+            registerBlock("pale_oak_pressure_plate",()->
+                    new PressurePlateBlock(ModBlockSetTypes.PALE_OAK,
+                            BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.get().defaultMapColor())
+                                    .forceSolidOn()
+                                    .instrument(NoteBlockInstrument.BASS)
+                                    .noCollission()
+                                    .strength(0.5F)
+                                    .ignitedByLava()
+                                    .pushReaction(PushReaction.DESTROY)));
+
+    public static final DeferredBlock<TrapDoorBlock> PALE_OAK_TRAPDOOR = registerBlock("pale_oak_trapdoor", ()->
+            new TrapDoorBlock(ModBlockSetTypes.PALE_OAK,
+                    BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.get()
+                            .defaultMapColor()).instrument(NoteBlockInstrument.BASS)
+                            .strength(3.0F).noOcclusion().isValidSpawn(Blocks::never).ignitedByLava()));
+
+
+    public static final DeferredBlock<ButtonBlock> PALE_OAK_BUTTON =
+            registerBlock("pale_oak_button",
+                    ()->new ButtonBlock( ModBlockSetTypes.PALE_OAK,
+                            30,
+                            BlockBehaviour.Properties.of().noCollission()
+                                    .strength(0.5F).pushReaction(PushReaction.DESTROY)));
+
+    public static final DeferredBlock<StairBlock>
+            PALE_OAK_STAIRS = registerBlock("pale_oak_stairs",()-> new StairBlock(PALE_OAK_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(ModBlocks.PALE_OAK_PLANKS.get())));
+
+    public static final DeferredBlock<SlabBlock> PALE_OAK_SLAB = registerBlock("pale_oak_slab",()-> new SlabBlock(BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava()));
+
+    public static final DeferredBlock<FenceGateBlock> PALE_OAK_FENCE_GATE = registerBlock("pale_oak_fence_gate",()-> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.get().defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).ignitedByLava()));
+
+    public static final DeferredBlock<FenceBlock> PALE_OAK_FENCE = registerBlock("pale_oak_fence", ()->new FenceBlock(BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).ignitedByLava().sound(SoundType.WOOD)));
+
+    public static final DeferredBlock<DoorBlock> PALE_OAK_DOOR = registerBlock("pale_oak_door",()-> new DoorBlock(ModBlockSetTypes.PALE_OAK, BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().ignitedByLava().pushReaction(PushReaction.DESTROY)));
+
 
     public static final DeferredBlock<Block> CREAKING_HEART = registerBlock("creaking_heart",()-> new CreakingHeartBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASEDRUM).strength(10.0F).sound(ModSounds.CREAKING_HEART)));
 
@@ -154,14 +192,9 @@ public class ModBlocks {
             registerBlockOnly("potted_closed_eyeblossom", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT,
                     CLOSED_EYEBLOSSOM, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
 
-
-    public static void registerFlowerPotPlants() {
-        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(
-                OPEN_EYEBLOSSOM.getId(), POTTED_OPEN_EYEBLOSSOM);
-        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(
-                CLOSED_EYEBLOSSOM.getId(), POTTED_CLOSED_EYEBLOSSOM);
-    }
-
+    public static final DeferredBlock<Block> POTTED_PALE_OAK_SAPLING =
+            registerBlockOnly("potted_pale_oak_sapling", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT,
+                    PALE_OAK_SAPLING, BlockBehaviour.Properties.of().instabreak().noOcclusion().pushReaction(PushReaction.DESTROY)));
 
     private static <T extends Block> DeferredBlock<T> registerBlockOnly(String name, Supplier<T> block) {
         return BLOCKS.register(name, block);

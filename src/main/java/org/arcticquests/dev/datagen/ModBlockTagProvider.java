@@ -29,9 +29,9 @@ public class ModBlockTagProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         addVanillaTags();
-        // Resin Clump
+
         tag(BlockTags.COMBINATION_STEP_SOUND_BLOCKS).add(ModBlocks.RESIN_CLUMP.get());
-        // Resin bricks
+
         tag(BlockTags.WALLS).add(ModBlocks.RESIN_BRICK_WALL.get());
         tag(BlockTags.SLABS).add(ModBlocks.RESIN_BRICK_SLAB.get());
         tag(BlockTags.STAIRS).add(ModBlocks.RESIN_BRICK_STAIRS.get());
@@ -46,18 +46,20 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         this.tag(BlockTags.FLOWERS).add(ModBlocks.CLOSED_EYEBLOSSOM.get(), ModBlocks.OPEN_EYEBLOSSOM.get());
         this.tag(BlockTags.SMALL_FLOWERS).add(ModBlocks.CLOSED_EYEBLOSSOM.get(), ModBlocks.OPEN_EYEBLOSSOM.get());
 
-        /*tag(BlockTags.WOODEN_BUTTONS).add(ModBlocks.PALE_OAK_BUTTON.get());
+        tag(BlockTags.WOODEN_BUTTONS).add(ModBlocks.PALE_OAK_BUTTON.get());
         tag(BlockTags.WOODEN_DOORS).add(ModBlocks.PALE_OAK_DOOR.get());
         tag(BlockTags.WOODEN_FENCES).add(ModBlocks.PALE_OAK_FENCE.get());
         tag(BlockTags.WOODEN_SLABS).add(ModBlocks.PALE_OAK_SLAB.get());
         tag(BlockTags.WOODEN_TRAPDOORS).add(ModBlocks.PALE_OAK_TRAPDOOR.get());
         tag(BlockTags.WOODEN_PRESSURE_PLATES).add(ModBlocks.PALE_OAK_PRESSURE_PLATE.get());
         tag(BlockTags.WOODEN_STAIRS).add(ModBlocks.PALE_OAK_STAIRS.get());
+
         tag(BlockTags.STANDING_SIGNS).add(ModBlocks.PALE_OAK_SIGN.get());
         tag(BlockTags.WALL_SIGNS).add(ModBlocks.PALE_OAK_WALL_SIGN.get());
         tag(BlockTags.CEILING_HANGING_SIGNS).add(ModBlocks.PALE_OAK_HANGING_SIGN.get());
         tag(BlockTags.WALL_HANGING_SIGNS).add(ModBlocks.PALE_OAK_WALL_HANGING_SIGN.get());
-        tag(BlockTags.FENCE_GATES).add(ModBlocks.PALE_OAK_FENCE_GATE.get());*/
+
+        tag(BlockTags.FENCE_GATES).add(ModBlocks.PALE_OAK_FENCE_GATE.get());
 
     }
 
