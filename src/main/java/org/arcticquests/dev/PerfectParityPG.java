@@ -80,11 +80,15 @@ public class PerfectParityPG {
         NeoForge.EVENT_BUS.register(this);
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
+
+        modEventBus.addListener(ModBlockEntities::registerTileExtensions);
+
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
         event.enqueueWork(() -> {
+            Sheets.addWoodType(ModWoodTypes.PALE_OAK);
             Regions.register(new ModOverworldRegion(ResourceLocation.fromNamespaceAndPath(MODID, "palegarden"), 2));
             ModBlockFamilies.createBlockFamilies();
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.OPEN_EYEBLOSSOM.getId(), ModBlocks.POTTED_OPEN_EYEBLOSSOM);
@@ -134,11 +138,10 @@ public class PerfectParityPG {
             event.accept(ModBlocks.OPEN_EYEBLOSSOM);
             event.accept(ModBlocks.CLOSED_EYEBLOSSOM);
         }
-/*        if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+        if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
             event.accept(ModBlocks.PALE_OAK_SIGN);
-            event.accept(ModBlocks.PALE_OAK_WALL_SIGN);
             event.accept(ModBlocks.PALE_OAK_HANGING_SIGN);
-            event.accept(ModBlocks.PALE_OAK_WALL_HANGING_SIGN);}*/
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -155,15 +158,8 @@ public class PerfectParityPG {
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             EntityRenderers.register(ModEntities.CREAKING.get(), CreakingRenderer::new);
-
-            event.enqueueWork(() -> {
-                Sheets.addWoodType(ModWoodTypes.PALE_OAK);
-
-                ItemBlockRenderTypes.setRenderLayer(ModBlocks.PALE_OAK_SIGN.get(), RenderType.cutout());
-                ItemBlockRenderTypes.setRenderLayer(ModBlocks.PALE_OAK_WALL_SIGN.get(), RenderType.cutout());
-                ItemBlockRenderTypes.setRenderLayer(ModBlocks.PALE_OAK_HANGING_SIGN.get(), RenderType.cutout());
-                ItemBlockRenderTypes.setRenderLayer(ModBlocks.PALE_OAK_WALL_HANGING_SIGN.get(), RenderType.cutout());
-            });
+            BlockEntityRenderers.register(BlockEntityType.SIGN, SignRenderer::new);
+            BlockEntityRenderers.register(BlockEntityType.HANGING_SIGN, HangingSignRenderer::new);
         }
         @SubscribeEvent
         public static void registerParticleFactories(RegisterParticleProvidersEvent event) {

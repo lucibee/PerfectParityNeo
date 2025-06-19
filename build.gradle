@@ -87,7 +87,6 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 dependencies {
     implementation "com.github.glitchfiend:TerraBlender-neoforge:1.21.1-4.1.0.8"
     // implementation "curse.maven:selene-499980:6462396"
-    implementation "org.sinytra.forgified-fabric-api:forgified-fabric-api:0.115.6+2.1.1+1.21.1"
     // Specify the version of Minecraft to use.
     // Depending on the plugin applied there are several options. We will assume you applied the userdev plugin as shown above.
     // The group for userdev is net.neoforge, the module name is neoforge, and the version is the same as the neoforge version.
