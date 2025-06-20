@@ -23,7 +23,7 @@ public class ModChestBoatRenderer extends BoatRenderer {
     public Pair<ResourceLocation, ListModel<Boat>> getModelWithLocation(Boat boat) {
         if (boat instanceof ModChestBoatEntity modChestBoat) {
             Pair<ResourceLocation, ListModel<Boat>> vanillaPair = super.getModelWithLocation(boat);
-            ResourceLocation customTexture =  ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,
+            ResourceLocation customTexture = ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,
                     "textures/entity/chest_boat/" + modChestBoat.getModWoodType().getName() + ".png");
             return Pair.of(customTexture, vanillaPair.getSecond());
         }

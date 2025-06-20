@@ -26,10 +26,12 @@ public class CreakingHeartDecorator extends TreeDecorator {
     public CreakingHeartDecorator(float f) {
         this.probability = f;
     }
+
     @Override
     protected TreeDecoratorType<?> type() {
         return ModTreeDecoratorTypes.CREAKING_HEART.get();
     }
+
     @Override
     public void place(TreeDecorator.Context context) {
         RandomSource randomSource = context.random();
@@ -39,7 +41,7 @@ public class CreakingHeartDecorator extends TreeDecorator {
                 List<BlockPos> list2 = new ArrayList<>(list);
                 Util.shuffle(list2, randomSource);
                 Optional<BlockPos> optional = list2.stream().filter((blockPos) -> {
-                    for(Direction direction : Direction.values()) {
+                    for (Direction direction : Direction.values()) {
                         if (!checkBlock(context, blockPos.relative(direction), (blockState) -> blockState.is(BlockTags.LOGS))) {
                             return false;
                         }

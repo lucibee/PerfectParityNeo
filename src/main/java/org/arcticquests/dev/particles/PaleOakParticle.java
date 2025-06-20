@@ -3,8 +3,6 @@ package org.arcticquests.dev.particles;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 public class PaleOakParticle extends TextureSheetParticle {
     private static final float ACCELERATION_SCALE = 0.0025F;
@@ -12,16 +10,16 @@ public class PaleOakParticle extends TextureSheetParticle {
     private static final int CURVE_ENDPOINT_TIME = 300;
     private static final float FALL_ACC = 0.25F;
     private static final float WIND_BIG = 2.0F;
-    private float rotSpeed;
     private final float particleRandom;
     private final float spinAcceleration;
+    private float rotSpeed;
 
     protected PaleOakParticle(ClientLevel clientLevel, double d, double e, double f, SpriteSet spriteSet) {
         super(clientLevel, d, e, f);
         this.setSprite(spriteSet.get(this.random.nextInt(12), 12));
-        this.rotSpeed = (float)Math.toRadians(this.random.nextBoolean() ? -30.0 : 30.0);
+        this.rotSpeed = (float) Math.toRadians(this.random.nextBoolean() ? -30.0 : 30.0);
         this.particleRandom = this.random.nextFloat();
-        this.spinAcceleration = (float)Math.toRadians(this.random.nextBoolean() ? -5.0 : 5.0);
+        this.spinAcceleration = (float) Math.toRadians(this.random.nextBoolean() ? -5.0 : 5.0);
         this.lifetime = 300;
         this.gravity = 7.5E-4F;
         float g = this.random.nextBoolean() ? 0.05F : 0.075F;
@@ -71,6 +69,7 @@ public class PaleOakParticle extends TextureSheetParticle {
 
     public static class Provider implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet sprites;
+
         public Provider(SpriteSet sprites) {
             this.sprites = sprites;
         }

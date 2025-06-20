@@ -10,7 +10,6 @@ import org.arcticquests.dev.block.ModBlocks;
 import java.util.Map;
 
 
-
 public class ModBlockFamilies {
     private static final Map<Block, BlockFamily> MAP = Maps.newHashMap();
 

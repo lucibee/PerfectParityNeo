@@ -36,12 +36,12 @@ public class ModRotatedPillarBlock extends RotatedPillarBlock {
     @Override
     public @Nullable BlockState getToolModifiedState(BlockState state, UseOnContext context,
                                                      ItemAbility itemAbility, boolean simulate) {
-        if(context.getItemInHand().getItem() instanceof AxeItem) {
-            if(state.is(ModBlocks.PALE_OAK_LOG)) {
+        if (context.getItemInHand().getItem() instanceof AxeItem) {
+            if (state.is(ModBlocks.PALE_OAK_LOG)) {
                 return ModBlocks.STRIPPED_PALE_OAK_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
             }
 
-            if(state.is(ModBlocks.PALE_OAK_WOOD)) {
+            if (state.is(ModBlocks.PALE_OAK_WOOD)) {
                 return ModBlocks.STRIPPED_PALE_OAK_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
             }
         }

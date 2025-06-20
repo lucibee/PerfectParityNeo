@@ -1,13 +1,13 @@
 package org.arcticquests.dev.entity;
 
 
-import net.minecraft.world.entity.vehicle.ChestBoat;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.entity.vehicle.ChestBoat;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import org.arcticquests.dev.item.ModItems;
@@ -31,6 +31,7 @@ public class ModChestBoatEntity extends ChestBoat {
         this.entityData.set(DATA_ID_WOOD_TYPE, WoodTypeVariant.PALE_OAK.getName());
 
     }
+
     public WoodTypeVariant getModWoodType() {
         try {
             String woodTypeName = this.entityData.get(DATA_ID_WOOD_TYPE);

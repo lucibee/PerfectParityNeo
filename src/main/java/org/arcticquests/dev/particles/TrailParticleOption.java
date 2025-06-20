@@ -23,7 +23,7 @@ public record TrailParticleOption(Vec3 target, int color, int duration) implemen
                     ByteBufCodecs.DOUBLE, Vec3::z,
                     Vec3::new
             );
-    public static final StreamCodec<RegistryFriendlyByteBuf, TrailParticleOption> STREAM_CODEC=
+    public static final StreamCodec<RegistryFriendlyByteBuf, TrailParticleOption> STREAM_CODEC =
             StreamCodec.composite(
                     VEC3_CODEC,       // read/write a Vec3
                     TrailParticleOption::target,
@@ -33,18 +33,22 @@ public record TrailParticleOption(Vec3 target, int color, int duration) implemen
                     TrailParticleOption::duration,
                     TrailParticleOption::new  // combiner: (Vec3, color, duration) → new TrailParticleOption(...)
             );
+
     @Override
     public @NotNull ParticleType<TrailParticleOption> getType() {
         return ModParticles.TRAIL.get();
     }
+
     @Override
     public Vec3 target() {
         return this.target;
     }
+
     @Override
     public int color() {
         return this.color;
     }
+
     @Override
     public int duration() {
         return this.duration;

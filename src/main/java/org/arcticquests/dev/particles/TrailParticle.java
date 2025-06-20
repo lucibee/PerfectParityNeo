@@ -5,8 +5,6 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
 import static net.minecraft.util.FastColor.ABGR32.*;
@@ -24,6 +22,10 @@ public class TrailParticle extends TextureSheetParticle {
         this.target = vec3;
     }
 
+    public static int scaleRGB(int i, float f, float g, float h) {
+        return color(alpha(i), Math.clamp((long) ((int) ((float) red(i) * f)), 0, 255), Math.clamp((long) ((int) ((float) green(i) * g)), 0, 255), Math.clamp((long) ((int) ((float) blue(i) * h)), 0, 255));
+    }
+
     @Override
     public ParticleRenderType getRenderType() {
         return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
@@ -38,7 +40,7 @@ public class TrailParticle extends TextureSheetParticle {
             this.remove();
         } else {
             int i = this.lifetime - this.age;
-            double d = (double)1.0F / (double)i;
+            double d = (double) 1.0F / (double) i;
             this.x = Mth.lerp(d, this.x, this.target.x());
             this.y = Mth.lerp(d, this.y, this.target.y());
             this.z = Mth.lerp(d, this.z, this.target.z());
@@ -50,23 +52,19 @@ public class TrailParticle extends TextureSheetParticle {
         return 15728880;
     }
 
-    public static int scaleRGB(int i, float f, float g, float h) {
-        return color(alpha(i), Math.clamp((long)((int)((float)red(i) * f)), 0, 255), Math.clamp((long)((int)((float)green(i) * g)), 0, 255), Math.clamp((long)((int)((float)blue(i) * h)), 0, 255));
-    }
-
-public static class Provider implements ParticleProvider<TrailParticleOption> {
+    public static class Provider implements ParticleProvider<TrailParticleOption> {
         private final SpriteSet sprite;
 
         public Provider(SpriteSet spriteSet) {
             this.sprite = spriteSet;
         }
 
-    @Override
-    public @Nullable Particle createParticle(TrailParticleOption trailParticleOption, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
-        TrailParticle trailParticle = new TrailParticle(clientLevel, d, e, f, g, h, i, trailParticleOption.target(), trailParticleOption.color());
-        trailParticle.pickSprite(this.sprite);
-        trailParticle.setLifetime(trailParticleOption.duration());
-        return trailParticle;
-    }
+        @Override
+        public @Nullable Particle createParticle(TrailParticleOption trailParticleOption, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
+            TrailParticle trailParticle = new TrailParticle(clientLevel, d, e, f, g, h, i, trailParticleOption.target(), trailParticleOption.color());
+            trailParticle.pickSprite(this.sprite);
+            trailParticle.setLifetime(trailParticleOption.duration());
+            return trailParticle;
+        }
     }
 }

@@ -35,15 +35,74 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.BiConsumer;
 
 public class CreakingHeartBlock extends BaseEntityBlock {
-    public static final MapCodec<CreakingHeartBlock> CODEC = simpleCodec(CreakingHeartBlock::new);
     public static final EnumProperty<Direction.Axis> AXIS;
-    public static BooleanProperty ACTIVE;
     public static final BooleanProperty NATURAL;
     public static final BooleanProperty ENABLED;
+    public static BooleanProperty ACTIVE;
+    public static final MapCodec<CreakingHeartBlock> CODEC = simpleCodec(CreakingHeartBlock::new);
+
+    static {
+        AXIS = BlockStateProperties.AXIS;
+        ACTIVE = BooleanProperty.create("active");
+        NATURAL = BooleanProperty.create("natural");
+        ENABLED = BlockStateProperties.ENABLED;
+    }
 
     public CreakingHeartBlock(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Direction.Axis.Y).setValue(ACTIVE, false).setValue(NATURAL, false).setValue(ENABLED, false));
+    }
+
+    public static boolean isNaturalNight(Level level) {
+        return level.dimensionType().natural() && level.isNight();
+    }
+
+    private static BlockState updateState(BlockState blockState, LevelAccessor levelAccessor, BlockPos blockPos) {
+        boolean bl = hasRequiredLogs(blockState, levelAccessor, blockPos);
+        boolean bl2 = !(Boolean) blockState.getValue(ENABLED);
+        return bl && bl2 ? blockState.setValue(ENABLED, true) : blockState;
+    }
+
+    public static boolean hasRequiredLogs(BlockState blockState, LevelAccessor levelAccessor, BlockPos blockPos) {
+        Direction.Axis axis = blockState.getValue(AXIS);
+
+        Direction[] directions;
+        switch (axis) {
+            case X:
+                directions = new Direction[]{Direction.EAST, Direction.WEST};
+                break;
+            case Y:
+                directions = new Direction[]{Direction.UP, Direction.DOWN};
+                break;
+            case Z:
+                directions = new Direction[]{Direction.SOUTH, Direction.NORTH};
+                break;
+            default:
+                throw new IllegalStateException("Invalid axis: " + axis);
+        }
+
+        for (Direction direction : directions) {
+            BlockState blockState2 = levelAccessor.getBlockState(blockPos.relative(direction));
+            if (!blockState2.is(ModBlockTagProvider.PALE_OAK_LOGS) || blockState2.getValue(AXIS) != axis) {
+                if (blockState2.is(ModBlockTagProvider.PALE_OAK_LOGS)) {
+                }
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static boolean isSurroundedByLogs(LevelAccessor levelAccessor, BlockPos blockPos) {
+        for (Direction direction : Direction.values()) {
+            BlockPos blockPos2 = blockPos.relative(direction);
+            BlockState blockState = levelAccessor.getBlockState(blockPos2);
+            if (!blockState.is(ModBlockTagProvider.PALE_OAK_LOGS)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override
@@ -72,17 +131,12 @@ public class CreakingHeartBlock extends BaseEntityBlock {
         }
     }
 
-
-    public static boolean isNaturalNight(Level level) {
-        return level.dimensionType().natural() && level.isNight();
-    }
-
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
         if (isNaturalNight(level)) {
             if (blockState.getValue(ENABLED)) {
                 if (randomSource.nextInt(16) == 0 && isSurroundedByLogs(level, blockPos)) {
-                    level.playLocalSound((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), ModSounds.CREAKING_HEART_IDLE.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
+                    level.playLocalSound((double) blockPos.getX(), (double) blockPos.getY(), (double) blockPos.getZ(), ModSounds.CREAKING_HEART_IDLE.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
                 }
 
             }
@@ -94,13 +148,6 @@ public class CreakingHeartBlock extends BaseEntityBlock {
         BlockState blockState3 = super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
         return updateState(blockState3, levelAccessor, blockPos);
     }
-
-    private static BlockState updateState(BlockState blockState, LevelAccessor levelAccessor, BlockPos blockPos) {
-        boolean bl = hasRequiredLogs(blockState, levelAccessor, blockPos);
-        boolean bl2 = !(Boolean)blockState.getValue(ENABLED);
-        return bl && bl2 ? blockState.setValue(ENABLED, true) : blockState;
-    }
-
 
     @Override
     public void onPlace(BlockState state, Level lvl, BlockPos pos,
@@ -116,51 +163,9 @@ public class CreakingHeartBlock extends BaseEntityBlock {
         }
     }
 
-    public static boolean hasRequiredLogs(BlockState blockState, LevelAccessor levelAccessor, BlockPos blockPos) {
-        Direction.Axis axis = blockState.getValue(AXIS);
-
-        Direction[] directions;
-        switch (axis) {
-            case X:
-                directions = new Direction[]{Direction.EAST, Direction.WEST};
-                break;
-            case Y:
-                directions = new Direction[]{Direction.UP, Direction.DOWN};
-                break;
-            case Z:
-                directions = new Direction[]{Direction.SOUTH, Direction.NORTH};
-                break;
-            default:
-                throw new IllegalStateException("Invalid axis: " + axis);
-        }
-
-        for(Direction direction : directions) {
-            BlockState blockState2 = levelAccessor.getBlockState(blockPos.relative(direction));
-            if (!blockState2.is(ModBlockTagProvider.PALE_OAK_LOGS) || blockState2.getValue(AXIS) != axis) {
-                if (blockState2.is(ModBlockTagProvider.PALE_OAK_LOGS)) {
-                }
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    private static boolean isSurroundedByLogs(LevelAccessor levelAccessor, BlockPos blockPos) {
-        for(Direction direction : Direction.values()) {
-            BlockPos blockPos2 = blockPos.relative(direction);
-            BlockState blockState = levelAccessor.getBlockState(blockPos2);
-            if (!blockState.is(ModBlockTagProvider.PALE_OAK_LOGS)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
-        return updateState((BlockState)this.defaultBlockState().setValue(AXIS, blockPlaceContext.getClickedFace().getAxis()), blockPlaceContext.getLevel(), blockPlaceContext.getClickedPos());
+        return updateState((BlockState) this.defaultBlockState().setValue(AXIS, blockPlaceContext.getClickedFace().getAxis()), blockPlaceContext.getLevel(), blockPlaceContext.getClickedPos());
     }
 
     @Override
@@ -214,7 +219,7 @@ public class CreakingHeartBlock extends BaseEntityBlock {
     }
 
     private void tryAwardExperience(Player player, BlockState blockState, Level level, BlockPos blockPos) {
-        if (!player.isCreative() && !player.isSpectator() && (Boolean)blockState.getValue(NATURAL) && level instanceof ServerLevel serverLevel) {
+        if (!player.isCreative() && !player.isSpectator() && (Boolean) blockState.getValue(NATURAL) && level instanceof ServerLevel serverLevel) {
             this.popExperience(serverLevel, blockPos, level.random.nextIntBetweenInclusive(20, 24));
         }
 
@@ -227,7 +232,7 @@ public class CreakingHeartBlock extends BaseEntityBlock {
 
     @Override
     protected int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos blockPos) {
-        if (!(Boolean)blockState.getValue(ACTIVE)) {
+        if (!(Boolean) blockState.getValue(ACTIVE)) {
             return 0;
         } else {
             BlockEntity var5 = level.getBlockEntity(blockPos);
@@ -237,12 +242,5 @@ public class CreakingHeartBlock extends BaseEntityBlock {
                 return 0;
             }
         }
-    }
-
-    static {
-        AXIS = BlockStateProperties.AXIS;
-        ACTIVE = BooleanProperty.create("active");
-        NATURAL = BooleanProperty.create("natural");
-        ENABLED = BlockStateProperties.ENABLED;
     }
 }

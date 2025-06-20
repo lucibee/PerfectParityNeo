@@ -26,31 +26,40 @@ public class PaleMossDecorator extends TreeDecorator {
     private final float trunkProbability;
     private final float groundProbability;
 
-    protected TreeDecoratorType<?> type() {
-        return ModTreeDecoratorTypes.PALE_MOSS.get();
-    }
-
     public PaleMossDecorator(float f, float g, float h) {
         this.leavesProbability = f;
         this.trunkProbability = g;
         this.groundProbability = h;
     }
 
+    private static void addMossHanger(BlockPos blockPos, TreeDecorator.Context context) {
+        while (context.isAir(blockPos.below()) && !((double) context.random().nextFloat() < (double) 0.5F)) {
+            context.setBlock(blockPos, (BlockState) ModBlocks.PALE_HANGING_MOSS.get().defaultBlockState().setValue(HangingMossBlock.TIP, false));
+            blockPos = blockPos.below();
+        }
+
+        context.setBlock(blockPos, (BlockState) ModBlocks.PALE_HANGING_MOSS.get().defaultBlockState().setValue(HangingMossBlock.TIP, true));
+    }
+
+    protected TreeDecoratorType<?> type() {
+        return ModTreeDecoratorTypes.PALE_MOSS.get();
+    }
+
     public void place(TreeDecorator.Context context) {
         RandomSource randomSource = context.random();
-        WorldGenLevel worldGenLevel = (WorldGenLevel)context.level();
+        WorldGenLevel worldGenLevel = (WorldGenLevel) context.level();
         List<BlockPos> list = Util.shuffledCopy(context.logs(), randomSource);
         if (!list.isEmpty()) {
-            Mutable<BlockPos> mutable = new MutableObject((BlockPos)list.getFirst());
+            Mutable<BlockPos> mutable = new MutableObject((BlockPos) list.getFirst());
             list.forEach((blockPosx) -> {
-                if (blockPosx.getY() < ((BlockPos)mutable.getValue()).getY()) {
+                if (blockPosx.getY() < ((BlockPos) mutable.getValue()).getY()) {
                     mutable.setValue(blockPosx);
                 }
 
             });
-            BlockPos blockPos = (BlockPos)mutable.getValue();
+            BlockPos blockPos = (BlockPos) mutable.getValue();
             if (randomSource.nextFloat() < this.groundProbability) {
-                worldGenLevel.registryAccess().lookup(Registries.CONFIGURED_FEATURE).flatMap((registry) -> registry.get(ModConfiguredFeatures.PALE_MOSS_PATCH)).ifPresent((reference) -> ((ConfiguredFeature)reference.value()).place(worldGenLevel, worldGenLevel.getLevel().getChunkSource().getGenerator(), randomSource, blockPos.above()));
+                worldGenLevel.registryAccess().lookup(Registries.CONFIGURED_FEATURE).flatMap((registry) -> registry.get(ModConfiguredFeatures.PALE_MOSS_PATCH)).ifPresent((reference) -> ((ConfiguredFeature) reference.value()).place(worldGenLevel, worldGenLevel.getLevel().getChunkSource().getGenerator(), randomSource, blockPos.above()));
             }
 
             context.logs().forEach((blockPosx) -> {
@@ -72,14 +81,5 @@ public class PaleMossDecorator extends TreeDecorator {
 
             });
         }
-    }
-
-    private static void addMossHanger(BlockPos blockPos, TreeDecorator.Context context) {
-        while(context.isAir(blockPos.below()) && !((double)context.random().nextFloat() < (double)0.5F)) {
-            context.setBlock(blockPos, (BlockState) ModBlocks.PALE_HANGING_MOSS.get().defaultBlockState().setValue(HangingMossBlock.TIP, false));
-            blockPos = blockPos.below();
-        }
-
-        context.setBlock(blockPos, (BlockState)ModBlocks.PALE_HANGING_MOSS.get().defaultBlockState().setValue(HangingMossBlock.TIP, true));
     }
 }

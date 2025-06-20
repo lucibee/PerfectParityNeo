@@ -15,14 +15,13 @@ public class PaleOakLeavesBlock extends LeavesBlock {
 
     public static final MapCodec<PaleOakLeavesBlock> CODEC = simpleCodec(PaleOakLeavesBlock::new);
 
+    public PaleOakLeavesBlock(Properties properties) {
+        super(properties);
+    }
+
     @Override
     public @NotNull MapCodec<? extends LeavesBlock> codec() {
         return CODEC;
-    }
-
-
-    public PaleOakLeavesBlock(Properties properties) {
-        super(properties);
     }
 
     @Override

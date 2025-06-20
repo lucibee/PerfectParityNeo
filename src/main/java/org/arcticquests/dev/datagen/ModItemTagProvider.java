@@ -4,7 +4,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -20,15 +19,14 @@ import java.util.concurrent.CompletableFuture;
 public class ModItemTagProvider extends ItemTagsProvider {
 
     public static final TagKey<Item> PALE_OAK_LOGS = createTag("pale_oak_logs");
-    private static TagKey<Item> createTag(String name) {
-        return ItemTags.create(ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID, name));
-    }
 
     public ModItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTags, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, blockTags, PerfectParityPG.MODID, existingFileHelper);
     }
 
-
+    private static TagKey<Item> createTag(String name) {
+        return ItemTags.create(ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID, name));
+    }
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {

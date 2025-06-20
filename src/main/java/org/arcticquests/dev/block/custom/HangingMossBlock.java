@@ -26,24 +26,28 @@ import org.arcticquests.dev.datagen.ModBlockTagProvider;
 import org.arcticquests.dev.sounds.ModSounds;
 
 public class HangingMossBlock extends Block implements BonemealableBlock {
+    public static final BooleanProperty TIP;
     public static final MapCodec<HangingMossBlock> CODEC = simpleCodec(HangingMossBlock::new);
     private static final int SIDE_PADDING = 1;
-    private static final VoxelShape TIP_SHAPE = Block.box((double)1.0F, (double)2.0F, (double)1.0F, (double)15.0F, (double)16.0F, (double)15.0F);
-    private static final VoxelShape BASE_SHAPE = Block.box((double)1.0F, (double)0.0F, (double)1.0F, (double)15.0F, (double)16.0F, (double)15.0F);
-    public static final BooleanProperty TIP;
+    private static final VoxelShape TIP_SHAPE = Block.box((double) 1.0F, (double) 2.0F, (double) 1.0F, (double) 15.0F, (double) 16.0F, (double) 15.0F);
+    private static final VoxelShape BASE_SHAPE = Block.box((double) 1.0F, (double) 0.0F, (double) 1.0F, (double) 15.0F, (double) 16.0F, (double) 15.0F);
+
+    static {
+        TIP = BooleanProperty.create("tip");
+    }
+
+    public HangingMossBlock(BlockBehaviour.Properties properties) {
+        super(properties);
+        this.registerDefaultState((BlockState) ((BlockState) this.stateDefinition.any()).setValue(TIP, true));
+    }
 
     public MapCodec<HangingMossBlock> codec() {
         return CODEC;
     }
 
-    public HangingMossBlock(BlockBehaviour.Properties properties) {
-        super(properties);
-        this.registerDefaultState((BlockState)((BlockState)this.stateDefinition.any()).setValue(TIP, true));
-    }
-
     @Override
     protected VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return (Boolean)blockState.getValue(TIP) ? TIP_SHAPE : BASE_SHAPE;
+        return (Boolean) blockState.getValue(TIP) ? TIP_SHAPE : BASE_SHAPE;
     }
 
     @Override
@@ -51,7 +55,7 @@ public class HangingMossBlock extends Block implements BonemealableBlock {
         if (randomSource.nextInt(500) == 0) {
             BlockState blockState2 = level.getBlockState(blockPos.above());
             if (blockState2.is(ModBlockTagProvider.PALE_OAK_LOGS) || blockState2.is(ModBlocks.PALE_OAK_LEAVES)) {
-                level.playLocalSound((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), ModSounds.PALE_HANGING_MOSS_IDLE.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
+                level.playLocalSound((double) blockPos.getX(), (double) blockPos.getY(), (double) blockPos.getZ(), ModSounds.PALE_HANGING_MOSS_IDLE.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
             }
         }
 
@@ -66,6 +70,7 @@ public class HangingMossBlock extends Block implements BonemealableBlock {
     protected boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
         return this.canStayAtPosition(levelReader, blockPos);
     }
+
     private boolean canStayAtPosition(BlockGetter blockGetter, BlockPos blockPos) {
         BlockPos blockPos2 = blockPos.relative(Direction.UP);
         BlockState blockState = blockGetter.getBlockState(blockPos2);
@@ -78,7 +83,7 @@ public class HangingMossBlock extends Block implements BonemealableBlock {
             levelAccessor.scheduleTick(blockPos, this, 1);
         }
 
-        return (BlockState)blockState.setValue(TIP, !levelAccessor.getBlockState(blockPos.below()).is(this));
+        return (BlockState) blockState.setValue(TIP, !levelAccessor.getBlockState(blockPos.below()).is(this));
     }
 
     @Override
@@ -98,6 +103,7 @@ public class HangingMossBlock extends Block implements BonemealableBlock {
     public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return this.canGrowInto(levelReader.getBlockState(this.getTip(levelReader, blockPos).below()));
     }
+
     private boolean canGrowInto(BlockState blockState) {
         return blockState.isAir();
     }
@@ -109,7 +115,7 @@ public class HangingMossBlock extends Block implements BonemealableBlock {
         do {
             mutableBlockPos.move(Direction.DOWN);
             blockState = blockGetter.getBlockState(mutableBlockPos);
-        } while(blockState.is(this));
+        } while (blockState.is(this));
 
         return mutableBlockPos.relative(Direction.UP).immutable();
     }
@@ -118,15 +124,12 @@ public class HangingMossBlock extends Block implements BonemealableBlock {
     public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         return true;
     }
+
     @Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         BlockPos blockPos2 = this.getTip(serverLevel, blockPos).below();
         if (this.canGrowInto(serverLevel.getBlockState(blockPos2))) {
-            serverLevel.setBlockAndUpdate(blockPos2, (BlockState)blockState.setValue(TIP, true));
+            serverLevel.setBlockAndUpdate(blockPos2, (BlockState) blockState.setValue(TIP, true));
         }
-    }
-
-    static {
-        TIP = BooleanProperty.create("tip");
     }
 }

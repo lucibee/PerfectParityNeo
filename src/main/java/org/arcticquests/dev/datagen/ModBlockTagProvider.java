@@ -1,7 +1,6 @@
 package org.arcticquests.dev.datagen;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -18,12 +17,13 @@ import java.util.concurrent.CompletableFuture;
 public class ModBlockTagProvider extends BlockTagsProvider {
 
     public static final TagKey<Block> PALE_OAK_LOGS = createTag("pale_oak_logs");
-    private static TagKey<Block> createTag(String name) {
-        return BlockTags.create(ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID, name));
-    }
 
     public ModBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, PerfectParityPG.MODID, existingFileHelper);
+    }
+
+    private static TagKey<Block> createTag(String name) {
+        return BlockTags.create(ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID, name));
     }
 
     @Override

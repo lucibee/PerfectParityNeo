@@ -33,10 +33,6 @@ public class EyeblossomBlock extends FlowerBlock {
     private static final int EYEBLOSSOM_XZ_RANGE = 3;
     private static final int EYEBLOSSOM_Y_RANGE = 2;
     private final Type type;
-    @Override
-    public MapCodec<? extends EyeblossomBlock> codec() {
-        return CODEC;
-    }
 
     public EyeblossomBlock(Type type, BlockBehaviour.Properties properties) {
         super(type.effect, type.effectDuration, properties);
@@ -47,28 +43,36 @@ public class EyeblossomBlock extends FlowerBlock {
         super(EyeblossomBlock.Type.fromBoolean(bl).effect, EyeblossomBlock.Type.fromBoolean(bl).effectDuration, properties);
         this.type = EyeblossomBlock.Type.fromBoolean(bl);
     }
+
+    @Override
+    public MapCodec<? extends EyeblossomBlock> codec() {
+        return CODEC;
+    }
+
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
         if (this.type.emitSounds() && randomSource.nextInt(700) == 0) {
             BlockState blockState2 = level.getBlockState(blockPos.below());
             if (blockState2.is(ModBlocks.PALE_MOSS_BLOCK.get())) {
-                level.playLocalSound((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), ModSounds.EYEBLOSSOM_IDLE.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
+                level.playLocalSound((double) blockPos.getX(), (double) blockPos.getY(), (double) blockPos.getZ(), ModSounds.EYEBLOSSOM_IDLE.get(), SoundSource.BLOCKS, 1.0F, 1.0F, false);
             }
         }
 
     }
+
     @Override
     protected void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         if (this.tryChangingState(blockState, serverLevel, blockPos, randomSource)) {
-            serverLevel.playSound((Player)null, blockPos, this.type.transform().longSwitchSound, SoundSource.BLOCKS, 1.0F, 1.0F);
+            serverLevel.playSound((Player) null, blockPos, this.type.transform().longSwitchSound, SoundSource.BLOCKS, 1.0F, 1.0F);
         }
 
         super.randomTick(blockState, serverLevel, blockPos, randomSource);
     }
+
     @Override
     protected void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         if (this.tryChangingState(blockState, serverLevel, blockPos, randomSource)) {
-            serverLevel.playSound((Player)null, blockPos, this.type.transform().shortSwitchSound, SoundSource.BLOCKS, 1.0F, 1.0F);
+            serverLevel.playSound((Player) null, blockPos, this.type.transform().shortSwitchSound, SoundSource.BLOCKS, 1.0F, 1.0F);
         }
 
         super.tick(blockState, serverLevel, blockPos, randomSource);
@@ -88,7 +92,7 @@ public class EyeblossomBlock extends FlowerBlock {
                 BlockState blockState2 = serverLevel.getBlockState(blockPos2);
                 if (blockState2 == blockState) {
                     double d = Math.sqrt(blockPos.distSqr(blockPos2));
-                    int i = randomSource.nextIntBetweenInclusive((int)(d * (double)5.0F), (int)(d * (double)10.0F));
+                    int i = randomSource.nextIntBetweenInclusive((int) (d * (double) 5.0F), (int) (d * (double) 10.0F));
                     serverLevel.scheduleTick(blockPos2, blockState.getBlock(), i);
                 }
 
@@ -131,6 +135,11 @@ public class EyeblossomBlock extends FlowerBlock {
             this.shortSwitchSound = soundEvent2;
             this.particleColor = j;
         }
+
+        public static Type fromBoolean(boolean bl) {
+            return bl ? OPEN : CLOSED;
+        }
+
         public Block block() {
             return this.open ? ModBlocks.OPEN_EYEBLOSSOM.get() : ModBlocks.CLOSED_EYEBLOSSOM.get();
         }
@@ -147,17 +156,13 @@ public class EyeblossomBlock extends FlowerBlock {
             return this.open;
         }
 
-        public static Type fromBoolean(boolean bl) {
-            return bl ? OPEN : CLOSED;
-        }
-
         public void spawnTransformParticle(ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
             Vec3 vec3 = blockPos.getCenter();
-            double d = (double)0.5F + randomSource.nextDouble();
-            Vec3 vec32 = new Vec3(randomSource.nextDouble() - (double)0.5F, randomSource.nextDouble() + (double)1.0F, randomSource.nextDouble() - (double)0.5F);
+            double d = (double) 0.5F + randomSource.nextDouble();
+            Vec3 vec32 = new Vec3(randomSource.nextDouble() - (double) 0.5F, randomSource.nextDouble() + (double) 1.0F, randomSource.nextDouble() - (double) 0.5F);
             Vec3 vec33 = vec3.add(vec32.scale(d));
-            TrailParticleOption trailParticleOption = new TrailParticleOption(vec33, this.particleColor, (int)((double)20.0F * d));
-            serverLevel.sendParticles(trailParticleOption, vec3.x, vec3.y, vec3.z, 1, (double)0.0F, (double)0.0F, (double)0.0F, (double)0.0F);
+            TrailParticleOption trailParticleOption = new TrailParticleOption(vec33, this.particleColor, (int) ((double) 20.0F * d));
+            serverLevel.sendParticles(trailParticleOption, vec3.x, vec3.y, vec3.z, 1, (double) 0.0F, (double) 0.0F, (double) 0.0F, (double) 0.0F);
         }
 
         public SoundEvent getLongSwitchSound() {

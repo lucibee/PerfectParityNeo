@@ -5,18 +5,11 @@ import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
-import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.vehicle.Boat;
-import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
-import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -44,8 +37,8 @@ import org.arcticquests.dev.sounds.ModSounds;
 import org.arcticquests.dev.util.WoodTypeVariant;
 import org.arcticquests.dev.worldgen.ModConfiguredFeatures;
 import org.arcticquests.dev.worldgen.ModPlacedFeatures;
-import org.arcticquests.dev.worldgen.biome.ModOverworldRegion;
 import org.arcticquests.dev.worldgen.ModTreeDecoratorTypes;
+import org.arcticquests.dev.worldgen.biome.ModOverworldRegion;
 import org.slf4j.Logger;
 import terrablender.api.Regions;
 
@@ -56,8 +49,7 @@ public class PerfectParityPG {
     public static final String MODID = "perfectparitypg";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public PerfectParityPG(IEventBus modEventBus, ModContainer modContainer)
-    {
+    public PerfectParityPG(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
@@ -77,8 +69,7 @@ public class PerfectParityPG {
 
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {
+    private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             Sheets.addWoodType(WoodTypeVariant.PALE_OAK.getWoodType());
             Regions.register(new ModOverworldRegion(ResourceLocation.fromNamespaceAndPath(MODID, "palegarden"), 2));
@@ -89,13 +80,13 @@ public class PerfectParityPG {
         });
     }
 
-    private void addCreative(BuildCreativeModeTabContentsEvent event)
-    {   if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
-        event.accept(ModItems.CREAKING_SPAWN_EGG);
-    }
+    private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
+            event.accept(ModItems.CREAKING_SPAWN_EGG);
+        }
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-         event.accept(ModItems.RESIN_BRICK);
-    }
+            event.accept(ModItems.RESIN_BRICK);
+        }
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(ModBlocks.RESIN_CLUMP);
             event.accept(ModBlocks.RESIN_BLOCK);
@@ -142,8 +133,7 @@ public class PerfectParityPG {
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event)
-    {
+    public void onServerStarting(ServerStartingEvent event) {
 
     }
 
@@ -151,9 +141,10 @@ public class PerfectParityPG {
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
         @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
-            event.enqueueWork(() -> {Sheets.addWoodType(WoodTypeVariant.PALE_OAK.getWoodType());});
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            event.enqueueWork(() -> {
+                Sheets.addWoodType(WoodTypeVariant.PALE_OAK.getWoodType());
+            });
 
             EntityRenderers.register(ModEntities.CREAKING.get(), CreakingRenderer::new);
 
@@ -164,11 +155,11 @@ public class PerfectParityPG {
                     new ModChestBoatRenderer(context, true));
 
 
-
             BlockEntityRenderers.register(ModBlockEntities.PALE_OAK_SIGN.get(), SignRenderer::new);
             BlockEntityRenderers.register(ModBlockEntities.PALE_OAK_WALL_HANGING_SIGN.get(), HangingSignRenderer::new);
 
         }
+
         @SubscribeEvent
         public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
             event.registerSpriteSet(ModParticles.PALE_OAK_LEAVES.get(), PaleOakParticle.Provider::new);

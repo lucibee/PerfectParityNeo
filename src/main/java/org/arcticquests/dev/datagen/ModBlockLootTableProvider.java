@@ -36,29 +36,29 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
         add(ModBlocks.PALE_HANGING_MOSS.get(), block -> createDoublePlantShearsDrop(ModBlocks.PALE_HANGING_MOSS.get()));
 
-        add(ModBlocks.OPEN_EYEBLOSSOM.get(), block ->  createPotFlowerItemTable(ModBlocks.OPEN_EYEBLOSSOM.get()));
+        add(ModBlocks.OPEN_EYEBLOSSOM.get(), block -> createPotFlowerItemTable(ModBlocks.OPEN_EYEBLOSSOM.get()));
 
-        add(ModBlocks.CLOSED_EYEBLOSSOM.get(),block ->  createPotFlowerItemTable(ModBlocks.CLOSED_EYEBLOSSOM.get()));
+        add(ModBlocks.CLOSED_EYEBLOSSOM.get(), block -> createPotFlowerItemTable(ModBlocks.CLOSED_EYEBLOSSOM.get()));
 
-        add(ModBlocks.PALE_OAK_SAPLING.get(),block ->  createPotFlowerItemTable(ModBlocks.PALE_OAK_SAPLING.get()));
+        add(ModBlocks.PALE_OAK_SAPLING.get(), block -> createPotFlowerItemTable(ModBlocks.PALE_OAK_SAPLING.get()));
 
         dropSelf(ModBlocks.OPEN_EYEBLOSSOM.get());
         dropSelf(ModBlocks.CLOSED_EYEBLOSSOM.get());
         dropSelf(ModBlocks.PALE_MOSS_BLOCK.get());
         dropSelf(ModBlocks.PALE_MOSS_CARPET.get());
         dropSelf(ModBlocks.PALE_OAK_SLAB.get());
-         dropSelf(ModBlocks.PALE_OAK_STAIRS.get());
-         dropSelf(ModBlocks.PALE_OAK_FENCE.get());
-         dropSelf(ModBlocks.PALE_OAK_FENCE_GATE.get());
-         createDoorTable(ModBlocks.PALE_OAK_DOOR.get());
-         dropSelf(ModBlocks.PALE_OAK_TRAPDOOR.get());
-         dropSelf(ModBlocks.PALE_OAK_BUTTON.get());
-         dropSelf(ModBlocks.PALE_OAK_PRESSURE_PLATE.get());
+        dropSelf(ModBlocks.PALE_OAK_STAIRS.get());
+        dropSelf(ModBlocks.PALE_OAK_FENCE.get());
+        dropSelf(ModBlocks.PALE_OAK_FENCE_GATE.get());
+        createDoorTable(ModBlocks.PALE_OAK_DOOR.get());
+        dropSelf(ModBlocks.PALE_OAK_TRAPDOOR.get());
+        dropSelf(ModBlocks.PALE_OAK_BUTTON.get());
+        dropSelf(ModBlocks.PALE_OAK_PRESSURE_PLATE.get());
 
-       dropOther(ModBlocks.PALE_OAK_SIGN.get(), ModItems.PALE_OAK_SIGN.get());
-         dropOther(ModBlocks.PALE_OAK_WALL_SIGN.get(), ModItems.PALE_OAK_SIGN.get());
-         dropOther(ModBlocks.PALE_OAK_HANGING_SIGN.get(), ModItems.PALE_OAK_HANGING_SIGN.get());
-         dropOther(ModBlocks.PALE_OAK_WALL_HANGING_SIGN.get(), ModItems.PALE_OAK_HANGING_SIGN.get());
+        dropOther(ModBlocks.PALE_OAK_SIGN.get(), ModItems.PALE_OAK_SIGN.get());
+        dropOther(ModBlocks.PALE_OAK_WALL_SIGN.get(), ModItems.PALE_OAK_SIGN.get());
+        dropOther(ModBlocks.PALE_OAK_HANGING_SIGN.get(), ModItems.PALE_OAK_HANGING_SIGN.get());
+        dropOther(ModBlocks.PALE_OAK_WALL_HANGING_SIGN.get(), ModItems.PALE_OAK_HANGING_SIGN.get());
 
     }
 

@@ -9,6 +9,6 @@ public class ModModelLayers {
 
     private static ModelLayerLocation registerLayer(String name) {
         // “main” is the layer variant—most models just use “main”
-        return new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,name), "main");
+        return new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID, name), "main");
     }
 }

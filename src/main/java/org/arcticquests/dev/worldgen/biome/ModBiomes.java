@@ -15,8 +15,7 @@ import org.arcticquests.dev.worldgen.ModPlacedFeatures;
 public class ModBiomes {
     public static final ResourceKey<Biome> PALE_GARDEN = register("pale_garden");
 
-    private static ResourceKey<Biome> register(String name)
-    {
+    private static ResourceKey<Biome> register(String name) {
         return ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID, name));
     }
 

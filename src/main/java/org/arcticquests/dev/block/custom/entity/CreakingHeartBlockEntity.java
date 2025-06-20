@@ -45,8 +45,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class CreakingHeartBlockEntity extends BlockEntity {
-    private static final int PLAYER_DETECTION_RANGE = 32;
     public static final int CREAKING_ROAMING_RADIUS = 32;
+    private static final int PLAYER_DETECTION_RANGE = 32;
     private static final int DISTANCE_CREAKING_TOO_FAR = 34;
     private static final int SPAWN_RANGE_XZ = 16;
     private static final int SPAWN_RANGE_Y = 8;
@@ -61,6 +61,7 @@ public class CreakingHeartBlockEntity extends BlockEntity {
     private static final int MAX_COUNT = 64;
     private static final int TICKS_GRACE_PERIOD = 30;
     private static final Optional<Creaking> NO_CREAKING = Optional.empty();
+    static SpawnUtil.Strategy ON_TOP_OF_COLLIDER_NO_LEAVES = (serverLevel, blockPos, blockState, blockPos2, blockState2) -> blockState2.getCollisionShape(serverLevel, blockPos2).isEmpty() && !blockState.is(BlockTags.LEAVES) && Block.isFaceFull(blockState.getCollisionShape(serverLevel, blockPos), Direction.UP);
     @Nullable
     private Either<Creaking, UUID> creakingInfo;
     private long ticksExisted;
@@ -69,8 +70,6 @@ public class CreakingHeartBlockEntity extends BlockEntity {
     @Nullable
     private Vec3 emitterTarget;
     private int outputSignal;
-
-    static SpawnUtil.Strategy ON_TOP_OF_COLLIDER_NO_LEAVES = (serverLevel, blockPos, blockState, blockPos2, blockState2) -> blockState2.getCollisionShape(serverLevel, blockPos2).isEmpty() && !blockState.is(BlockTags.LEAVES) && Block.isFaceFull(blockState.getCollisionShape(serverLevel, blockPos), Direction.UP);
 
 
     public CreakingHeartBlockEntity(BlockPos blockPos, BlockState blockState) {
@@ -98,11 +97,11 @@ public class CreakingHeartBlockEntity extends BlockEntity {
                 if (creakingHeartBlockEntity.emitter % 10 == 0 && creakingHeartBlockEntity.emitterTarget != null) {
                     creakingHeartBlockEntity.getCreakingProtector().ifPresent((creakingx) -> creakingHeartBlockEntity.emitterTarget = creakingx.getBoundingBox().getCenter());
                     Vec3 vec3 = Vec3.atCenterOf(blockPos);
-                    float f = 0.2F + 0.8F * (float)(100 - creakingHeartBlockEntity.emitter) / 100.0F;
-                    Vec3 vec32 = vec3.subtract(creakingHeartBlockEntity.emitterTarget).scale((double)f).add(creakingHeartBlockEntity.emitterTarget);
+                    float f = 0.2F + 0.8F * (float) (100 - creakingHeartBlockEntity.emitter) / 100.0F;
+                    Vec3 vec32 = vec3.subtract(creakingHeartBlockEntity.emitterTarget).scale((double) f).add(creakingHeartBlockEntity.emitterTarget);
                     BlockPos blockPos2 = BlockPos.containing(vec32);
-                    float g = (float)creakingHeartBlockEntity.emitter / 2.0F / 100.0F + 0.5F;
-                    serverLevel.playSound((Player)null, blockPos2, ModSounds.CREAKING_HEART_HURT.get(), SoundSource.BLOCKS, g, 1.0F);
+                    float g = (float) creakingHeartBlockEntity.emitter / 2.0F / 100.0F + 0.5F;
+                    serverLevel.playSound((Player) null, blockPos2, ModSounds.CREAKING_HEART_HURT.get(), SoundSource.BLOCKS, g, 1.0F);
                 }
 
                 --creakingHeartBlockEntity.emitter;
@@ -116,18 +115,18 @@ public class CreakingHeartBlockEntity extends BlockEntity {
                         if (!CreakingHeartBlock.hasRequiredLogs(blockState, level, blockPos)) {
                             level.setBlock(blockPos, (BlockState) blockState.setValue(CreakingHeartBlock.ENABLED, false), 3);
                         }
-                    } else if ((Boolean)blockState.getValue(CreakingHeartBlock.ENABLED)) {
+                    } else if ((Boolean) blockState.getValue(CreakingHeartBlock.ENABLED)) {
                         if (CreakingHeartBlock.isNaturalNight(level)) {
                             level.setBlock(blockPos, (BlockState) blockState.setValue(CreakingHeartBlock.ACTIVE, blockState.getValue(CreakingHeartBlock.ENABLED)), 3);
                             if (level.getDifficulty() != Difficulty.PEACEFUL) {
                                 if (serverLevel.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING)) {
-                                    Player player = level.getNearestPlayer((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ(), (double)32.0F, false);
+                                    Player player = level.getNearestPlayer((double) blockPos.getX(), (double) blockPos.getY(), (double) blockPos.getZ(), (double) 32.0F, false);
                                     if (player != null) {
                                         Creaking creaking = spawnProtector(serverLevel, creakingHeartBlockEntity);
                                         if (creaking != null) {
                                             creakingHeartBlockEntity.setCreakingInfo(creaking);
                                             creaking.makeSound(ModSounds.CREAKING_SPAWN.get());
-                                            level.playSound((Player)null, creakingHeartBlockEntity.getBlockPos(), ModSounds.CREAKING_HEART_SPAWN.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
+                                            level.playSound((Player) null, creakingHeartBlockEntity.getBlockPos(), ModSounds.CREAKING_HEART_SPAWN.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
                                         }
                                     }
 
@@ -138,15 +137,15 @@ public class CreakingHeartBlockEntity extends BlockEntity {
                 } else {
                     Optional<Creaking> optional = creakingHeartBlockEntity.getCreakingProtector();
                     if (optional.isPresent()) {
-                        Creaking creaking = (Creaking)optional.get();
-                        if ((!CreakingHeartBlock.isNaturalNight(level) && !creaking.hasCustomName()) || creakingHeartBlockEntity.distanceToCreaking() > (double)34.0F || creaking.playerIsStuckInYou()) {
-                            creakingHeartBlockEntity.removeProtector((DamageSource)null);
+                        Creaking creaking = (Creaking) optional.get();
+                        if ((!CreakingHeartBlock.isNaturalNight(level) && !creaking.hasCustomName()) || creakingHeartBlockEntity.distanceToCreaking() > (double) 34.0F || creaking.playerIsStuckInYou()) {
+                            creakingHeartBlockEntity.removeProtector((DamageSource) null);
                             return;
                         }
 
                         if (!CreakingHeartBlock.hasRequiredLogs(blockState, level, blockPos) && creakingHeartBlockEntity.creakingInfo == null) {
-                            level.setBlock(blockPos, (BlockState)blockState.setValue(CreakingHeartBlock.ACTIVE, false), 3);
-                            level.setBlock(blockPos, (BlockState)blockState.setValue(CreakingHeartBlock.ENABLED, false), 3);
+                            level.setBlock(blockPos, (BlockState) blockState.setValue(CreakingHeartBlock.ACTIVE, false), 3);
+                            level.setBlock(blockPos, (BlockState) blockState.setValue(CreakingHeartBlock.ENABLED, false), 3);
                         }
                     }
 
@@ -155,8 +154,23 @@ public class CreakingHeartBlockEntity extends BlockEntity {
         }
     }
 
+    @Nullable
+    private static Creaking spawnProtector(ServerLevel serverLevel, CreakingHeartBlockEntity creakingHeartBlockEntity) {
+        BlockPos blockPos = creakingHeartBlockEntity.getBlockPos();
+        Optional<Creaking> optional = SpawnUtil.trySpawnMob(ModEntities.CREAKING.get(), MobSpawnType.SPAWNER, serverLevel, blockPos, 5, 16, 8, ON_TOP_OF_COLLIDER_NO_LEAVES);
+        if (optional.isEmpty()) {
+            return null;
+        } else {
+            Creaking creaking = (Creaking) optional.get();
+            serverLevel.gameEvent(creaking, GameEvent.ENTITY_PLACE, creaking.position());
+            serverLevel.broadcastEntityEvent(creaking, (byte) 60);
+            creaking.setTransient(blockPos);
+            return creaking;
+        }
+    }
+
     private double distanceToCreaking() {
-        return (Double)this.getCreakingProtector().map((creaking) -> Math.sqrt(creaking.distanceToSqr(Vec3.atBottomCenterOf(this.getBlockPos())))).orElse((double)0.0F);
+        return (Double) this.getCreakingProtector().map((creaking) -> Math.sqrt(creaking.distanceToSqr(Vec3.atBottomCenterOf(this.getBlockPos())))).orElse((double) 0.0F);
     }
 
     private void clearCreakingInfo() {
@@ -180,7 +194,7 @@ public class CreakingHeartBlockEntity extends BlockEntity {
             return NO_CREAKING;
         } else {
             if (this.creakingInfo.left().isPresent()) {
-                Creaking creaking = (Creaking)this.creakingInfo.left().get();
+                Creaking creaking = (Creaking) this.creakingInfo.left().get();
                 if (!creaking.isRemoved()) {
                     return Optional.of(creaking);
                 }
@@ -191,7 +205,7 @@ public class CreakingHeartBlockEntity extends BlockEntity {
             Level uUID = this.level;
             if (uUID instanceof ServerLevel serverLevel) {
                 if (this.creakingInfo.right().isPresent()) {
-                    UUID uUID2 = (UUID)this.creakingInfo.right().get();
+                    UUID uUID2 = (UUID) this.creakingInfo.right().get();
                     Entity entity = serverLevel.getEntity(uUID2);
                     if (entity instanceof Creaking creaking2) {
                         this.setCreakingInfo(creaking2);
@@ -207,21 +221,6 @@ public class CreakingHeartBlockEntity extends BlockEntity {
             }
 
             return NO_CREAKING;
-        }
-    }
-
-    @Nullable
-    private static Creaking spawnProtector(ServerLevel serverLevel, CreakingHeartBlockEntity creakingHeartBlockEntity) {
-        BlockPos blockPos = creakingHeartBlockEntity.getBlockPos();
-        Optional<Creaking> optional = SpawnUtil.trySpawnMob(ModEntities.CREAKING.get(), MobSpawnType.SPAWNER, serverLevel, blockPos, 5, 16, 8, ON_TOP_OF_COLLIDER_NO_LEAVES);
-        if (optional.isEmpty()) {
-            return null;
-        } else {
-            Creaking creaking = (Creaking)optional.get();
-            serverLevel.gameEvent(creaking, GameEvent.ENTITY_PLACE, creaking.position());
-            serverLevel.broadcastEntityEvent(creaking, (byte)60);
-            creaking.setTransient(blockPos);
-            return creaking;
         }
     }
 
@@ -244,9 +243,9 @@ public class CreakingHeartBlockEntity extends BlockEntity {
                     this.emitParticles(serverLevel2, 20, false);
                     int rand = this.level.getRandom().nextIntBetweenInclusive(2, 3);
 
-                    for(int j = 0; j < rand; ++j) {
+                    for (int j = 0; j < rand; ++j) {
                         this.spreadResin().ifPresent((blockPos) -> {
-                            this.level.playSound((Player)null, blockPos, ModSounds.RESIN_PLACE.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
+                            this.level.playSound((Player) null, blockPos, ModSounds.RESIN_PLACE.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
                             this.level.gameEvent(GameEvent.BLOCK_PLACE, blockPos, GameEvent.Context.of(this.level.getBlockState(blockPos)));
                         });
                     }
@@ -259,9 +258,9 @@ public class CreakingHeartBlockEntity extends BlockEntity {
     }
 
     private Optional<BlockPos> spreadResin() {
-        Mutable<BlockPos> mutable = new MutableObject((Object)null);
+        Mutable<BlockPos> mutable = new MutableObject((Object) null);
         BlockPos.breadthFirstTraversal(this.worldPosition, 2, 64, (blockPos, consumer) -> {
-            for(Direction direction : Util.shuffledCopy(Direction.values(), this.level.random)) {
+            for (Direction direction : Util.shuffledCopy(Direction.values(), this.level.random)) {
                 BlockPos blockPos2 = blockPos.relative(direction);
                 if (this.level.getBlockState(blockPos2).is(ModBlockTagProvider.PALE_OAK_LOGS)) {
                     consumer.accept(blockPos2);
@@ -290,7 +289,7 @@ public class CreakingHeartBlockEntity extends BlockEntity {
             }
             return true;
         });
-        return Optional.ofNullable((BlockPos)mutable.getValue());
+        return Optional.ofNullable((BlockPos) mutable.getValue());
     }
 
     private void emitParticles(ServerLevel serverLevel, int i, boolean bl) {
@@ -299,7 +298,7 @@ public class CreakingHeartBlockEntity extends BlockEntity {
             int k = bl ? 16545810 : 6250335;
             RandomSource randomSource = serverLevel.random;
 
-            for(double d = (double)0.0F; d < (double)i; ++d) {
+            for (double d = (double) 0.0F; d < (double) i; ++d) {
                 AABB aABB = creaking.getBoundingBox();
                 Vec3 vec3 = aABB.getMinPosition().add(randomSource.nextDouble() * aABB.getXsize(), randomSource.nextDouble() * aABB.getYsize(), randomSource.nextDouble() * aABB.getZsize());
                 Vec3 vec32 = Vec3.atLowerCornerOf(this.getBlockPos()).add(randomSource.nextDouble(), randomSource.nextDouble(), randomSource.nextDouble());
@@ -309,7 +308,7 @@ public class CreakingHeartBlockEntity extends BlockEntity {
                     vec32 = vec33;
                 }
                 TrailParticleOption trailParticleOption = new TrailParticleOption(vec32, k, randomSource.nextInt(40) + 10);
-                serverLevel.sendParticles(trailParticleOption, vec3.x, vec3.y, vec3.z, 1, (double)0.0F, (double)0.0F, (double)0.0F, (double)0.0F);
+                serverLevel.sendParticles(trailParticleOption, vec3.x, vec3.y, vec3.z, 1, (double) 0.0F, (double) 0.0F, (double) 0.0F, (double) 0.0F);
 
             }
 
@@ -332,7 +331,7 @@ public class CreakingHeartBlockEntity extends BlockEntity {
     }
 
     public boolean isProtector(Creaking creaking) {
-        return (Boolean)this.getCreakingProtector().map((creaking2) -> creaking2 == creaking).orElse(false);
+        return (Boolean) this.getCreakingProtector().map((creaking2) -> creaking2 == creaking).orElse(false);
     }
 
     public int getAnalogOutputSignal() {
@@ -342,8 +341,8 @@ public class CreakingHeartBlockEntity extends BlockEntity {
     public int computeAnalogOutputSignal() {
         if (this.creakingInfo != null && !this.getCreakingProtector().isEmpty()) {
             double d = this.distanceToCreaking();
-            double e = Math.clamp(d, (double)0.0F, (double)32.0F) / (double)32.0F;
-            return 15 - (int)Math.floor(e * (double)15.0F);
+            double e = Math.clamp(d, (double) 0.0F, (double) 32.0F) / (double) 32.0F;
+            return 15 - (int) Math.floor(e * (double) 15.0F);
         } else {
             return 0;
         }

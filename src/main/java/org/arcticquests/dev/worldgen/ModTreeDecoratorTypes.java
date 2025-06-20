@@ -7,7 +7,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.arcticquests.dev.PerfectParityPG;
-import org.arcticquests.dev.mixin.TreeDecoratorTypeInvoker;
 
 import static org.arcticquests.dev.PerfectParityPG.LOGGER;
 
