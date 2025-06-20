@@ -12,6 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import org.arcticquests.dev.PerfectParityPG;
 import org.arcticquests.dev.block.ModBlocks;
 import org.arcticquests.dev.entity.ModEntities;
+import org.arcticquests.dev.util.WoodTypeVariant;
 
 public class ModItems {
 
@@ -27,6 +28,7 @@ public class ModItems {
     public static final DeferredItem<HangingSignItem> PALE_OAK_HANGING_SIGN = ITEMS.register("pale_oak_hanging_sign",
             () -> new HangingSignItem(ModBlocks.PALE_OAK_HANGING_SIGN.get(), ModBlocks.PALE_OAK_WALL_HANGING_SIGN.get(),
                     new Item.Properties().stacksTo(16)));
+
 
     public static final DeferredItem<BoatItem> PALE_OAK_BOAT = ITEMS.register("pale_oak_boat",
             () -> new BoatItem(false, Boat.Type.OAK,new Item.Properties().stacksTo(1)));

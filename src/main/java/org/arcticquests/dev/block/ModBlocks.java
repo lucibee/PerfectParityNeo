@@ -14,15 +14,14 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.arcticquests.dev.PerfectParityPG;
 import org.arcticquests.dev.block.custom.*;
-import org.arcticquests.dev.block.wood.ModBlockSetTypes;
-import org.arcticquests.dev.block.wood.ModWoodTypes;
 import org.arcticquests.dev.item.ModItems;
 import org.arcticquests.dev.sounds.ModSounds;
+import org.arcticquests.dev.util.BlockSetTypeVariant;
+import org.arcticquests.dev.util.WoodTypeVariant;
 import org.arcticquests.dev.worldgen.ModTreeGrowers;
 
 import java.util.function.Supplier;
@@ -80,7 +79,7 @@ public class ModBlocks {
 
 
     public static final DeferredBlock<Block> PALE_OAK_WOOD = registerBlock("pale_oak_wood", ()-> new
-            RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));;
+            ModRotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava()));
 
     public static final DeferredBlock<Block>  PALE_OAK_PLANKS = registerBlock("pale_oak_planks",()->
             new Block(BlockBehaviour.Properties.of().mapColor(MapColor.QUARTZ).instrument(NoteBlockInstrument.BASS)
@@ -93,7 +92,7 @@ public class ModBlocks {
                             .noCollission().randomTicks().instabreak()
                             .sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
 
-    public static final DeferredBlock<Block> PALE_OAK_LOG=registerBlock("pale_oak_log",()-> new RotatedPillarBlock(
+    public static final DeferredBlock<Block> PALE_OAK_LOG=registerBlock("pale_oak_log",()-> new ModRotatedPillarBlock(
             BlockBehaviour.Properties.of()
                 .mapColor(PALE_OAK_PLANKS.get().defaultMapColor())
                 .instrument(NoteBlockInstrument.BASS)
@@ -101,7 +100,7 @@ public class ModBlocks {
                 .sound(SoundType.WOOD)
                 .ignitedByLava()));
 
-    public static final DeferredBlock<Block> STRIPPED_PALE_OAK_LOG= registerBlock("stripped_pale_oak_log",()-> new RotatedPillarBlock(
+    public static final DeferredBlock<Block> STRIPPED_PALE_OAK_LOG= registerBlock("stripped_pale_oak_log",()-> new ModRotatedPillarBlock(
             BlockBehaviour.Properties.of()
                     .mapColor(PALE_OAK_PLANKS.get().defaultMapColor())
                     .instrument(NoteBlockInstrument.BASS)
@@ -110,7 +109,7 @@ public class ModBlocks {
                     .ignitedByLava()));
 
     public static final DeferredBlock<Block> STRIPPED_PALE_OAK_WOOD= registerBlock("stripped_pale_oak_wood",()->
-            new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.get().defaultMapColor())
+            new ModRotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.get().defaultMapColor())
                     .instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD)
                     .ignitedByLava()));
 
@@ -126,22 +125,22 @@ public class ModBlocks {
 
 
     public static final DeferredBlock<StandingSignBlock> PALE_OAK_SIGN = registerBlockOnly("pale_oak_sign",
-            () -> new StandingSignBlock(ModWoodTypes.PALE_OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SIGN)));
+            () -> new StandingSignBlock(WoodTypeVariant.PALE_OAK.getWoodType(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SIGN)));
 
     public static final DeferredBlock<WallSignBlock> PALE_OAK_WALL_SIGN = registerBlockOnly("pale_oak_wall_sign",
-            () -> new WallSignBlock(ModWoodTypes.PALE_OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_SIGN)));
+            () -> new WallSignBlock(WoodTypeVariant.PALE_OAK.getWoodType(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_SIGN)));
 
     public static final DeferredBlock<CeilingHangingSignBlock> PALE_OAK_HANGING_SIGN = registerBlockOnly("pale_oak_hanging_sign",
-            () -> new CeilingHangingSignBlock(ModWoodTypes.PALE_OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN)));
+            () -> new CeilingHangingSignBlock(WoodTypeVariant.PALE_OAK.getWoodType(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN)));
 
     public static final DeferredBlock<WallHangingSignBlock> PALE_OAK_WALL_HANGING_SIGN = registerBlockOnly("pale_oak_wall_hanging_sign",
-            () -> new WallHangingSignBlock(ModWoodTypes.PALE_OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN)));
+            () -> new WallHangingSignBlock(WoodTypeVariant.PALE_OAK.getWoodType(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_HANGING_SIGN)));
 
 
     //Non Block Blocks
     public static final DeferredBlock<PressurePlateBlock> PALE_OAK_PRESSURE_PLATE =
             registerBlock("pale_oak_pressure_plate",()->
-                    new PressurePlateBlock(ModBlockSetTypes.PALE_OAK,
+                    new PressurePlateBlock(BlockSetTypeVariant.PALE_OAK.getBlockSetType(),
                             BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.get().defaultMapColor())
                                     .forceSolidOn()
                                     .instrument(NoteBlockInstrument.BASS)
@@ -151,7 +150,7 @@ public class ModBlocks {
                                     .pushReaction(PushReaction.DESTROY)));
 
     public static final DeferredBlock<TrapDoorBlock> PALE_OAK_TRAPDOOR = registerBlock("pale_oak_trapdoor", ()->
-            new TrapDoorBlock(ModBlockSetTypes.PALE_OAK,
+            new TrapDoorBlock(BlockSetTypeVariant.PALE_OAK.getBlockSetType(),
                     BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.get()
                             .defaultMapColor()).instrument(NoteBlockInstrument.BASS)
                             .strength(3.0F).noOcclusion().isValidSpawn(Blocks::never).ignitedByLava()));
@@ -159,7 +158,7 @@ public class ModBlocks {
 
     public static final DeferredBlock<ButtonBlock> PALE_OAK_BUTTON =
             registerBlock("pale_oak_button",
-                    ()->new ButtonBlock( ModBlockSetTypes.PALE_OAK,
+                    ()->new ButtonBlock( BlockSetTypeVariant.PALE_OAK.getBlockSetType(),
                             30,
                             BlockBehaviour.Properties.of().noCollission()
                                     .strength(0.5F).pushReaction(PushReaction.DESTROY)));
@@ -173,7 +172,7 @@ public class ModBlocks {
 
     public static final DeferredBlock<FenceBlock> PALE_OAK_FENCE = registerBlock("pale_oak_fence", ()->new FenceBlock(BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).ignitedByLava().sound(SoundType.WOOD)));
 
-    public static final DeferredBlock<DoorBlock> PALE_OAK_DOOR = registerBlock("pale_oak_door",()-> new DoorBlock(ModBlockSetTypes.PALE_OAK, BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().ignitedByLava().pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<DoorBlock> PALE_OAK_DOOR = registerBlock("pale_oak_door",()-> new DoorBlock(BlockSetTypeVariant.PALE_OAK.getBlockSetType(), BlockBehaviour.Properties.of().mapColor(PALE_OAK_PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().ignitedByLava().pushReaction(PushReaction.DESTROY)));
 
 
     public static final DeferredBlock<Block> CREAKING_HEART = registerBlock("creaking_heart",()-> new CreakingHeartBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASEDRUM).strength(10.0F).sound(ModSounds.CREAKING_HEART)));

@@ -34,6 +34,8 @@ public class DataGenerators {
             generator.addProvider(true, new ModBiomeTagProvider(packOutput, lookupProvider, PerfectParityPG.MODID, fileHelper));
             generator.addProvider(true, new ModDatapackProvider(packOutput, lookupProvider));
            // generator.addProvider(true, new LootTableProvider(packOutput, Collections.emptySet(), List.of(new LootTableProvider.SubProviderEntry(ModBlockLootTableProvider::new, LootContextParamSets.BLOCK)), lookupProvider));
+           // generator.addProvider(true, new ModAdvancementProvider(packOutput, lookupProvider, fileHelper));
+
         }
 
         if (event.includeClient()) {

@@ -3,7 +3,6 @@ package org.arcticquests.dev.block.custom;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
@@ -33,7 +32,7 @@ public class PaleOakLeavesBlock extends LeavesBlock {
             BlockPos blockPos2 = blockPos.below();
             BlockState blockState2 = level.getBlockState(blockPos2);
             if (!isFaceFull(blockState2.getCollisionShape(level, blockPos2), Direction.UP)) {
-                ParticleUtils.spawnParticleBelow(level, blockPos, randomSource, ModParticles.PALE_OAK_LEAVES.get()); // REplce particles with ModParticles.PALE_OAK_LEAVES
+                ParticleUtils.spawnParticleBelow(level, blockPos, randomSource, ModParticles.PALE_OAK_LEAVES.get());
             }
         }
     }
