@@ -125,13 +125,13 @@ public class ModBlocks {
                     .isRedstoneConductor((state, getter, pos) -> false)));
 
 
-    public static final DeferredBlock<StandingSignBlock> PALE_OAK_SIGN = registerBlock("pale_oak_sign",
+    public static final DeferredBlock<StandingSignBlock> PALE_OAK_SIGN = registerBlockOnly("pale_oak_sign",
             () -> new StandingSignBlock(ModWoodTypes.PALE_OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SIGN)));
 
     public static final DeferredBlock<WallSignBlock> PALE_OAK_WALL_SIGN = registerBlockOnly("pale_oak_wall_sign",
             () -> new WallSignBlock(ModWoodTypes.PALE_OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WALL_SIGN)));
 
-    public static final DeferredBlock<CeilingHangingSignBlock> PALE_OAK_HANGING_SIGN = registerBlock("pale_oak_hanging_sign",
+    public static final DeferredBlock<CeilingHangingSignBlock> PALE_OAK_HANGING_SIGN = registerBlockOnly("pale_oak_hanging_sign",
             () -> new CeilingHangingSignBlock(ModWoodTypes.PALE_OAK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_HANGING_SIGN)));
 
     public static final DeferredBlock<WallHangingSignBlock> PALE_OAK_WALL_HANGING_SIGN = registerBlockOnly("pale_oak_wall_hanging_sign",

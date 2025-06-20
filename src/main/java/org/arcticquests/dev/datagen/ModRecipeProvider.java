@@ -146,7 +146,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_planks", has(ModBlocks.PALE_OAK_PLANKS.get()))
                 .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_fence_gate"));
 
-       /* shaped(RecipeCategory.REDSTONE, ModItems.PALE_OAK_SIGN.get(), 3)
+        shaped(RecipeCategory.REDSTONE, ModItems.PALE_OAK_SIGN.get(), 3)
                 .define('#', ModBlocks.PALE_OAK_PLANKS.get())
                 .define('S',  Items.STICK)
                 .pattern("###")
@@ -154,7 +154,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern(" S ")
                 .unlockedBy("has_planks", has(ModBlocks.PALE_OAK_PLANKS.get()))
                 .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_sign"));
-*/
         shaped(RecipeCategory.REDSTONE, ModBlocks.PALE_OAK_DOOR.get(), 3)
                 .define('#', ModBlocks.PALE_OAK_PLANKS.get())
                 .pattern("##")
@@ -170,7 +169,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_planks", has(ModBlocks.PALE_OAK_PLANKS.get()))
                 .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_trapdoor"));
 
-      /*  shaped(RecipeCategory.DECORATIONS, ModItems.PALE_OAK_HANGING_SIGN.get(), 6)
+        shaped(RecipeCategory.DECORATIONS, ModItems.PALE_OAK_HANGING_SIGN.get(), 6)
                 .define('#', ModBlocks.STRIPPED_PALE_OAK_LOG.get())
                 .define('C', Items.CHAIN)
                 .pattern("C C")
@@ -178,13 +177,12 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("###")
                 .unlockedBy("has_log", has(ModBlocks.STRIPPED_PALE_OAK_LOG.get()))
                 .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_hanging_sign"));
-*/
-/*        shaped(RecipeCategory.TRANSPORTATION, ModItems.PALE_OAK_BOAT.get())
+        shaped(RecipeCategory.TRANSPORTATION, ModItems.PALE_OAK_BOAT.get())
                 .define('#', ModBlocks.PALE_OAK_PLANKS.get())
                 .pattern("# #")
                 .pattern("###")
                 .unlockedBy("in_water", insideOf(Blocks.WATER))
-                .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_boat"));*/
+                .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_boat"));
 
         shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.STRIPPED_PALE_OAK_WOOD.get(), 3)
                 .define('#', ModBlocks.STRIPPED_PALE_OAK_LOG.get())
@@ -200,11 +198,11 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_log", has(ModBlocks.PALE_OAK_PLANKS))
                 .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_wood"));
 
-/*        shapeless(RecipeCategory.DECORATIONS, ModItems.PALE_OAK_CHEST_BOAT.get())
+        shapeless(RecipeCategory.DECORATIONS, ModItems.PALE_OAK_CHEST_BOAT.get())
                 .requires(ModItems.PALE_OAK_BOAT.get())
                 .requires(Items.CHEST)
                 .unlockedBy("has_boat", has(ModItems.PALE_OAK_BOAT.get()))
-                .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_chest_boat"));*/
+                .save(exporter, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,"pale_oak_chest_boat"));
 
         shapeless(RecipeCategory.REDSTONE, ModBlocks.PALE_OAK_BUTTON.get())
                 .requires(ModBlocks.PALE_OAK_PLANKS.get())

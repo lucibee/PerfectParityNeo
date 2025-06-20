@@ -10,7 +10,6 @@ import java.util.Set;
 
 public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
-
     protected ModBlockLootTableProvider(HolderLookup.Provider registries) {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
     }
@@ -56,10 +55,10 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
          dropSelf(ModBlocks.PALE_OAK_BUTTON.get());
          dropSelf(ModBlocks.PALE_OAK_PRESSURE_PLATE.get());
 
-/*       dropOther(ModBlocks.PALE_OAK_SIGN.get(), ModItems.PALE_OAK_SIGN.get());
+       dropOther(ModBlocks.PALE_OAK_SIGN.get(), ModItems.PALE_OAK_SIGN.get());
          dropOther(ModBlocks.PALE_OAK_WALL_SIGN.get(), ModItems.PALE_OAK_SIGN.get());
          dropOther(ModBlocks.PALE_OAK_HANGING_SIGN.get(), ModItems.PALE_OAK_HANGING_SIGN.get());
-         dropOther(ModBlocks.PALE_OAK_WALL_HANGING_SIGN.get(), ModItems.PALE_OAK_HANGING_SIGN.get());*/
+         dropOther(ModBlocks.PALE_OAK_WALL_HANGING_SIGN.get(), ModItems.PALE_OAK_HANGING_SIGN.get());
 
     }
 

@@ -3,11 +3,15 @@ package org.arcticquests.dev.block.custom.entity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.HangingSignBlockEntity;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.arcticquests.dev.PerfectParityPG;
 import org.arcticquests.dev.block.ModBlocks;
+import org.arcticquests.dev.block.wood.ModWoodTypes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +24,14 @@ public class ModBlockEntities {
     public static final Supplier<BlockEntityType<CreakingHeartBlockEntity>> CREAKING_HEART =
             BLOCK_ENTITIES.register("creaking_heart", () -> BlockEntityType.Builder.of(
                     CreakingHeartBlockEntity::new, ModBlocks.CREAKING_HEART.get()).build(null));
+
+    public static final Supplier<BlockEntityType<SignBlockEntity>> PALE_OAK_SIGN = BLOCK_ENTITIES.register("pale_oak_sign",
+            ()-> BlockEntityType.Builder.of(SignBlockEntity::new,ModBlocks.PALE_OAK_SIGN.get()).build(null));
+
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SignBlockEntity>> PALE_OAK_WALL_HANGING_SIGN = BLOCK_ENTITIES.register("pale_oak_hanging_sign",
+            ()-> BlockEntityType.Builder.of(SignBlockEntity::new,ModBlocks.PALE_OAK_WALL_SIGN.get()).build(null));
+
 
 public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

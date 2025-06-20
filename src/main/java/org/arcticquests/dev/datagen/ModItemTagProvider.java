@@ -55,11 +55,10 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.WOODEN_STAIRS).add(ModBlocks.PALE_OAK_STAIRS.asItem());
         tag(ItemTags.WOODEN_PRESSURE_PLATES).add(ModBlocks.PALE_OAK_PRESSURE_PLATE.asItem());
         tag(ItemTags.FENCE_GATES).add(ModBlocks.PALE_OAK_FENCE_GATE.asItem());
-/*
         tag(ItemTags.SIGNS).add(ModItems.PALE_OAK_SIGN.get());
-        tag(ItemTags.HANGING_SIGNS).add(ModItems.PALE_OAK_HANGING_SIGN.get());*/
-/*        tag(ItemTags.BOATS).add(ModItems.PALE_OAK_BOAT.get());
-        tag(ItemTags.CHEST_BOATS).add(ModItems.PALE_OAK_CHEST_BOAT.get());*/
+        tag(ItemTags.HANGING_SIGNS).add(ModItems.PALE_OAK_HANGING_SIGN.get());
+        tag(ItemTags.BOATS).add(ModItems.PALE_OAK_BOAT.get());
+        tag(ItemTags.CHEST_BOATS).add(ModItems.PALE_OAK_CHEST_BOAT.get());
 
 
         tag(ItemTags.LEAVES).add(ModBlocks.PALE_OAK_LEAVES.asItem());

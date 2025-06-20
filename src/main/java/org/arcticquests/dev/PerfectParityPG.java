@@ -1,12 +1,11 @@
 package org.arcticquests.dev;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
+import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -76,7 +75,6 @@ public class PerfectParityPG {
         ModConfiguredFeatures.registerModConfiguredFeatures();
         ModPlacedFeatures.registerModPlacedFeatures();
 
-        // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -139,8 +137,13 @@ public class PerfectParityPG {
             event.accept(ModBlocks.CLOSED_EYEBLOSSOM);
         }
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
-            event.accept(ModBlocks.PALE_OAK_SIGN);
-            event.accept(ModBlocks.PALE_OAK_HANGING_SIGN);
+            event.accept(ModItems.PALE_OAK_SIGN);
+            event.accept(ModItems.PALE_OAK_HANGING_SIGN);
+        }
+
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            event.accept(ModItems.PALE_OAK_BOAT);
+            event.accept(ModItems.PALE_OAK_CHEST_BOAT);
         }
     }
 
@@ -157,9 +160,16 @@ public class PerfectParityPG {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
+            event.enqueueWork(() -> {Sheets.addWoodType(ModWoodTypes.PALE_OAK);});
+
             EntityRenderers.register(ModEntities.CREAKING.get(), CreakingRenderer::new);
-            BlockEntityRenderers.register(BlockEntityType.SIGN, SignRenderer::new);
-            BlockEntityRenderers.register(BlockEntityType.HANGING_SIGN, HangingSignRenderer::new);
+
+            EntityRenderers.register(ModEntities.PALE_OAK_BOAT.get(), context -> new BoatRenderer(context, false));
+            EntityRenderers.register(ModEntities.PALE_OAK_CHEST_BOAT.get(), context-> new BoatRenderer(context,true));
+
+            BlockEntityRenderers.register(ModBlockEntities.PALE_OAK_SIGN.get(), SignRenderer::new);
+            BlockEntityRenderers.register(ModBlockEntities.PALE_OAK_WALL_HANGING_SIGN.get(), HangingSignRenderer::new);
+
         }
         @SubscribeEvent
         public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
