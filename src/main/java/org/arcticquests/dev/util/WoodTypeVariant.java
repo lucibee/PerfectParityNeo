@@ -3,6 +3,7 @@ package org.arcticquests.dev.util;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.properties.WoodType;
+import org.arcticquests.dev.PerfectParityPG;
 
 public enum WoodTypeVariant {
     PALE_OAK("pale_oak");
@@ -11,8 +12,9 @@ public enum WoodTypeVariant {
 
     WoodTypeVariant(String name) {
         this.name = name;
-        this.woodType = WoodType.register(new WoodType(name, BlockSetTypeVariant.valueOf(name.toUpperCase()).getBlockSetType()));
+        this.woodType = WoodType.register(new WoodType(ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,name).toString(), BlockSetTypeVariant.valueOf(name.toUpperCase()).getBlockSetType()));
     }
+
 
     public String getName() {
         return name;
@@ -20,9 +22,5 @@ public enum WoodTypeVariant {
 
     public WoodType getWoodType() {
         return woodType;
-    }
-
-    public ResourceLocation getTexture(String type) {
-        return ResourceLocation.fromNamespaceAndPath("perfectparitypg", "block/" + name + "_" + type);
     }
 }

@@ -1,7 +1,7 @@
 {
-  "variants": {
+  "variants":{
     "": {
-      "model": "perfectparitypg:block/pale_oak_sign"
+      "model":"perfectparitypg:block/pale_oak_sign"
     }
   }
 }
