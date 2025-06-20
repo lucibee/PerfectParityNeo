@@ -2,5 +2,6 @@
   "parent": "perfectparitypg:block/mossy_carpet_side",
   "textures": {
     "side": "perfectparitypg:block/pale_moss_carpet_side_small"
-  },"render_type": "cutout"
+  },
+  "render_type": "cutout"
 }

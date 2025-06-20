@@ -34,7 +34,6 @@
     ],
     "subtitle": "subtitles.block.generic.footsteps"
   },
-
   "block.resin_bricks.break": {
     "sounds": [
       "perfectparitypg:block/resin_bricks/resin_brick_break"

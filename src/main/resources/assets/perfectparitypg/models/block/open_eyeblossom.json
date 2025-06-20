@@ -2,5 +2,6 @@
   "parent": "minecraft:block/cross",
   "textures": {
     "cross": "perfectparitypg:block/open_eyeblossom"
-  },"render_type": "cutout"
+  },
+  "render_type": "cutout"
 }
