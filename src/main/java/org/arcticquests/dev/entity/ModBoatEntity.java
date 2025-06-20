@@ -8,6 +8,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import org.arcticquests.dev.block.ModBlocks;
 import org.arcticquests.dev.item.ModItems;
 import org.arcticquests.dev.util.WoodTypeVariant;
 
@@ -23,10 +25,20 @@ public class ModBoatEntity extends Boat {
         setModWoodType(woodType);
     }
 
+
+
+    public void setVariant(ModBoatType boatType) {
+        this.entityData.set(DATA_ID_WOOD_TYPE, boatType.getName());
+    }
+
+    public ModBoatType getVariantMod() {
+        return ModBoatType.byName(this.entityData.get(DATA_ID_WOOD_TYPE));
+    }
+
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder p_326198_) {
         super.defineSynchedData(p_326198_);
-        this.entityData.set(DATA_ID_WOOD_TYPE, WoodTypeVariant.PALE_OAK.getName());
+        p_326198_.define(DATA_ID_WOOD_TYPE, WoodTypeVariant.PALE_OAK.getName());
 
     }
 

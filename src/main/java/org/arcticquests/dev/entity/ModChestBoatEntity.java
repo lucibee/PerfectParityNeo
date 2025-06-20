@@ -26,9 +26,15 @@ public class ModChestBoatEntity extends ChestBoat {
     }
 
     @Override
+    public Boat.Type getVariant() {
+        return ModBoatType.valueOf(getModWoodType().name());
+    }
+
+
+    @Override
     protected void defineSynchedData(SynchedEntityData.Builder p_326198_) {
         super.defineSynchedData(p_326198_);
-        this.entityData.set(DATA_ID_WOOD_TYPE, WoodTypeVariant.PALE_OAK.getName());
+        p_326198_.define(DATA_ID_WOOD_TYPE, WoodTypeVariant.PALE_OAK.getName());
 
     }
 
