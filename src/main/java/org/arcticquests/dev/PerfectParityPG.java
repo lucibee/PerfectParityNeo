@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
+import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -27,13 +28,12 @@ import org.arcticquests.dev.block.custom.entity.ModBlockEntities;
 import org.arcticquests.dev.block.wood.ModBlockFamilies;
 import org.arcticquests.dev.entity.ModEntities;
 import org.arcticquests.dev.entity.client.CreakingRenderer;
-import org.arcticquests.dev.entity.client.ModBoatRenderer;
-import org.arcticquests.dev.entity.client.ModChestBoatRenderer;
 import org.arcticquests.dev.item.ModItems;
 import org.arcticquests.dev.particles.ModParticles;
 import org.arcticquests.dev.particles.PaleOakParticle;
 import org.arcticquests.dev.particles.TrailParticle;
 import org.arcticquests.dev.sounds.ModSounds;
+import org.arcticquests.dev.util.ModBoatTypes;
 import org.arcticquests.dev.util.WoodTypeVariant;
 import org.arcticquests.dev.worldgen.ModConfiguredFeatures;
 import org.arcticquests.dev.worldgen.ModPlacedFeatures;
@@ -78,6 +78,9 @@ public class PerfectParityPG {
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.PALE_OAK_SAPLING.getId(), ModBlocks.POTTED_PALE_OAK_SAPLING);
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.CLOSED_EYEBLOSSOM.getId(), ModBlocks.POTTED_CLOSED_EYEBLOSSOM);
         });
+        // Safe place — enum extensions are guaranteed to be injected
+        event.enqueueWork(ModBoatTypes::init);
+
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
@@ -149,11 +152,10 @@ public class PerfectParityPG {
             EntityRenderers.register(ModEntities.CREAKING.get(), CreakingRenderer::new);
 
             EntityRenderers.register(ModEntities.PALE_OAK_BOAT.get(), context ->
-                    new ModBoatRenderer(context, false));
+                    new BoatRenderer(context, false));
 
             EntityRenderers.register(ModEntities.PALE_OAK_CHEST_BOAT.get(), context ->
-                    new ModChestBoatRenderer(context, true));
-
+                    new BoatRenderer(context,true));
 
             BlockEntityRenderers.register(ModBlockEntities.PALE_OAK_SIGN.get(), SignRenderer::new);
             BlockEntityRenderers.register(ModBlockEntities.PALE_OAK_WALL_HANGING_SIGN.get(), HangingSignRenderer::new);

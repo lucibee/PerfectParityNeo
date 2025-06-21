@@ -30,13 +30,12 @@ public class ModItems {
 
 
     public static final DeferredItem<BoatItem> PALE_OAK_BOAT = ITEMS.register("pale_oak_boat",
-            () -> new BoatItem(false, Boat.Type.OAK, new Item.Properties().stacksTo(1)));
+            () -> new BoatItem(false, Boat.Type.valueOf("PERFECTPARITYPG_PALE_OAK"), new Item.Properties().stacksTo(1)));
 
     public static final DeferredItem<BoatItem> PALE_OAK_CHEST_BOAT = ITEMS.register("pale_oak_chest_boat",
-            () -> new BoatItem(true, Boat.Type.OAK, new Item.Properties().stacksTo(1)));
+            () -> new BoatItem(true,Boat.Type.valueOf("PERFECTPARITYPG_PALE_OAK"), new Item.Properties().stacksTo(1)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
-
 }
