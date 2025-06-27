@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
@@ -62,7 +63,6 @@ public class PerfectParityPG {
         ModPlacedFeatures.registerModPlacedFeatures();
 
         NeoForge.EVENT_BUS.register(this);
-        // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
         modEventBus.addListener(ModBlockEntities::registerTileExtensions);
@@ -78,7 +78,6 @@ public class PerfectParityPG {
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.PALE_OAK_SAPLING.getId(), ModBlocks.POTTED_PALE_OAK_SAPLING);
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.CLOSED_EYEBLOSSOM.getId(), ModBlocks.POTTED_CLOSED_EYEBLOSSOM);
         });
-        // Safe place — enum extensions are guaranteed to be injected
         event.enqueueWork(ModBoatTypes::init);
 
     }
@@ -87,9 +86,7 @@ public class PerfectParityPG {
         if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
             event.accept(ModItems.CREAKING_SPAWN_EGG);
         }
-        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-            event.accept(ModItems.RESIN_BRICK);
-        }
+
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(ModBlocks.RESIN_CLUMP);
             event.accept(ModBlocks.RESIN_BLOCK);
@@ -128,9 +125,13 @@ public class PerfectParityPG {
             event.accept(ModItems.PALE_OAK_HANGING_SIGN);
         }
 
-        if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(ModItems.PALE_OAK_BOAT);
             event.accept(ModItems.PALE_OAK_CHEST_BOAT);
+        }
+
+        if (event.getTabKey() == CreativeModeTabs.SEARCH) {
+            event.insertAfter(ModBlocks.RESIN_CLUMP.toStack(), ModItems.RESIN_BRICK.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
     }
 

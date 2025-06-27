@@ -18,6 +18,7 @@ public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(PerfectParityPG.MODID);
 
     public static final DeferredItem<Item> RESIN_BRICK = ITEMS.register("resin_brick", () -> new Item(new Item.Properties()));
+
     public static final DeferredItem<Item> CREAKING_SPAWN_EGG = ITEMS.register("creaking_spawn_egg", () -> new DeferredSpawnEggItem(ModEntities.CREAKING, 0x5F5F5F, 0xFC7812, new Item.Properties()));
 
     public static final DeferredItem<SignItem> PALE_OAK_SIGN = ITEMS.register("pale_oak_sign",
