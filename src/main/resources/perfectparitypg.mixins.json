@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "org.arcticquests.dev.mixin",
+  "package": "org.arcticquests.dev.perfectparitypg.Perfectparitypg.mixin",
   "compatibilityLevel": "JAVA_21",
   "refmap": "perfectparitypg.refmap.json",
   "mixins": [
