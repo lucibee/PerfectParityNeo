@@ -72,7 +72,6 @@ public class PerfectParityPG {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            Sheets.addWoodType(WoodTypeVariant.PALE_OAK.getWoodType());
             Regions.register(new ModOverworldRegion(ResourceLocation.fromNamespaceAndPath(MODID, "palegarden"), 2));
             ModBlockFamilies.createBlockFamilies();
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.OPEN_EYEBLOSSOM.getId(), ModBlocks.POTTED_OPEN_EYEBLOSSOM);
