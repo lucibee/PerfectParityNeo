@@ -2,7 +2,7 @@ package org.arcticquests.dev.perfectparitypg.Perfectparitypg.util;
 
 import net.minecraft.world.entity.vehicle.Boat;
 
-public class CustomBoatType {
+public class PaleOakBoatType {
     static {
         Boat.Type.values();
     }

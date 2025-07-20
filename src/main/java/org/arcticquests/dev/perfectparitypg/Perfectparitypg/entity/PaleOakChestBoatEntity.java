@@ -4,7 +4,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.entity.vehicle.ChestBoat;
 import net.minecraft.world.level.Level;
-import org.arcticquests.dev.perfectparitypg.Perfectparitypg.util.CustomBoatType;
+import org.arcticquests.dev.perfectparitypg.Perfectparitypg.util.PaleOakBoatType;
 import org.jetbrains.annotations.NotNull;
 
 public class PaleOakChestBoatEntity extends ChestBoat {
@@ -14,6 +14,6 @@ public class PaleOakChestBoatEntity extends ChestBoat {
 
     @Override
     public Boat.@NotNull Type getVariant() {
-        return CustomBoatType.PALE_OAK;
+        return PaleOakBoatType.PALE_OAK;
     }
 }

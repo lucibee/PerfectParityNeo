@@ -3,7 +3,7 @@ package org.arcticquests.dev.perfectparitypg.Perfectparitypg.entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.Level;
-import org.arcticquests.dev.perfectparitypg.Perfectparitypg.util.CustomBoatType;
+import org.arcticquests.dev.perfectparitypg.Perfectparitypg.util.PaleOakBoatType;
 import org.jetbrains.annotations.NotNull;
 
 public class PaleOakBoatEntity extends Boat {
@@ -13,6 +13,6 @@ public class PaleOakBoatEntity extends Boat {
 
     @Override
     public Boat.@NotNull Type getVariant() {
-        return CustomBoatType.PALE_OAK;
+        return PaleOakBoatType.PALE_OAK;
     }
 }

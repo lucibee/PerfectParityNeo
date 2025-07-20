@@ -1,19 +1,16 @@
 package org.arcticquests.dev.perfectparitypg.Perfectparitypg.item;
 
-import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.BoatItem;
 import net.minecraft.world.item.HangingSignItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SignItem;
-import net.minecraft.world.level.block.ComposterBlock;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import org.arcticquests.dev.perfectparitypg.Perfectparitypg.PerfectParityPG;
 import org.arcticquests.dev.perfectparitypg.Perfectparitypg.block.ModBlocks;
 import org.arcticquests.dev.perfectparitypg.Perfectparitypg.entity.ModEntities;
-import org.arcticquests.dev.perfectparitypg.Perfectparitypg.util.CustomBoatType;
+import org.arcticquests.dev.perfectparitypg.Perfectparitypg.util.PaleOakBoatType;
 
 public class ModItems {
 
@@ -33,10 +30,10 @@ public class ModItems {
 
 
     public static final DeferredItem<BoatItem> PALE_OAK_BOAT = ITEMS.register("pale_oak_boat",
-            () -> new BoatItem(false, CustomBoatType.PALE_OAK, new Item.Properties().stacksTo(1)));
+            () -> new BoatItem(false, PaleOakBoatType.PALE_OAK, new Item.Properties().stacksTo(1)));
 
     public static final DeferredItem<BoatItem> PALE_OAK_CHEST_BOAT = ITEMS.register("pale_oak_chest_boat",
-            () -> new BoatItem(true, CustomBoatType.PALE_OAK, new Item.Properties().stacksTo(1)));
+            () -> new BoatItem(true, PaleOakBoatType.PALE_OAK, new Item.Properties().stacksTo(1)));
 
 
     public static void register(IEventBus eventBus) {

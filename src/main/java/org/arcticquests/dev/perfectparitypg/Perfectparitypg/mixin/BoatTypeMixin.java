@@ -12,11 +12,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import net.minecraft.world.level.block.Block;
-import org.arcticquests.dev.perfectparitypg.Perfectparitypg.util.CustomBoatType;
+import org.arcticquests.dev.perfectparitypg.Perfectparitypg.util.PaleOakBoatType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.function.Supplier;
 
 @Mixin(Boat.Type.class)
 public class BoatTypeMixin {
@@ -67,7 +66,7 @@ public class BoatTypeMixin {
                 () -> Items.STICK,
                 false
         );
-        CustomBoatType.PALE_OAK = pale_oak;
+        PaleOakBoatType.PALE_OAK = pale_oak;
         types.add(pale_oak);
 
         $VALUES = types.toArray(new Boat.Type[0]);
