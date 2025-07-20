@@ -9,7 +9,7 @@ import org.arcticquests.dev.perfectparitypg.Perfectparitypg.item.ModItems;
 
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, PerfectParityPG.MODID, existingFileHelper);
+        super(output, "perfectparitypg", existingFileHelper);
     }
 
     @Override

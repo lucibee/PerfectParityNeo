@@ -5,6 +5,9 @@
   "compatibilityLevel": "JAVA_21",
   "refmap": "perfectparitypg.refmap.json",
   "mixins": [
+    "BoatItemDropsMixin",
+    "BoatTypeMixin",
+    "BushBlockMixin",
     "TreeDecoratorTypeInvoker"
   ],
   "client": [

@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 
 public class ModParticles {
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES =
-            DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, PerfectParityPG.MODID);
+            DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, "minecraft");
 
     public static final Supplier<SimpleParticleType> PALE_OAK_LEAVES =
             PARTICLE_TYPES.register("pale_oak_leaves", () -> new SimpleParticleType(true));

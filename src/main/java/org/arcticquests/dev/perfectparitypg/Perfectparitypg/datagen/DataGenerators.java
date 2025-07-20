@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-@EventBusSubscriber(modid = PerfectParityPG.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = "minecraft", bus = EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
 
     @SubscribeEvent
@@ -30,7 +30,7 @@ public class DataGenerators {
             generator.addProvider(true, blockTagProvider);
             generator.addProvider(true, new ModItemTagProvider(packOutput, lookupProvider, blockTagProvider.contentsGetter(), fileHelper));
             generator.addProvider(true, new ModRecipeProvider(packOutput, lookupProvider));
-            generator.addProvider(true, new ModBiomeTagProvider(packOutput, lookupProvider, PerfectParityPG.MODID, fileHelper));
+            generator.addProvider(true, new ModBiomeTagProvider(packOutput, lookupProvider, "perfectparitypg", fileHelper));
             generator.addProvider(true, new ModDatapackProvider(packOutput, lookupProvider));
             //generator.addProvider(true, new LootTableProvider(packOutput, Collections.emptySet(), List.of(new LootTableProvider.SubProviderEntry(ModBlockLootTableProvider::new, LootContextParamSets.BLOCK)), lookupProvider));
             // generator.addProvider(true, new ModAdvancementProvider(packOutput, lookupProvider, fileHelper));

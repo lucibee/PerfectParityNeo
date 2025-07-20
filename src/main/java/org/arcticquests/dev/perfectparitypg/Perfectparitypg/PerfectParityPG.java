@@ -11,6 +11,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -51,6 +53,7 @@ public class PerfectParityPG {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public PerfectParityPG(IEventBus modEventBus, ModContainer modContainer) {
+        modContainer.registerConfig(net.neoforged.fml.config.ModConfig.Type.COMMON, org.arcticquests.dev.perfectparitypg.Perfectparitypg.config.CreakingFleeConfig.CONFIG);
         modEventBus.addListener(this::commonSetup);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
@@ -72,7 +75,9 @@ public class PerfectParityPG {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            Regions.register(new ModOverworldRegion(ResourceLocation.fromNamespaceAndPath(MODID, "palegarden"), 2));
+            registerCompostables();
+            registerFlammables();
+            Regions.register(new ModOverworldRegion(ResourceLocation.fromNamespaceAndPath("minecraft", "palegarden"), 2));
             ModBlockFamilies.createBlockFamilies();
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.OPEN_EYEBLOSSOM.getId(), ModBlocks.POTTED_OPEN_EYEBLOSSOM);
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.PALE_OAK_SAPLING.getId(), ModBlocks.POTTED_PALE_OAK_SAPLING);
@@ -80,6 +85,32 @@ public class PerfectParityPG {
         });
         event.enqueueWork(ModBoatTypes::init);
 
+
+    }
+    public static void registerCompostables() {
+        ComposterBlock.COMPOSTABLES.put(ModBlocks.CLOSED_EYEBLOSSOM.get().asItem(), 0.65f);
+        ComposterBlock.COMPOSTABLES.put(ModBlocks.OPEN_EYEBLOSSOM.get().asItem(), 0.3f);
+        ComposterBlock.COMPOSTABLES.put(ModBlocks.PALE_MOSS_BLOCK.get().asItem(), 0.65f);
+        ComposterBlock.COMPOSTABLES.put(ModBlocks.PALE_MOSS_BLOCK.get().asItem(), 0.3f); // (Note: This will overwrite the previous value for PALE_MOSS_BLOCK)
+        ComposterBlock.COMPOSTABLES.put(ModBlocks.PALE_HANGING_MOSS.get().asItem(), 0.3f);
+        ComposterBlock.COMPOSTABLES.put(ModBlocks.PALE_MOSS_CARPET.get().asItem(), 0.3f);
+        ComposterBlock.COMPOSTABLES.put(ModBlocks.PALE_OAK_LEAVES.get().asItem(), 0.3f);
+    }
+    public static void registerFlammables() {
+        FireBlock fire = (FireBlock) Blocks.FIRE;
+        fire.setFlammable(ModBlocks.PALE_OAK_LOG.get(), 5, 5);
+        fire.setFlammable(ModBlocks.STRIPPED_PALE_OAK_LOG.get(), 5, 5);
+        fire.setFlammable(ModBlocks.PALE_OAK_WOOD.get(), 5, 5);
+        fire.setFlammable(ModBlocks.STRIPPED_PALE_OAK_WOOD.get(), 5, 5);
+        fire.setFlammable(ModBlocks.PALE_OAK_PLANKS.get(), 5, 20);
+        fire.setFlammable(ModBlocks.PALE_OAK_LEAVES.get(), 30, 60);
+        fire.setFlammable(ModBlocks.PALE_OAK_SLAB.get(), 5, 20);
+        fire.setFlammable(ModBlocks.PALE_OAK_STAIRS.get(), 5, 20);
+        fire.setFlammable(ModBlocks.PALE_OAK_FENCE.get(), 5, 20);
+        fire.setFlammable(ModBlocks.PALE_OAK_FENCE_GATE.get(), 5, 20);
+        fire.setFlammable(ModBlocks.PALE_HANGING_MOSS.get(), 5, 100);
+        fire.setFlammable(ModBlocks.PALE_MOSS_BLOCK.get(), 5, 20);
+        fire.setFlammable(ModBlocks.PALE_MOSS_CARPET.get(), 5, 100);
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
@@ -147,6 +178,12 @@ public class PerfectParityPG {
         public static void onClientSetup(FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
                 Sheets.addWoodType(WoodTypeVariant.PALE_OAK.getWoodType());
+                net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(ModBlocks.PALE_HANGING_MOSS.get(), net.minecraft.client.renderer.RenderType.cutout());
+                net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(ModBlocks.OPEN_EYEBLOSSOM.get(), net.minecraft.client.renderer.RenderType.cutout());
+                net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(ModBlocks.CLOSED_EYEBLOSSOM.get(), net.minecraft.client.renderer.RenderType.cutout());
+                net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(ModBlocks.RESIN_CLUMP.get(), net.minecraft.client.renderer.RenderType.cutout());
+                net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(ModBlocks.PALE_MOSS_CARPET.get(), net.minecraft.client.renderer.RenderType.cutout());
+
             });
 
             EntityRenderers.register(ModEntities.CREAKING.get(), CreakingRenderer::new);

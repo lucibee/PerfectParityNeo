@@ -21,6 +21,6 @@ public class ModDatapackProvider extends DatapackBuiltinEntriesProvider {
             .add(Registries.PLACED_FEATURE, ModPlacedFeatures::bootstrap);
 
     public ModDatapackProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries, BUILDER, Set.of(PerfectParityPG.MODID));
+        super(output, registries, BUILDER, Set.of("minecraft"));
     }
 }

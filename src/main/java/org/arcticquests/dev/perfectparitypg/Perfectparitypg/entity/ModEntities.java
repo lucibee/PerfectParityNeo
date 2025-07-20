@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 public class ModEntities {
 
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
-            DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, PerfectParityPG.MODID);
+            DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE,"minecraft");
 
     public static final Supplier<EntityType<Creaking>> CREAKING =
             ENTITY_TYPES.register("creaking", () -> EntityType.Builder.of(Creaking::new, MobCategory.CREATURE)
@@ -22,10 +22,10 @@ public class ModEntities {
 
 
     public static final Supplier<EntityType<Boat>> PALE_OAK_BOAT =
-            ENTITY_TYPES.register("pale_oak_boat", () ->
+ENTITY_TYPES.register("pale_oak_boat", () ->
                     EntityType.Builder.<Boat>of(PaleOakBoatEntity::new, MobCategory.MISC)
                             .sized(1.375F, 0.5625F)
-                            .clientTrackingRange(10)
+.clientTrackingRange(10)
                             .build("pale_oak_boat")
             );
 

@@ -6,5 +6,5 @@ import org.arcticquests.dev.perfectparitypg.Perfectparitypg.PerfectParityPG;
 import java.util.Optional;
 
 public class ModTreeGrowers {
-    public static final TreeGrower PALE_OAK = new TreeGrower(PerfectParityPG.MODID + "pale_oak", Optional.empty(), Optional.of(ModConfiguredFeatures.PALE_OAK), Optional.empty());
+    public static final TreeGrower PALE_OAK = new TreeGrower("minecraft" + "pale_oak", Optional.empty(), Optional.of(ModConfiguredFeatures.PALE_OAK), Optional.empty());
 }

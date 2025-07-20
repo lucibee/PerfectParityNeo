@@ -34,7 +34,7 @@ public class PaleMossDecorator extends TreeDecorator {
 
     private static void addMossHanger(BlockPos blockPos, TreeDecorator.Context context) {
         while (context.isAir(blockPos.below()) && !((double) context.random().nextFloat() < (double) 0.5F)) {
-            context.setBlock(blockPos, (BlockState) ModBlocks.PALE_HANGING_MOSS.get().defaultBlockState().setValue(HangingMossBlock.TIP, false));
+            context.setBlock(blockPos, ModBlocks.PALE_HANGING_MOSS.get().defaultBlockState().setValue(HangingMossBlock.TIP, false));
             blockPos = blockPos.below();
         }
 

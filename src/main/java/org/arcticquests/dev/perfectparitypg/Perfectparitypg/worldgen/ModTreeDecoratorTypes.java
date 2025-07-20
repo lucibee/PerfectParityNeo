@@ -14,7 +14,7 @@ import static org.arcticquests.dev.perfectparitypg.Perfectparitypg.PerfectParity
 public class ModTreeDecoratorTypes {
 
     public static final DeferredRegister<TreeDecoratorType<?>> TREE_DECORATOR_TYPES =
-            DeferredRegister.create(Registries.TREE_DECORATOR_TYPE, PerfectParityPG.MODID);
+            DeferredRegister.create(Registries.TREE_DECORATOR_TYPE, "minecraft");
 
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<PaleMossDecorator>> PALE_MOSS =
             TREE_DECORATOR_TYPES.register("pale_moss",

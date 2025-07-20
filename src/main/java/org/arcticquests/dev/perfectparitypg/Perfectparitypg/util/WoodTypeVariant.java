@@ -12,7 +12,7 @@ public enum WoodTypeVariant {
 
     WoodTypeVariant(String name) {
         this.name = name;
-        this.woodType = WoodType.register(new WoodType(ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID,name).toString(), BlockSetTypeVariant.valueOf(name.toUpperCase()).getBlockSetType()));
+        this.woodType = WoodType.register(new WoodType(ResourceLocation.fromNamespaceAndPath("minecraft",name).toString(), BlockSetTypeVariant.valueOf(name.toUpperCase()).getBlockSetType()));
     }
 
 

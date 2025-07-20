@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class ModTrimMaterials {
     public static final ResourceKey<TrimMaterial> RESIN =
-            ResourceKey.create(Registries.TRIM_MATERIAL, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID, "resin"));
+            ResourceKey.create(Registries.TRIM_MATERIAL, ResourceLocation.fromNamespaceAndPath("minecraft", "resin"));
 
     public static void bootstrap(BootstrapContext<TrimMaterial> context) {
         register(context, RESIN, ModItems.RESIN_BRICK.get(), Style.EMPTY.withColor(TextColor.parseColor("#fc7812").getOrThrow()), 0.113F);

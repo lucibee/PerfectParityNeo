@@ -16,7 +16,7 @@ public class ModBiomes {
     public static final ResourceKey<Biome> PALE_GARDEN = register("pale_garden");
 
     private static ResourceKey<Biome> register(String name) {
-        return ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID, name));
+        return ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath("minecraft", name));
     }
 
     public static Biome paleGarden(BootstrapContext<Biome> context) {

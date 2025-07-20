@@ -1,5 +1,4 @@
 {
-  "replace": false,
   "sources": [
     {
       "type": "paletted_permutations",
@@ -35,7 +34,11 @@
         "trims/models/armor/raiser",
         "trims/models/armor/raiser_leggings",
         "trims/models/armor/host",
-        "trims/models/armor/host_leggings"
+        "trims/models/armor/host_leggings",
+        "trims/models/armor/flow",
+        "trims/models/armor/flow_leggings",
+        "trims/models/armor/bolt",
+        "trims/models/armor/bolt_leggings"
       ],
       "palette_key": "trims/color_palettes/trim_palette",
       "permutations": {
@@ -53,7 +56,7 @@
         "gold_darker": "trims/color_palettes/gold_darker",
         "diamond_darker": "trims/color_palettes/diamond_darker",
         "netherite_darker": "trims/color_palettes/netherite_darker",
-        "resin": "perfectparitypg:trims/color_palettes/resin"
+        "resin": "trims/color_palettes/resin"
       }
     }
   ]

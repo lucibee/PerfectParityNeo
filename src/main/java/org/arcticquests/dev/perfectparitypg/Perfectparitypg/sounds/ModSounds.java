@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 
 public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
-            DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, PerfectParityPG.MODID);
+            DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, "minecraft");
 
 
     public static final Supplier<SoundEvent> RESIN_BREAK = registerSoundEvent("block.resin.break");
@@ -53,12 +53,12 @@ public class ModSounds {
     public static final Supplier<SoundEvent> EYEBLOSSOM_CLOSE = registerSoundEvent("block.eyeblossom.close");
     public static final Supplier<SoundEvent> EYEBLOSSOM_IDLE = registerSoundEvent("block.eyeblossom.idle");
     public static final Supplier<SoundEvent> NONE = registerSoundEvent("music.none");
-    public static final ResourceLocation NONE_ID = ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID, "music.none");
+    public static final ResourceLocation NONE_ID = ResourceLocation.fromNamespaceAndPath("minecraft", "music.none");
     public static final Supplier<Music> NO_MUSIC = () -> new Music(BuiltInRegistries.SOUND_EVENT.getHolder(NONE_ID).orElseThrow(() -> new IllegalStateException("SoundEvent not registered yet for 'music.none'")), 999999, 999999, false);
     public static final Supplier<SoundEvent> PALE_HANGING_MOSS_IDLE = registerSoundEvent("block.pale_hanging_moss.idle");
 
     private static Supplier<SoundEvent> registerSoundEvent(String name) {
-        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID, name);
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath("minecraft", name);
         return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(id));
     }
 

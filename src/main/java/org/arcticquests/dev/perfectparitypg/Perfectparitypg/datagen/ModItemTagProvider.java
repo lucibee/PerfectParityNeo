@@ -21,11 +21,11 @@ public class ModItemTagProvider extends ItemTagsProvider {
     public static final TagKey<Item> PALE_OAK_LOGS = createTag("pale_oak_logs");
 
     public ModItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTags, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, blockTags, PerfectParityPG.MODID, existingFileHelper);
+        super(output, lookupProvider, blockTags, "perfectparitypg", existingFileHelper);
     }
 
     private static TagKey<Item> createTag(String name) {
-        return ItemTags.create(ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID, name));
+        return ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", name));
     }
 
     @Override

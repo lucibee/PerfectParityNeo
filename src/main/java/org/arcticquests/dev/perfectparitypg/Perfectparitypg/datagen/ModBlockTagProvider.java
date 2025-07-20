@@ -19,11 +19,11 @@ public class ModBlockTagProvider extends BlockTagsProvider {
     public static final TagKey<Block> PALE_OAK_LOGS = createTag("pale_oak_logs");
 
     public ModBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, PerfectParityPG.MODID, existingFileHelper);
+        super(output, lookupProvider, "perfectparitypg", existingFileHelper);
     }
 
     private static TagKey<Block> createTag(String name) {
-        return BlockTags.create(ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID, name));
+        return BlockTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", name));
     }
 
     @Override

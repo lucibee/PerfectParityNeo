@@ -12,7 +12,6 @@ import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import org.arcticquests.dev.perfectparitypg.Perfectparitypg.PerfectParityPG;
 import org.arcticquests.dev.perfectparitypg.Perfectparitypg.block.custom.*;
 import org.arcticquests.dev.perfectparitypg.Perfectparitypg.item.ModItems;
 import org.arcticquests.dev.perfectparitypg.Perfectparitypg.sounds.ModSounds;
@@ -23,7 +22,7 @@ import org.arcticquests.dev.perfectparitypg.Perfectparitypg.worldgen.ModTreeGrow
 import java.util.function.Supplier;
 
 public class ModBlocks {
-    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(PerfectParityPG.MODID);
+    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks("minecraft");
 
     public static final DeferredBlock<Block> RESIN_CLUMP = registerBlock("resin_clump", () ->
             new ResinClumpBlock(BlockBehaviour.Properties.of()

@@ -20,11 +20,11 @@ public class ModBiomeTagProvider extends BiomeTagsProvider {
     public static final TagKey<Biome> SPAWNS_COLD_VARIANT_FARM_ANIMALS = create("spawns_cold_variant_farm_animals");
 
     public ModBiomeTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookuprovider, String modId, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookuprovider, PerfectParityPG.MODID, existingFileHelper);
+        super(output, lookuprovider, "perfectparitypg", existingFileHelper);
     }
 
     private static TagKey<Biome> create(String string) {
-        return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID, string));
+        return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath("minecraft", string));
     }
 
     @Override
