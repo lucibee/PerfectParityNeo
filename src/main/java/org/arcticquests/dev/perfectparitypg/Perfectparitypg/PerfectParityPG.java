@@ -36,7 +36,6 @@ import org.arcticquests.dev.perfectparitypg.Perfectparitypg.particles.ModParticl
 import org.arcticquests.dev.perfectparitypg.Perfectparitypg.particles.PaleOakParticle;
 import org.arcticquests.dev.perfectparitypg.Perfectparitypg.particles.TrailParticle;
 import org.arcticquests.dev.perfectparitypg.Perfectparitypg.sounds.ModSounds;
-import org.arcticquests.dev.perfectparitypg.Perfectparitypg.util.ModBoatTypes;
 import org.arcticquests.dev.perfectparitypg.Perfectparitypg.util.WoodTypeVariant;
 import org.arcticquests.dev.perfectparitypg.Perfectparitypg.worldgen.ModConfiguredFeatures;
 import org.arcticquests.dev.perfectparitypg.Perfectparitypg.worldgen.ModPlacedFeatures;
@@ -83,8 +82,6 @@ public class PerfectParityPG {
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.PALE_OAK_SAPLING.getId(), ModBlocks.POTTED_PALE_OAK_SAPLING);
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.CLOSED_EYEBLOSSOM.getId(), ModBlocks.POTTED_CLOSED_EYEBLOSSOM);
         });
-        event.enqueueWork(ModBoatTypes::init);
-
 
     }
     public static void registerCompostables() {
