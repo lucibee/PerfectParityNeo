@@ -186,10 +186,10 @@ public class PerfectParityPG {
             EntityRenderers.register(ModEntities.CREAKING.get(), CreakingRenderer::new);
 
             EntityRenderers.register(ModEntities.PALE_OAK_BOAT.get(), context ->
-                    new BoatRenderer(context, false));
+                    new org.arcticquests.dev.perfectparitypg.Perfectparitypg.entity.client.PaleOakBoatRenderer(context, false));
 
             EntityRenderers.register(ModEntities.PALE_OAK_CHEST_BOAT.get(), context ->
-                    new BoatRenderer(context,true));
+                    new org.arcticquests.dev.perfectparitypg.Perfectparitypg.entity.client.PaleOakBoatRenderer(context, true));
 
             BlockEntityRenderers.register(ModBlockEntities.PALE_OAK_SIGN.get(), SignRenderer::new);
             BlockEntityRenderers.register(ModBlockEntities.PALE_OAK_WALL_HANGING_SIGN.get(), HangingSignRenderer::new);
