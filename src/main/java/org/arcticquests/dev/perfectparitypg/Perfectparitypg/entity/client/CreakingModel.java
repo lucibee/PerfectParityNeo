@@ -20,7 +20,7 @@ import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public class CreakingModel<T extends Creaking> extends HierarchicalModel<T> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(PerfectParityPG.MODID, "creaking"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("minecraft", "creaking"), "main");
 
     public static final List<ModelPart> NO_PARTS = List.of();
     private final ModelPart root;
