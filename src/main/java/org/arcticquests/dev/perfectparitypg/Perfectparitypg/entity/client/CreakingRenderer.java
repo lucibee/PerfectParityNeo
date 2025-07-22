@@ -7,6 +7,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.arcticquests.dev.perfectparitypg.Perfectparitypg.PerfectParityPG;
 import org.arcticquests.dev.perfectparitypg.Perfectparitypg.entity.Creaking;
+import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
 public class CreakingRenderer<T extends Creaking> extends MobRenderer<Creaking, CreakingModel<Creaking>> {
@@ -19,7 +20,7 @@ public class CreakingRenderer<T extends Creaking> extends MobRenderer<Creaking, 
     }
 
     @Override
-    public ResourceLocation getTextureLocation(Creaking creaking) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull Creaking creaking) {
         return TEXTURE_LOCATION;
     }
 }

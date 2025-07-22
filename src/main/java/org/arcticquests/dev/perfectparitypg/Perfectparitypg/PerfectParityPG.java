@@ -1,11 +1,14 @@
 package org.arcticquests.dev.perfectparitypg.Perfectparitypg;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.model.BoatModel;
+import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.BoatRenderer;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
@@ -181,6 +184,7 @@ public class PerfectParityPG {
                 net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(ModBlocks.RESIN_CLUMP.get(), net.minecraft.client.renderer.RenderType.cutout());
                 net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(ModBlocks.PALE_MOSS_CARPET.get(), net.minecraft.client.renderer.RenderType.cutout());
 
+
             });
 
             EntityRenderers.register(ModEntities.CREAKING.get(), CreakingRenderer::new);
@@ -194,6 +198,12 @@ public class PerfectParityPG {
             BlockEntityRenderers.register(ModBlockEntities.PALE_OAK_SIGN.get(), SignRenderer::new);
             BlockEntityRenderers.register(ModBlockEntities.PALE_OAK_WALL_HANGING_SIGN.get(), HangingSignRenderer::new);
 
+        }
+
+        @SubscribeEvent
+        public static void registerLayerDefinitions(net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterLayerDefinitions event) {
+            event.registerLayerDefinition(org.arcticquests.dev.perfectparitypg.Perfectparitypg.entity.ModModelLayers.PALE_OAK_BOAT, BoatModel::createBodyModel);
+            event.registerLayerDefinition(org.arcticquests.dev.perfectparitypg.Perfectparitypg.entity.ModModelLayers.PALE_OAK_CHEST_BOAT, ChestBoatModel::createBodyModel);
         }
 
         @SubscribeEvent
