@@ -167,7 +167,7 @@ public class Creaking extends Monster {
                 } else {
                     this.invulnerabilityAnimationRemainingTicks = 8;
                     this.level().broadcastEntityEvent(this, (byte)66);
-                    PerfectParityPG.LOGGER.info(String.valueOf(invulnerabilityAnimationRemainingTicks));
+                   // PerfectParityPG.LOGGER.info(String.valueOf(invulnerabilityAnimationRemainingTicks));
                     BlockEntity var8 = this.level().getBlockEntity(blockPos);
                     if (var8 instanceof CreakingHeartBlockEntity) {
                         CreakingHeartBlockEntity creakingHeartBlockEntity = (CreakingHeartBlockEntity)var8;
@@ -328,7 +328,7 @@ public class Creaking extends Monster {
 
     public void creakingDeathEffects(DamageSource damageSource) {
         this.resolvePlayerResponsibleForDamage(damageSource);
-        // this.die(damageSource);
+        //this.die(damageSource);
         this.makeSound(ModSounds.CREAKING_TWITCH.get());
     }
 
