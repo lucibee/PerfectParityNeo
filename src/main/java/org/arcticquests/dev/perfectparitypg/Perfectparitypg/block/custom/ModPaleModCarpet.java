@@ -80,38 +80,38 @@ public class ModPaleModCarpet extends Block implements BonemealableBlock {
 
     public ModPaleModCarpet(BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState((BlockState) ((BlockState) ((BlockState) ((BlockState) ((BlockState) ((BlockState) this.stateDefinition.any()).setValue(BASE, true)).setValue(NORTH, WallSide.NONE)).setValue(EAST, WallSide.NONE)).setValue(SOUTH, WallSide.NONE)).setValue(WEST, WallSide.NONE));
+        this.registerDefaultState(((BlockState) ((BlockState) ((BlockState) ((BlockState) this.stateDefinition.any()).setValue(BASE, true)).setValue(NORTH, WallSide.NONE)).setValue(EAST, WallSide.NONE)).setValue(SOUTH, WallSide.NONE).setValue(WEST, WallSide.NONE));
         this.shapesCache = ImmutableMap.copyOf((Map) this.stateDefinition.getPossibleStates().stream().collect(Collectors.toMap(Function.identity(), ModPaleModCarpet::calculateShape)));
     }
 
     private static VoxelShape calculateShape(BlockState blockState) {
         VoxelShape voxelShape = Shapes.empty();
-        if ((Boolean) blockState.getValue(BASE)) {
+        if (blockState.getValue(BASE)) {
             voxelShape = DOWN_AABB;
         }
 
         VoxelShape var10000;
-        switch ((WallSide) blockState.getValue(NORTH)) {
+        switch (blockState.getValue(NORTH)) {
             case NONE -> var10000 = voxelShape;
             case LOW -> var10000 = Shapes.or(voxelShape, NORTH_SHORT_AABB);
             case TALL -> var10000 = Shapes.or(voxelShape, NORTH_AABB);
-            default -> throw new MatchException((String) null, (Throwable) null);
+            default -> throw new MatchException(null, null);
         }
 
         voxelShape = var10000;
-        switch ((WallSide) blockState.getValue(SOUTH)) {
+        switch (blockState.getValue(SOUTH)) {
             case NONE -> var10000 = voxelShape;
             case LOW -> var10000 = Shapes.or(voxelShape, SOUTH_SHORT_AABB);
             case TALL -> var10000 = Shapes.or(voxelShape, SOUTH_AABB);
-            default -> throw new MatchException((String) null, (Throwable) null);
+            default -> throw new MatchException(null, null);
         }
 
         voxelShape = var10000;
-        switch ((WallSide) blockState.getValue(EAST)) {
+        switch (blockState.getValue(EAST)) {
             case NONE -> var10000 = voxelShape;
             case LOW -> var10000 = Shapes.or(voxelShape, EAST_SHORT_AABB);
             case TALL -> var10000 = Shapes.or(voxelShape, EAST_AABB);
-            default -> throw new MatchException((String) null, (Throwable) null);
+            default -> throw new MatchException(null, null);
         }
 
         voxelShape = var10000;
@@ -119,7 +119,7 @@ public class ModPaleModCarpet extends Block implements BonemealableBlock {
             case NONE -> var10000 = voxelShape;
             case LOW -> var10000 = Shapes.or(voxelShape, WEST_SHORT_AABB);
             case TALL -> var10000 = Shapes.or(voxelShape, WEST_AABB);
-            default -> throw new MatchException((String) null, (Throwable) null);
+            default -> throw new MatchException(null, null);
         }
 
         voxelShape = var10000;
@@ -127,7 +127,7 @@ public class ModPaleModCarpet extends Block implements BonemealableBlock {
     }
 
     private static boolean hasFaces(BlockState blockState) {
-        if ((Boolean) blockState.getValue(BASE)) {
+        if (blockState.getValue(BASE)) {
             return true;
         } else {
             for (EnumProperty<WallSide> enumProperty : PROPERTY_BY_DIRECTION.values()) {
@@ -153,7 +153,7 @@ public class ModPaleModCarpet extends Block implements BonemealableBlock {
     private static BlockState getUpdatedState(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, boolean bl) {
         BlockState blockState2 = null;
         BlockState blockState3 = null;
-        bl |= (Boolean) blockState.getValue(BASE);
+        bl |= blockState.getValue(BASE);
 
         for (Direction direction : Direction.Plane.HORIZONTAL) {
             EnumProperty<WallSide> enumProperty = getPropertyForFace(direction);
@@ -178,7 +178,7 @@ public class ModPaleModCarpet extends Block implements BonemealableBlock {
                 }
             }
 
-            blockState = (BlockState) blockState.setValue(enumProperty, wallSide);
+            blockState = blockState.setValue(enumProperty, wallSide);
         }
 
         return blockState;
@@ -201,13 +201,13 @@ public class ModPaleModCarpet extends Block implements BonemealableBlock {
         BlockState blockState = blockGetter.getBlockState(blockPos2);
         boolean bl = blockState.is(ModBlocks.PALE_MOSS_CARPET);
         if ((!bl || !(Boolean) blockState.getValue(BASE)) && (bl || blockState.canBeReplaced())) {
-            BlockState blockState2 = (BlockState) ModBlocks.PALE_MOSS_CARPET.get().defaultBlockState().setValue(BASE, false);
+            BlockState blockState2 = ModBlocks.PALE_MOSS_CARPET.get().defaultBlockState().setValue(BASE, false);
             BlockState blockState3 = getUpdatedState(blockState2, blockGetter, blockPos.above(), true);
 
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 EnumProperty<WallSide> enumProperty = getPropertyForFace(direction);
                 if (blockState3.getValue(enumProperty) != WallSide.NONE && !booleanSupplier.getAsBoolean()) {
-                    blockState3 = (BlockState) blockState3.setValue(enumProperty, WallSide.NONE);
+                    blockState3 = blockState3.setValue(enumProperty, WallSide.NONE);
                 }
             }
 
@@ -223,7 +223,7 @@ public class ModPaleModCarpet extends Block implements BonemealableBlock {
 
     @Nullable
     public static EnumProperty<WallSide> getPropertyForFace(Direction direction) {
-        return (EnumProperty) PROPERTY_BY_DIRECTION.get(direction);
+        return PROPERTY_BY_DIRECTION.get(direction);
     }
 
     public MapCodec<ModPaleModCarpet> codec() {
@@ -231,6 +231,18 @@ public class ModPaleModCarpet extends Block implements BonemealableBlock {
     }
 
     protected VoxelShape getOcclusionShape(BlockState blockState) {
+        return Shapes.empty();
+    }
+
+    @Override
+    public boolean skipRendering(BlockState state, BlockState adjacentState, Direction side) {
+        // Never request culling of adjacent block faces because of this block
+        return false;
+    }
+
+    @Override
+    protected @NotNull VoxelShape getBlockSupportShape(BlockState state, BlockGetter level, BlockPos pos) {
+        // Provide no support/occlusion shape so adjacent faces are not culled
         return Shapes.empty();
     }
 
