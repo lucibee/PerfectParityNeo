@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/carpet",
+  "render_type": "solid",
   "textures": {
     "wool": "perfectparitypg:block/pale_moss_carpet"
   }

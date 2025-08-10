@@ -2,5 +2,5 @@
   "parent": "minecraft:block/flower_pot_cross",
   "textures": {
     "plant": "minecraft:block/open_eyeblossom"
-  }
-}
+  },
+  "render_type": "cutout"}

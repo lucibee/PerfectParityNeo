@@ -7,8 +7,6 @@ import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
-import net.minecraft.client.renderer.entity.BoatRenderer;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
@@ -178,18 +176,6 @@ public class PerfectParityPG {
         public static void onClientSetup(FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
                 Sheets.addWoodType(WoodTypeVariant.PALE_OAK.getWoodType());
-                net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(ModBlocks.PALE_HANGING_MOSS.get(), net.minecraft.client.renderer.RenderType.cutout());
-                net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(ModBlocks.OPEN_EYEBLOSSOM.get(), net.minecraft.client.renderer.RenderType.cutout());
-                net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(ModBlocks.CLOSED_EYEBLOSSOM.get(), net.minecraft.client.renderer.RenderType.cutout());
-                net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(ModBlocks.OPEN_EYEBLOSSOM.get(), net.minecraft.client.renderer.RenderType.cutout());
-                net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_OPEN_EYEBLOSSOM.get(), net.minecraft.client.renderer.RenderType.cutout());
-                net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_CLOSED_EYEBLOSSOM.get(), net.minecraft.client.renderer.RenderType.cutout());
-                net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(ModBlocks.PALE_OAK_SAPLING.get(), net.minecraft.client.renderer.RenderType.cutout());
-                net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(ModBlocks.POTTED_PALE_OAK_SAPLING.get(), net.minecraft.client.renderer.RenderType.cutout());
-                net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(ModBlocks.RESIN_CLUMP.get(), net.minecraft.client.renderer.RenderType.cutout());
-                net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer(ModBlocks.PALE_MOSS_CARPET.get(), net.minecraft.client.renderer.RenderType.cutout());
-
-
             });
 
             EntityRenderers.register(ModEntities.CREAKING.get(), CreakingRenderer::new);
